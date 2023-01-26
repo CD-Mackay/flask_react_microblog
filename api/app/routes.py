@@ -9,4 +9,4 @@ def index():
 
 @app.route('/time')
 def get_current_time():
-    return 'Hello time'
+    return {'time': time.time()}
