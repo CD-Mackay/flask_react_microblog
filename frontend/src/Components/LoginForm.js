@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const LoginForm = ({ setToken }) => {
+const LoginForm = ({ saveToken }) => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: ""
@@ -17,9 +17,9 @@ const LoginForm = ({ setToken }) => {
       })
   };
 
-    fetch('/token', requestOptions)
-    .then((response) => {
-      setToken(response.data.access_token)
+    fetch('/token', requestOptions).then(response => response.json())
+    .then((data) => {
+      saveToken(data.access_token)
     }).catch((error) => {
       if (error.response) {
         console.log(error.response)

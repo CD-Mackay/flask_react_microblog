@@ -7,7 +7,8 @@ import UseToken from './Components/UseToken';
 
 function App() {
 
-  const { token, removeToken, setToken } = UseToken();
+  const { token, removeToken, saveToken } = UseToken();
+  console.log("token", token)
   const [time, setTime] = useState(0)
   const [posts, setPosts] = useState("")
 
@@ -31,7 +32,7 @@ function App() {
         {!token && token!=="" &&token!== undefined && token !== null && 
           <p>{posts}</p>
           }
-        <LoginForm />
+        <LoginForm saveToken={saveToken}/>
       </header>
     </div>
   );

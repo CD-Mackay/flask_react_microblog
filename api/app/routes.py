@@ -29,6 +29,7 @@ def get_token():
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
     return response
+    
 
 @app.route("/logout", methods=["POST"])
 def logout():
