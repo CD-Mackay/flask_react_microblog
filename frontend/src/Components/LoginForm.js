@@ -7,14 +7,18 @@ const LoginForm = ({ setToken }) => {
   })
 
   function handleLogin(event){
-    fetch({
-      method: "POST",
-      url: "/token",
-      data: {
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         email: loginForm.email,
         password: loginForm.password
-      }
-    }).then((response) => {
+      })
+  };
+
+    fetch('/token', requestOptions)
+    .then((response) => {
       setToken(response.data.access_token)
     }).catch((error) => {
       if (error.response) {
