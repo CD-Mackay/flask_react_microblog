@@ -17,7 +17,7 @@ def get_current_time():
 def get_posts():
     return {'content': 'I am a post, woooh look at me lorem ipsum'}
 
-@app.route('/login',method=['POST'])
+@app.route('/login',methods=['GET', 'POST'])
 def login():
     form = LoginForm
     if form.validate_on_submit():
