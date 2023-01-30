@@ -1,10 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect} from 'react'
+import LoginForm from './Components/LoginForm';
+import UseToken from './Components/UseToken';
 
 
 function App() {
 
+  const { token, removeToken, saveToken } = UseToken();
+  console.log("token", token)
   const [time, setTime] = useState(0)
   const [posts, setPosts] = useState("")
 
@@ -25,15 +29,10 @@ function App() {
         <p>
           {time}
         </p>
-        <p>{posts}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {!token && token!=="" &&token!== undefined && token !== null && 
+          <p>{posts}</p>
+          }
+        <LoginForm saveToken={saveToken}/>
       </header>
     </div>
   );
