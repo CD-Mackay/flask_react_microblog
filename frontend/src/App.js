@@ -2,10 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect} from 'react'
 import LoginForm from './Components/LoginForm';
+import UseToken from './Components/UseToken';
 
 
 function App() {
 
+  const { token, removeToken, setToken } = UseToken();
   const [time, setTime] = useState(0)
   const [posts, setPosts] = useState("")
 
@@ -26,7 +28,9 @@ function App() {
         <p>
           {time}
         </p>
-        <p>{posts}</p>
+        {!token && token!=="" &&token!== undefined && token !== null && 
+          <p>{posts}</p>
+          }
         <LoginForm />
       </header>
     </div>
