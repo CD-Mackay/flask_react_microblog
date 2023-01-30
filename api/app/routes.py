@@ -16,6 +16,7 @@ def get_current_time():
     return {'time': time.time()}
 
 @app.route('/posts')
+@jwt_required()
 def get_posts():
     return {'content': 'I am a post, woooh look at me lorem ipsum'}
 
