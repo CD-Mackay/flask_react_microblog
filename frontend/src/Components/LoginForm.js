@@ -1,9 +1,64 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const LoginForm = () => {
+const LoginForm = ({ setToken }) => {
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: ""
+  })
+
+  function handleLogin(event){
+    fetch({
+      method: "POST",
+      url: "/token",
+      data: {
+        email: loginForm.email,
+        password: loginForm.password
+      }
+    }).then((response) => {
+      setToken(response.data.access_token)
+    }).catch((error) => {
+      if (error.response) {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        }
+    })
+
+    setLoginForm(({
+      email: "",
+      password: ""}))
+
+    event.preventDefault()
+  }
+
+  function handleChange(event) { 
+    const {value, name} = event.target
+    setLoginForm(prevNote => ({
+        ...prevNote, [name]: value})
+    )}
+
   return (
-    <p>I am Loginform</p>
-  )
-}
+    <form>
+      <input
+        onChange={handleChange}
+        type="email"
+        text={loginForm.email}
+        name="email"
+        placeholder="Email"
+        value={loginForm.email}
+      />
+      <input
+        onChange={handleChange}
+        type="password"
+        text={loginForm.password}
+        name="password"
+        placeholder="Password"
+        value={loginForm.password}
+      />
 
-export default LoginForm
+      <button onClick={handleLogin}>Submit</button>
+    </form>
+  );
+};
+
+export default LoginForm;
