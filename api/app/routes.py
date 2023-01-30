@@ -1,7 +1,7 @@
 from app import app
 import time
 from app.forms import LoginForm
-from flask import flash, redirect, request
+from flask import flash, redirect, request, jsonify
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 
@@ -27,6 +27,12 @@ def get_token():
         return {"msg": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
+    return response
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
     return response
 
 
