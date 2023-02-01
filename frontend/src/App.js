@@ -26,14 +26,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header token={token} removeToken={removeToken} />
+      <Header token={token} setShowLogin={setShowLogin} removeToken={removeToken} />
       <img src={logo} className="App-logo" alt="logo" />
       <p>{time}</p>
       {token && token !== "" && token !== undefined && token !== null && (
         <p>{posts}</p>
       )}
       {!showLogin && <button onClick={() => setShowLogin(true)}>Login?</button>}
-      {showLogin && <LoginForm saveToken={saveToken} />}
+      {showLogin && !token && <LoginForm saveToken={saveToken} />}
     </div>
   );
 }
