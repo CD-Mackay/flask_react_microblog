@@ -27,7 +27,6 @@ function App() {
   return (
     <div className="App">
       <Header token={token} setShowLogin={setShowLogin} removeToken={removeToken} />
-      <img src={logo} className="App-logo" alt="logo" />
       <p>{time}</p>
       {token && token !== "" && token !== undefined && token !== null && (
         <p>{posts}</p>
