@@ -16,7 +16,11 @@ function App() {
     fetch('/time').then(res => res.json()).then(data => 
       setTime(data.time)
     )
-    fetch('/posts').then(res => res.json()).then(data => 
+    fetch('/posts', {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }).then(res => res.json()).then(data => 
       setPosts(data.content)
     )
     
@@ -29,7 +33,7 @@ function App() {
         <p>
           {time}
         </p>
-        {!token && token!=="" &&token!== undefined && token !== null && 
+        {token && token!=="" &&token!== undefined && token !== null && 
           <p>{posts}</p>
           }
         <LoginForm saveToken={saveToken}/>
