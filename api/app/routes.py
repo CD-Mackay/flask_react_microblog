@@ -1,6 +1,5 @@
 from app import app
 import time
-from app.forms import LoginForm
 from flask import flash, redirect, request, jsonify
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager

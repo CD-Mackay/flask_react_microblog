@@ -1,0 +1,12 @@
+.header-nav {
+  width: 100vw;
+  background-color: #9c4e98;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.button-wrapper {
+  padding: 5px;
+}
