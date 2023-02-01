@@ -11,6 +11,7 @@ function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0)
   const [posts, setPosts] = useState("")
+  const [showLogin, setShowLogin] = useState(false)
 
   useEffect(() =>{
     fetch('/time').then(res => res.json()).then(data => 
@@ -36,7 +37,8 @@ function App() {
         {token && token!=="" &&token!== undefined && token !== null && 
           <p>{posts}</p>
           }
-        <LoginForm saveToken={saveToken}/>
+                    {!showLogin && <button onClick={() => setShowLogin(true)}>Login?</button>}
+        {showLogin && <LoginForm saveToken={saveToken}/>}
     </div>
   );
 }
