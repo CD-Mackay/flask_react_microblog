@@ -3,6 +3,7 @@ import './App.css';
 import { useState, useEffect} from 'react'
 import LoginForm from './Components/LoginForm';
 import UseToken from './Components/UseToken';
+import Header from './Components/Header';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <Header token={token}/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           {time}
@@ -33,7 +34,6 @@ function App() {
           <p>{posts}</p>
           }
         <LoginForm saveToken={saveToken}/>
-      </header>
     </div>
   );
 }
