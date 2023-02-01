@@ -9,7 +9,6 @@ import Header from './Components/Header';
 function App() {
 
   const { token, removeToken, saveToken } = UseToken();
-  console.log("token", token)
   const [time, setTime] = useState(0)
   const [posts, setPosts] = useState("")
 
@@ -25,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header token={token}/>
+      <Header token={token} removeToken={removeToken} />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           {time}
