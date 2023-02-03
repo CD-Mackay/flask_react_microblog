@@ -1,9 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
-import LoginForm from "./Components/LoginForm";
 import UseToken from "./Components/UseToken";
 import Header from "./Components/Header/Header";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
 
 function App() {
   const { token, removeToken, saveToken } = UseToken();
@@ -18,7 +19,7 @@ function App() {
     fetch("/posts", {
       headers: {
         Authorization: "Bearer " + token,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -26,15 +27,17 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header token={token} setShowLogin={setShowLogin} removeToken={removeToken} />
-      <p>{time}</p>
-      {token && token !== "" && token !== undefined && token !== null && (
-        <p>{posts}</p>
-      )}
-      {!showLogin && !token && <button onClick={() => setShowLogin(true)}>Login?</button>}
-      {showLogin && !token && <LoginForm saveToken={saveToken} />}
-    </div>
+    <BrowserRouter>
+       <Header
+            token={token}
+            setShowLogin={setShowLogin}
+            removeToken={removeToken}
+          />
+      <Routes>
+        <Route path="/" element={<Home token={token} />} />
+        <Route path="/login" element={<Login saveToken={saveToken} />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
