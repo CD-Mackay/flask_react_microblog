@@ -18,6 +18,7 @@ function App() {
     fetch("/posts", {
       headers: {
         Authorization: "Bearer " + token,
+        'Content-Type': 'application/json'
       },
     })
       .then((res) => res.json())
@@ -31,7 +32,7 @@ function App() {
       {token && token !== "" && token !== undefined && token !== null && (
         <p>{posts}</p>
       )}
-      {!showLogin && <button onClick={() => setShowLogin(true)}>Login?</button>}
+      {!showLogin && !token && <button onClick={() => setShowLogin(true)}>Login?</button>}
       {showLogin && !token && <LoginForm saveToken={saveToken} />}
     </div>
   );
