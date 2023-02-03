@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import UseToken from "./Components/UseToken";
 import Header from "./Components/Header/Header";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
+import Home from "./Pages/Home.js";
+import Login from "./Pages/Login.js";
 
 function App() {
   const { token, removeToken, saveToken } = UseToken();
