@@ -8,9 +8,11 @@ const Header = ({ token, removeToken, setShowLogin }) => {
       <div></div>
       <div className="button-wrapper">
         {token && <button onClick={removeToken}>Logout</button>}
-        <Link to="/login">
-          <button>Login?</button>
-        </Link>
+        {!token && (
+          <Link to="/login">
+            <button>Login?</button>
+          </Link>
+        )}
       </div>
     </nav>
   );
