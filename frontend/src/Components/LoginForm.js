@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UseToken from "./UseToken";
 
-const LoginForm = ({ saveToken }) => {
+
+const LoginForm = () => {
+
+  const { saveToken } = UseToken();
+  const navigate = useNavigate()
+
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: ""
@@ -33,6 +41,8 @@ const LoginForm = ({ saveToken }) => {
       password: ""}))
 
     event.preventDefault()
+    console.log("making ma redirection!")
+    return navigate('/')
   }
 
   function handleChange(event) { 
