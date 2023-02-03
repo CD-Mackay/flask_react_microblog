@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import UseToken from "./UseToken";
 
-const LoginForm = ({ saveToken }) => {
+
+const LoginForm = () => {
+
+  const { token, removeToken, saveToken } = UseToken();
+
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: ""

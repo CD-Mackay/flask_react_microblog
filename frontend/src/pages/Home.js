@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Home = ({ token, showLogin, saveToken, time, posts, setShowLogin }) => {
+const Home = ({ token, showLogin, time, posts }) => {
   return (
     <div className="App">
       <p>{time}</p>

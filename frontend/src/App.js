@@ -18,8 +18,7 @@ function App() {
       .then((data) => setTime(data.time));
     fetch("/posts", {
       headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
       },
     })
       .then((res) => res.json())
@@ -34,7 +33,7 @@ function App() {
             removeToken={removeToken}
           />
       <Routes>
-        <Route path="/" element={<Home token={token} />} />
+        <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
       </Routes>
     </BrowserRouter>
