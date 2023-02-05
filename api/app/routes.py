@@ -19,7 +19,7 @@ def get_current_time():
 def get_posts():
     return {'content': 'I am a post, woooh look at me lorem ipsum'}
 
-@app.route('/token',methods=['POST'])
+@app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)

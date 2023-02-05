@@ -1,10 +1,17 @@
-import "./App.css";
+// Library Imports
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+// Component Imports
 import UseToken from "./Components/UseToken";
 import Header from "./Components/Header/Header";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
+
+// Style Imports
+import "./App.css";
+
+
 
 function App() {
   const { token, removeToken, saveToken } = UseToken();
@@ -13,10 +20,10 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
-    fetch("/time")
+    fetch("/time") // Fetches current time from API
       .then((res) => res.json())
       .then((data) => setTime(data.time));
-    fetch("/posts", {
+    fetch("/posts", { // Protected route, accesses posts data for logged in users
       headers: {
         Authorization: "Bearer " + token
       },
