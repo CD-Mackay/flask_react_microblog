@@ -2,54 +2,51 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UseToken from "./UseToken";
 
-
 const LoginForm = () => {
-
-  const { saveToken } = UseToken();
-  const navigate = useNavigate()
-
+  const { saveToken, getToken } = UseToken();
+  const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
-  function handleLogin(event){
-
+  function handleLogin(event) {
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: loginForm.email,
-        password: loginForm.password
-      })
-  };
+        password: loginForm.password,
+      }),
+    };
 
-    fetch('/token', requestOptions).then(response => response.json())
-    .then((data) => {
-      saveToken(data.access_token)
-    }).catch((error) => {
-      if (error.response) {
-        console.log(error.response)
-        console.log(error.response.status)
-        console.log(error.response.headers)
-        }
-    })
+    try {
+      let response = fetch("/token", requestOptions);
+      saveToken(response.access_token);
+      // return navigate("/");
+      event.preventDefault()
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      console.log(error.response.headers);
+    }
 
-    setLoginForm(({
+    setLoginForm({
       email: "",
-      password: ""}))
+      password: "",
+    });
 
-    event.preventDefault()
-    console.log("making ma redirection!")
-    return navigate('/')
+    event.preventDefault();
   }
 
-  function handleChange(event) { 
-    const {value, name} = event.target
-    setLoginForm(prevNote => ({
-        ...prevNote, [name]: value})
-    )}
+  function handleChange(event) {
+    const { value, name } = event.target;
+    setLoginForm((prevNote) => ({
+      ...prevNote,
+      [name]: value,
+    }));
+  }
 
   return (
     <form>
