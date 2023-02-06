@@ -27,6 +27,7 @@ def get_token():
         return {"error": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
+    print(response)
     return response
     
 

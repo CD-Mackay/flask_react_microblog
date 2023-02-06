@@ -23,6 +23,8 @@ const LoginForm = () => {
 
     try {
       let response = fetch("/token", requestOptions);
+      console.log(response) // Return promise <pending /> Async issue?
+      console.log(response.access_token)
       saveToken(response.access_token);
       // return navigate("/");
       event.preventDefault()
