@@ -11,8 +11,8 @@ const LoginForm = () => {
     password: "",
   });
 
- async function handleLogin(event) {
-  event.preventDefault()
+  function handleLogin(event) {
+    event.preventDefault();
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,10 +23,17 @@ const LoginForm = () => {
     };
 
     fetch("/token", requestOptions)
-    .then(response =>  { return response.json()} )
-    .then(data => { return saveToken(data.access_token)})
-    .catch(error => console.log(error))
-    
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => {
+        saveToken(data.access_token);
+        return navigate("/");
+      })
+      .catch((error) => {
+        return console.log(error);
+      });
 
     setLoginForm({
       email: "",
@@ -34,7 +41,6 @@ const LoginForm = () => {
     });
 
     event.preventDefault();
-    return navigate('/')
   }
 
   function handleChange(event) {
