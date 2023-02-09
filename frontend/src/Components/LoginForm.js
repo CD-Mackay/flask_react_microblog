@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UseToken from "./UseToken";
 
 const LoginForm = () => {
-  const { saveToken, getToken } = UseToken();
+  const { saveToken } = UseToken();
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
