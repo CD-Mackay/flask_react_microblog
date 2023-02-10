@@ -29,7 +29,6 @@ const LoginForm = () => {
       })
       .then((data) => {
         saveToken(data.access_token);
-        console.log("redirect")
         return navigate("/");
       })
       .catch((error) => {
