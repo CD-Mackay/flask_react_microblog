@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // Component Imports
 
 const Home = ({ token, showLogin, time, posts }) => {
+  console.log("home", token)
   return (
     <div className="App">
       <p>{time}</p>
