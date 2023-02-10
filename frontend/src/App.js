@@ -23,7 +23,7 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => setPosts(data.content));
-  }, []);
+  }, [token]);
 
   return (
     <BrowserRouter>
