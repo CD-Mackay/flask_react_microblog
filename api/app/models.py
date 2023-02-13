@@ -1,4 +1,5 @@
 from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
@@ -16,3 +17,9 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def set_password(self, password):
+      self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+      self.check_password = check_password_hash(password)
