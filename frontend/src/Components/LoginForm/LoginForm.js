@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UseToken from "./UseToken";
+import UseToken from "../UseToken";
+import "./LoginForm.css"
 
 const LoginForm = () => {
   const { saveToken } = UseToken();
@@ -54,7 +55,7 @@ const LoginForm = () => {
   
 
   return (
-    <form>
+    <form className="login-form">
       <input
         onChange={handleChange}
         type="email"
