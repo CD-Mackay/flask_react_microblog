@@ -13,6 +13,9 @@ const Header = ({ token, removeToken, setShowLogin }) => {
             <button>Login?</button>
           </Link>
         )}
+        <Link to="/">
+          <button>Home</button>
+        </Link>
       </div>
     </nav>
   );
