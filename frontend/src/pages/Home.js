@@ -1,8 +1,11 @@
 // Library Imports
 import React from "react";
-import { Link } from "react-router-dom";
+
 // Style Imports
+
 // Component Imports
+import { Link } from "react-router-dom";
+
 
 const Home = ({ token, showLogin, time, posts }) => {
   return (

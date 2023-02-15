@@ -1,8 +1,13 @@
+//Library Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Styling Imports
+import "./LoginForm.css"
+
+// Component Imports
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
-import "./LoginForm.css"
 
 const LoginForm = () => {
   const { saveToken } = UseToken();
