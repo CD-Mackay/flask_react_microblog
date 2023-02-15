@@ -3,7 +3,7 @@ import "./Button.css";
 
 const Button = ({ message }) => {
   return (
-    <button>{message}</button>
+    <button className="button">{message}</button>
   );
 };
 

@@ -1,4 +1,5 @@
-button{ 
-  color: red;
-  background-color: blue;
+.button{ 
+  color: white;
+  background-color: #0135a9;
+  padding: 5px;
 }
