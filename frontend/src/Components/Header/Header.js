@@ -1,20 +1,21 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 const Header = ({ token, removeToken, setShowLogin }) => {
   return (
     <nav className="header-nav">
       <div></div>
       <div className="button-wrapper">
-        {token && <button onClick={removeToken}>Logout</button>}
+        {token && <Button onClick={removeToken}>Logout</Button>}
         {!token && (
           <Link to="/login">
-            <button>Login?</button>
+            <Button>Login?</Button>
           </Link>
         )}
         <Link to="/">
-          <button>Home</button>
+          <Button>Home</Button>
         </Link>
       </div>
     </nav>
