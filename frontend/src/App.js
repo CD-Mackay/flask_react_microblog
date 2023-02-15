@@ -1,10 +1,17 @@
-import "./App.css";
-import { useState, useEffect } from "react";
+// Component Imports
 import UseToken from "./Components/UseToken";
 import Header from "./Components/Header/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
+
+//Library Imports
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+//Styling Imports
+import "./App.css";
+
+
 
 function App() {
   const { token, removeToken, saveToken } = UseToken();
