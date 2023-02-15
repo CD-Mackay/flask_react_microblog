@@ -11,11 +11,11 @@ const Header = ({ token, removeToken, setShowLogin }) => {
         {token && <Button onClick={removeToken}>Logout</Button>}
         {!token && (
           <Link to="/login">
-            <Button>Login?</Button>
+            <Button message="Login" />
           </Link>
         )}
         <Link to="/">
-          <Button>Home</Button>
+          <Button message="Home" />
         </Link>
       </div>
     </nav>

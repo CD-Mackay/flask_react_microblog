@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import "./LoginForm.css"
 
@@ -73,7 +74,7 @@ const LoginForm = () => {
         value={loginForm.password}
       />
 
-      <button onClick={handleLogin}>Submit</button>
+      <Button message="Login" onClick={handleLogin} />
     </form>
   );
 };
