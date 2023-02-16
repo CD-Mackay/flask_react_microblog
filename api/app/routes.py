@@ -1,4 +1,4 @@
-from app import app
+from app import app, db
 from app.models import User
 import time
 from flask import flash, redirect, request, jsonify
@@ -38,6 +38,21 @@ def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
+
+@app.route('/register', methods=["POST"])
+def register_user():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    username = request.json.get("username", None)
+    user = User(username=username, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    access_token = create_access_token(identity=email)
+    response = {"access_token":access_token}
+    print(response)
+    return response
+
 
 
     
