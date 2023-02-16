@@ -39,7 +39,7 @@ def logout():
     unset_jwt_cookies(response)
     return response
 
-@app.route('/register', methods=["POST"])
+@app.route('/register', methods=["POST"]) ## Registers new Users, sets JWT upon succesful registration
 def register_user():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
