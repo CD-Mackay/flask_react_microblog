@@ -1,4 +1,5 @@
 from app import app
+from app.models import User
 import time
 from flask import flash, redirect, request, jsonify
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
@@ -23,7 +24,8 @@ def get_posts():
 def get_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test@test.com" or password != "test":
+    user = User.query.filter_by(email=email).first()
+    if user is None or not user.check_password(password):
         return {"error": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
