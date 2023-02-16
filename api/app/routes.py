@@ -1,4 +1,5 @@
-from app import app
+from app import app, db
+from app.models import User
 import time
 from flask import flash, redirect, request, jsonify
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
@@ -23,7 +24,8 @@ def get_posts():
 def get_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test@test.com" or password != "test":
+    user = User.query.filter_by(email=email).first()
+    if user is None or not user.check_password(password):
         return {"error": "Wrong email or password"}, 401
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
@@ -36,6 +38,21 @@ def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
+
+@app.route('/register', methods=["POST"]) ## Registers new Users, sets JWT upon succesful registration
+def register_user():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    username = request.json.get("username", None)
+    user = User(username=username, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    access_token = create_access_token(identity=email)
+    response = {"access_token":access_token}
+    print(response)
+    return response
+
 
 
     

@@ -3,6 +3,7 @@ import UseToken from "./Components/UseToken";
 import Header from "./Components/Header/Header";
 import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
+import Register from "./Pages/Register";
 
 //Library Imports
 import { useState, useEffect } from "react";
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
+        <Route path="/register" element={<Register saveToken={saveToken} />} />
       </Routes>
     </BrowserRouter>
   );
