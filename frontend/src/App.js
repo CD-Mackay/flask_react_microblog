@@ -35,11 +35,11 @@ function App() {
 
   return (
     <BrowserRouter>
-       <Header
+       {/* <Header
             token={token}
             setShowLogin={setShowLogin}
             removeToken={removeToken}
-          />
+          /> */}
       <Routes>
         <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />

@@ -7,11 +7,11 @@ import Layout from "./Components/Layout/Layout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Layout>
+  <Layout>
+    <React.StrictMode>
       <App />
-    </Layout>
-  </React.StrictMode>
+    </React.StrictMode>
+  </Layout>
 );
 
 // If you want to start measuring performance in your app, pass a function

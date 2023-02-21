@@ -2,7 +2,7 @@
 import React from "react";
 
 // Styling Imports
-import "./Header.css";
+import "./Layout.css";
 
 // Component Imports
 import Header from "../Header/Header";
