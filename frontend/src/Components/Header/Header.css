@@ -1,10 +1,10 @@
 .header-nav {
-  width: 100vw;
+  align-items: center;
   background-color: var(--main-purple);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 40px;
+  justify-content: space-between;
+  width: 100vw;
 }
 
 .button-wrapper {
