@@ -5,8 +5,6 @@ import React from "react";
 import "./Layout.css";
 
 // Component Imports
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 
 const Layout = (props) => {
   return (
