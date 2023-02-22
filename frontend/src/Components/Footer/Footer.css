@@ -2,6 +2,6 @@
   width: 100vw;
   position: fixed;
   bottom: 0;
-  background-color: #9c4e98;
+  background-color: var(--main-purple);
   height: 40px;
 }
