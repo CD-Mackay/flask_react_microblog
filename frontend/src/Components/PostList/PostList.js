@@ -6,10 +6,10 @@ import "./PostList.css";
 
 // Component Imports
 
-const PostList = () => {
+const PostList = ({posts}) => {
   return (
     <div>
-      <p>I am PostList</p>
+      <p>{posts}</p>
     </div>
   );
 };

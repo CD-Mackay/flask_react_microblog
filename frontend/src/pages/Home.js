@@ -5,6 +5,7 @@ import React from "react";
 
 // Component Imports
 import { Link } from "react-router-dom";
+import PostList from "../Components/PostList/PostList";
 
 
 const Home = ({ token, showLogin, time, posts }) => {
@@ -13,7 +14,7 @@ const Home = ({ token, showLogin, time, posts }) => {
       <p>{time}</p>
 
       {token && token !== "" && token !== undefined && token !== null && (
-        <p>{posts}</p>
+        <PostList posts={posts} />
       )}
 
       {!showLogin && !token && (
