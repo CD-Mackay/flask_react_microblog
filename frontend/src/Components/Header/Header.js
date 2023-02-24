@@ -15,9 +15,14 @@ const Header = ({ token, removeToken, setShowLogin }) => {
       <div className="button-wrapper">
         {token && <Button onClick={removeToken}>Logout</Button>}
         {!token && (
-          <Link to="/login">
-            <Button message="Login" />
-          </Link>
+          <>
+            <Link to="/login">
+              <Button message="Login" />
+            </Link>
+            <Link to="/register">
+              <Button message="Register" />
+            </Link>
+          </>
         )}
         <Link to="/">
           <Button message="Home" />
