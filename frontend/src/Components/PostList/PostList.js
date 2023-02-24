@@ -7,6 +7,7 @@ import "./PostList.css";
 // Component Imports
 
 const PostList = ({posts}) => {
+  console.log(posts)
   return (
     <div>
       <p>{posts}</p>
