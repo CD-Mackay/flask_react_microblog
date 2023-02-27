@@ -1,6 +1,7 @@
 //Library Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 // Styling Imports
 import "./LoginForm.css"
@@ -20,17 +21,28 @@ const LoginForm = () => {
 
   function handleLogin(event) {
     event.preventDefault();
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: loginForm.email,
-        password: loginForm.password,
-      }),
-    };
+    console.log(event)
+    // const requestOptions = {
+    //   method: 'POST',
+    //   mode: 'cors',
+    //   cache: 'default',
+    //   headers: {'Content-Type': 'application/json; charset=UTF-8'},
+    //   body: JSON.stringify({
+    //     email: loginForm.email,
+    //     password: loginForm.password,
+    //   }),
+    // };
 
-    fetch("/token", requestOptions)
+    axios({
+      method: "POST",
+      url:"/token",
+      data:{
+        email: loginForm.email,
+        password: loginForm.password
+       }
+    })
       .then((response) => {
+        console.log(response)
         if (!response.ok) throw new Error(response.status);
         return response.json();
       })
@@ -47,7 +59,6 @@ const LoginForm = () => {
       password: "",
     });
 
-    event.preventDefault();
   }
 
   function handleChange(event) {
@@ -79,7 +90,7 @@ const LoginForm = () => {
         value={loginForm.password}
       />
 
-      <Button message="Login" onClick={handleLogin} />
+      <Button message="Login" onClick={(event) => handleLogin(event)} />
     </form>
   );
 };

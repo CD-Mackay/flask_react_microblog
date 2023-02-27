@@ -16,14 +16,17 @@ const RegisterForm = () => {
   const [RegisterForm, setRegisterForm] = useState({
     email: "",
     password: "",
-    username: ""
+    username: "",
   });
 
   function handleRegister(event) {
     event.preventDefault();
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: RegisterForm.email,
         password: RegisterForm.password,
@@ -46,7 +49,7 @@ const RegisterForm = () => {
     setRegisterForm({
       email: "",
       password: "",
-      username: ""
+      username: "",
     });
 
     event.preventDefault();
