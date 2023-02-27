@@ -24,6 +24,7 @@ def get_posts():
 def get_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    print(email, password)
     user = User.query.filter_by(email=email).first()
     if user is None or not user.check_password(password):
         return {"error": "Wrong email or password"}, 401
