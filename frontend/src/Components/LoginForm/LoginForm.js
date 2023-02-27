@@ -34,8 +34,8 @@ const LoginForm = () => {
     // };
 
     axios({
-      method: "POST",
-      url:"/token",
+      method: 'POST',
+      url:"/token/",
       data:{
         email: loginForm.email,
         password: loginForm.password
