@@ -10,15 +10,14 @@ import "./PostList.css";
 const PostList = ({posts, dPosts}) => {
   console.log(posts)
 
-  const showPosts = (array) => {
-    array.map((element) => {
+  const showPosts = dPosts.map((element) => {
       return <PostListItem author={element.author} content={element.content} title={element.title} />
     })
-  }
+  
   return (
     <div>
       <p>{posts}</p>
-      <p>{showPosts(dPosts)}</p>
+      <p>{showPosts}</p>
     </div>
   );
 };
