@@ -6,12 +6,14 @@ import "./PostListItem.css";
 
 // Component Imports
 
-const PostListItem = ({author, content, title}) => {
+const PostListItem = ({ author, content, title }) => {
   return (
-    <div>
-      <h6>{title}</h6>
+    <div className="post-item">
+      <div className="title-card">
+        <h6>{title}</h6>
+        <h6>{author}</h6>
+      </div>
       <p>{content}</p>
-      <p>{author}</p>
     </div>
   );
 };

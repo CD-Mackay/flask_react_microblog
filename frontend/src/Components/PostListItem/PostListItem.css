@@ -1,0 +1,12 @@
+.post-item {
+  border: 1px solid gray;
+  width: 200px;
+}
+
+.title-card {
+  display: flex;
+}
+
+h6 {
+  margin: 5px;
+}
