@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Styling Imports
 import "./App.css";
+import Profile from "./Pages/Profile";
 
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
+        <Route path="/user" element={<Profile />} />
       </Routes>
       <Footer />
     </BrowserRouter>

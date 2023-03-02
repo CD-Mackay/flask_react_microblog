@@ -6,9 +6,9 @@ import "./Button.css";
 
 // Component Imports
 
-const Button = ({ message }) => {
+const Button = ({ message, onClick }) => {
   return (
-    <button className="button">{message}</button>
+    <button onClick={onClick} className="button">{message}</button>
   );
 };
 
