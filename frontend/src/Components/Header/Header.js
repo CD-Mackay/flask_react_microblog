@@ -8,12 +8,17 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
-const Header = ({ token, removeToken, setShowLogin }) => {
+const Header = ({ token, removeToken }) => {
   return (
     <nav className="header-nav">
       <div></div>
       <div className="button-wrapper">
-        {token && <Button onClick={removeToken}>Logout</Button>}
+        {token && <Button onClick={removeToken} message="Logout" />}
+        {token && (
+          <Link to="/user/:id">
+            <Button message="Profile" />
+          </Link>
+        )}
         {!token && (
           <>
             <Link to="/login">
