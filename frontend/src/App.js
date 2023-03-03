@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route path="/user" element={<Profile />} />
+        <Route path="/user/:id" element={<Profile />} />
       </Routes>
       <Footer />
     </BrowserRouter>
