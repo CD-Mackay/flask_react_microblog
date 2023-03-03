@@ -13,7 +13,11 @@ const Header = ({ token, removeToken, setShowLogin }) => {
     <nav className="header-nav">
       <div></div>
       <div className="button-wrapper">
-        {token && <Button onClick={removeToken} message="Logout" />}
+        {token && <Button onClick={removeToken} message="Logout" />}{
+          token && <Link to="/user/:id">
+            <Button message="Profile" />
+          </Link>
+        }
         {!token && (
           <>
             <Link to="/login">
