@@ -20,7 +20,6 @@ function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
-  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     fetch("/time")
@@ -39,11 +38,10 @@ function App() {
     <BrowserRouter>
        <Header
             token={token}
-            setShowLogin={setShowLogin}
             removeToken={removeToken}
           />
       <Routes>
-        <Route path="/" element={<Home token={token} showLogin={showLogin} time={time} posts={posts} />} />
+        <Route path="/" element={<Home token={token} time={time} posts={posts} />} />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile />} />
