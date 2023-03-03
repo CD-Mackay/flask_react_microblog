@@ -22,25 +22,17 @@ const LoginForm = () => {
   function handleLogin(event) {
     event.preventDefault();
     console.log(event)
-    // const requestOptions = {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   cache: 'default',
-    //   headers: {'Content-Type': 'application/json; charset=UTF-8'},
-    //   body: JSON.stringify({
-    //     email: loginForm.email,
-    //     password: loginForm.password,
-    //   }),
-    // };
-
-    axios({
+    const requestOptions = {
       method: 'POST',
-      url:"/token/",
-      data:{
+      mode: 'cors',
+      cache: 'default',
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      body: JSON.stringify({
         email: loginForm.email,
-        password: loginForm.password
-       }
-    })
+        password: loginForm.password,
+      }),
+    };
+    fetch("/token", requestOptions)
       .then((response) => {
         console.log(response)
         if (!response.ok) throw new Error(response.status);
