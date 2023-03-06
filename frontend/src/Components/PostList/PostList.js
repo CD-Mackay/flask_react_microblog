@@ -7,17 +7,19 @@ import "./PostList.css";
 
 // Component Imports
 
-const PostList = ({posts, dPosts}) => {
+const PostList = ({posts}) => {
   console.log(posts)
 
-  const showPosts = dPosts.map((element) => {
+  const showPosts = () => {
+    posts.map((element) => {
       return <PostListItem author={element.author} content={element.content} title={element.title} />
     })
+  } 
   
   return (
     <div>
       <p>{posts}</p>
-      <p>{showPosts}</p>
+      {posts && <div>{showPosts}</div>}
     </div>
   );
 };
