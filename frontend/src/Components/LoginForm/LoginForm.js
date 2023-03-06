@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Styling Imports
-import "./LoginForm.css"
+import "./LoginForm.css";
 
 // Component Imports
 import Button from "../Button/Button";
@@ -20,12 +20,13 @@ const LoginForm = () => {
 
   function handleLogin(event) {
     event.preventDefault();
-    console.log(event)
+    console.log(event);
     const requestOptions = {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'default',
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      method: "POST",
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: loginForm.email,
         password: loginForm.password,
@@ -33,7 +34,7 @@ const LoginForm = () => {
     };
     fetch("/token", requestOptions)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (!response.ok) throw new Error(response.status);
         return response.json();
       })
@@ -49,7 +50,6 @@ const LoginForm = () => {
       email: "",
       password: "",
     });
-
   }
 
   function handleChange(event) {
@@ -59,8 +59,6 @@ const LoginForm = () => {
       [name]: value,
     }));
   }
-
-  
 
   return (
     <form className="login-form">
