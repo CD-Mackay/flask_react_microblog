@@ -10,12 +10,13 @@ import "./PostList.css";
 const PostList = ({ posts }) => {
 
   const showPosts = () => {
-    return posts.map((element) => {
+    return posts.map((element, index) => {
       return (
         <PostListItem
           author={element.author}
           content={element.content}
           title={element.title}
+          key={index}
         />
       );
     });
