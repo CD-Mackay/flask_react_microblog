@@ -7,19 +7,25 @@ import "./PostList.css";
 
 // Component Imports
 
-const PostList = ({posts}) => {
-  console.log(posts)
+const PostList = ({ posts }) => {
+  console.log(posts);
+  console.log(Array.isArray(posts));
 
   const showPosts = () => {
-    posts.map((element) => {
-      return <PostListItem author={element.author} content={element.content} title={element.title} />
-    })
-  } 
-  
+    return posts.map((element) => {
+      return (
+        <PostListItem
+          author={element.author}
+          content={element.content}
+          title={element.title}
+        />
+      );
+    });
+  };
+
   return (
     <div>
-      <p>{posts}</p>
-      {posts && <div>{showPosts}</div>}
+      {posts && <div>{showPosts()}</div>}
     </div>
   );
 };
