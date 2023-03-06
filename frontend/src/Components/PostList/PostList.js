@@ -8,8 +8,6 @@ import "./PostList.css";
 // Component Imports
 
 const PostList = ({ posts }) => {
-  console.log(posts);
-  console.log(Array.isArray(posts));
 
   const showPosts = () => {
     return posts.map((element) => {
