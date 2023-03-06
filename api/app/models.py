@@ -23,4 +23,4 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
       self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-      self.check_password = check_password_hash(password)
+      self.check_password = check_password_hash(self.password_hash, password)
