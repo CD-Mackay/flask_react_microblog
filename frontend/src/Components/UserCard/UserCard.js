@@ -13,7 +13,6 @@ const UserCard = () => {
 
   const handeFollow = () => {
     followed ? setFollowed(false) : setFollowed(true);
-    console.log("handlingFollow!")
   }
 
   return (
