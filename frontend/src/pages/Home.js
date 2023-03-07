@@ -7,7 +7,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostList from "../Components/PostList/PostList";
 
-const Home = ({ token, showLogin, time, posts }) => {
+const Home = ({ token, time, posts }) => {
 
   const dummyPosts = [
     {
@@ -34,7 +34,7 @@ const Home = ({ token, showLogin, time, posts }) => {
       <PostList posts={posts} dPosts={dummyPosts} />
       {/* )} */}
 
-      {!showLogin && !token && (
+      {!token && (
         <Link to="/login">
           <button>Login?</button>
         </Link>
