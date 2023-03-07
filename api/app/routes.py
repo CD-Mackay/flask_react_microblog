@@ -54,6 +54,11 @@ def register_user():
     print(response)
     return response
 
+@app.route('/new', methods=['POST'])
+def make_post():
+    title = request.json.get("title", None)
+    content = request.json.get("content", None)
+
 
 
     
