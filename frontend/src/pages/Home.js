@@ -5,6 +5,7 @@ import React from "react";
 
 // Component Imports
 import { Link } from "react-router-dom";
+import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
 const Home = ({ token, time, posts }) => {
@@ -39,6 +40,7 @@ const Home = ({ token, time, posts }) => {
           <button>Login?</button>
         </Link>
       )}
+      <NewPost />
     </div>
   );
 };

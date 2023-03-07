@@ -9,7 +9,10 @@ import "./NewPost.css";
 
 const NewPost = () => {
   return (
-    <div>I am NewPost</div>
+    <form className="new-post">
+      <input type="text" placeholder="Title" />
+      <textarea />
+    </form>
   );
 };
 
