@@ -24,3 +24,7 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
 
     def check_password(self, password):
       self.check_password = check_password_hash(self.password_hash, password)
+
+# @login.user_loader WHAT DOES THIS MEAN??
+# def load_user(id):
+#     return User.query.get(int(id))
