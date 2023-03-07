@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import "./NewPost.css";
 
 // Component Imports
+import Button from "../Button/Button";
 
 
 const NewPost = () => {
@@ -31,6 +32,7 @@ const NewPost = () => {
     <form className="new-post">
       <input onChange={handleChange} type="text" placeholder="Title" />
       <textarea onChange={handleChange} />
+      <Button onClick={handleNewPost} message="Make the post!" />
     </form>
   );
 };
