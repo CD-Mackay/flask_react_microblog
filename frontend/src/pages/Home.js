@@ -4,7 +4,6 @@ import React from "react";
 // Style Imports
 
 // Component Imports
-import { Link } from "react-router-dom";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
