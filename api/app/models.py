@@ -4,7 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
   content = db.Column(db.String(250), index=True)
-  user_id = db.Column(db.Integer, db.ForeignKey('user.id')) ## Issue adding to table, check with most recent tab tutorial
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
+  ## Add title to Post Model, check Grinberg for advice
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)

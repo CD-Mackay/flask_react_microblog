@@ -31,7 +31,7 @@ const NewPost = () => {
   return (
     <form className="new-post">
       <input onChange={handleChange} type="text" placeholder="Title" />
-      <textarea onChange={handleChange} />
+      <textarea onChange={handleChange} placeholder="Write some stuff in here..." />
       <Button onClick={handleNewPost} message="Make the post!" />
     </form>
   );

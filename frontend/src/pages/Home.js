@@ -4,7 +4,6 @@ import React from "react";
 // Style Imports
 
 // Component Imports
-import { Link } from "react-router-dom";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
@@ -34,12 +33,6 @@ const Home = ({ token, time, posts }) => {
       {/* {token && token !== "" && token !== undefined && token !== null && ( */}
       <PostList posts={posts} dPosts={dummyPosts} />
       {/* )} */}
-
-      {!token && (
-        <Link to="/login">
-          <button>Login?</button>
-        </Link>
-      )}
       <NewPost />
     </div>
   );
