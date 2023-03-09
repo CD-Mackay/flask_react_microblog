@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User
+from app.models import User, Post
 import time
 from flask import flash, redirect, request, jsonify
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
@@ -58,6 +58,12 @@ def register_user():
 def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
+    ## How to add user to post content? 
+    post = Post(content=content, title=title, user_id=user)
+    db.session.add(post)
+    db.session.commit()
+
+
 
 
 
