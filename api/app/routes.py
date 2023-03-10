@@ -27,8 +27,12 @@ def get_token():
     print(email, password)
     user = User.query.filter_by(email=email).first()
     print(user.email, "useremail", user.password_hash)
-    if user is None or not user.check_password(password): ## Likely something wrong with check_password method on USer model
-        return {"error": "Wrong email or password"}, 401
+    # if user is None or not user.check_password(password): ## Likely something wrong with check_password method on USer model
+    #     return {"error": "Wrong email or password"}, 401
+    if user is None:
+        return {"error": "wrong email"}, 401
+    elif not user.check_password(password):
+        return {"error": "wrong password"}, 401
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token}
     print(response)
