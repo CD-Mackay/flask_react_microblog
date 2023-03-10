@@ -1,5 +1,6 @@
 .new-post {
   border: 1px solid gray;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 5px;
