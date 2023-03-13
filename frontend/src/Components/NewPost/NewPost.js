@@ -7,16 +7,14 @@ import "./NewPost.css";
 // Component Imports
 import Button from "../Button/Button";
 
-
 const NewPost = () => {
-
   const [postForm, setPostForm] = useState({
     title: "",
-    content: ""
-  })
+    content: "",
+  });
 
   const handleNewPost = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const requestOptions = {
       method: "POST",
       headers: {
@@ -35,7 +33,7 @@ const NewPost = () => {
         return response.json();
       })
       .then((data) => {
-       return data;
+        return data;
       })
       .catch((error) => {
         return console.log(error);
@@ -45,8 +43,7 @@ const NewPost = () => {
       title: "",
       content: "",
     });
-  }
-
+  };
 
   function handleChange(event) {
     const { value, name } = event.target;
@@ -57,8 +54,19 @@ const NewPost = () => {
   }
   return (
     <form className="new-post">
-      <input onChange={handleChange} type="text" placeholder="Title" />
-      <textarea onChange={handleChange} placeholder="Write some stuff in here..." />
+      <input
+        onChange={handleChange}
+        type="text"
+        text={postForm.title}
+        value={postForm.title}
+        placeholder="Title"
+      />
+      <textarea
+        onChange={handleChange}
+        text={postForm.content}
+        value={postForm.content}
+        placeholder="Write some stuff in here..."
+      />
       <Button onClick={handleNewPost} message="Make the post!" />
     </form>
   );
