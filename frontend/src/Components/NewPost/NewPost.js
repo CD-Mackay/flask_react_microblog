@@ -17,7 +17,34 @@ const NewPost = () => {
 
   const handleNewPost = (event) => {
     event.preventDefault()
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: postForm.title,
+        content: postForm.content,
+      }),
+    };
+    fetch("/token", requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => {
+       return data;
+      })
+      .catch((error) => {
+        return console.log(error);
+      });
 
+    setPostForm({
+      title: "",
+      content: "",
+    });
   }
 
 
