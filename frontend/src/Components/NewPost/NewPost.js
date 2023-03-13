@@ -24,9 +24,10 @@ const NewPost = () => {
       body: JSON.stringify({
         title: postForm.title,
         content: postForm.content,
+        // Still need some way to attach user id
       }),
     };
-    fetch("/token", requestOptions)
+    fetch("/newpost", requestOptions) // Backend routing not completed yet
       .then((response) => {
         console.log(response);
         if (!response.ok) throw new Error(response.status);
