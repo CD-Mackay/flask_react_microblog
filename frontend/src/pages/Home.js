@@ -32,8 +32,8 @@ const Home = ({ token, time, posts }) => {
 
       {/* {token && token !== "" && token !== undefined && token !== null && ( */}
       <PostList posts={posts} dPosts={dummyPosts} />
-      {/* )} */}
       <NewPost />
+      {/* )} */}
     </div>
   );
 };
