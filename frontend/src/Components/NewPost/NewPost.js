@@ -7,6 +7,7 @@ import "./NewPost.css";
 // Component Imports
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
+import ShowError from "../ShowError/ShowError";
 
 const NewPost = () => {
   const { token } = UseToken()
@@ -14,11 +15,13 @@ const NewPost = () => {
     title: "",
     content: "",
   });
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleNewPost = (event) => {
     event.preventDefault()
     if (!token) {
-      return console.log("you must be logged in to post")
+      setErrorMessage("You must be logged in to post")
+      return
     }
     event.preventDefault();
     const requestOptions = {
@@ -75,6 +78,7 @@ const NewPost = () => {
         placeholder="Write some stuff in here..."
       />
       <Button onClick={handleNewPost} message="Make the post!" />
+      <ShowError message={errorMessage} />
     </form>
   );
 };
