@@ -6,14 +6,20 @@ import "./NewPost.css";
 
 // Component Imports
 import Button from "../Button/Button";
+import UseToken from "../UseToken";
 
 const NewPost = () => {
+  const { token } = UseToken()
   const [postForm, setPostForm] = useState({
     title: "",
     content: "",
   });
 
   const handleNewPost = (event) => {
+    event.preventDefault()
+    if (!token) {
+      return console.log("you must be logged in to post")
+    }
     event.preventDefault();
     const requestOptions = {
       method: "POST",
