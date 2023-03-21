@@ -10,18 +10,18 @@ import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
 
 const NewPost = () => {
-  const { token } = UseToken()
+  const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",
     content: "",
   });
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleNewPost = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!token) {
-      setErrorMessage("You must be logged in to post")
-      return
+      setErrorMessage("You must be logged in to post");
+      return;
     }
     event.preventDefault();
     const requestOptions = {

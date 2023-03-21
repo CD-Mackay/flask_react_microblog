@@ -8,7 +8,6 @@ import "./PostList.css";
 // Component Imports
 
 const PostList = ({ posts }) => {
-
   const showPosts = () => {
     return posts.map((element, index) => {
       return (
@@ -22,11 +21,7 @@ const PostList = ({ posts }) => {
     });
   };
 
-  return (
-    <div>
-      {posts && <div>{showPosts()}</div>}
-    </div>
-  );
+  return <div>{posts && <div>{showPosts()}</div>}</div>;
 };
 
 export default PostList;
