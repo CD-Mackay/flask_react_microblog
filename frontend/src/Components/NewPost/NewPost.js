@@ -21,6 +21,9 @@ const NewPost = () => {
     event.preventDefault();
     if (!token) {
       setErrorMessage("You must be logged in to post");
+      setTimeout(() => {
+        setErrorMessage("")
+      }, 2000)
       return;
     }
     event.preventDefault();
