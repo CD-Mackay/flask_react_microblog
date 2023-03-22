@@ -14,12 +14,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Profile from "./Pages/Profile";
 
-
-
 function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
+  const [username, setUsername] = useState("")
 
   useEffect(() => {
     fetch("/time")
@@ -27,21 +26,30 @@ function App() {
       .then((data) => setTime(data.time));
     fetch("/posts", {
       headers: {
-        Authorization: "Bearer " + token
+        Authorization: "Bearer " + token,
       },
     })
       .then((res) => res.json())
       .then((data) => setPosts(data.content));
+    fetch("/profile", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUsername(data.username));
   }, [token]);
+
+  console.log(username)
 
   return (
     <BrowserRouter>
-       <Header
-            token={token}
-            removeToken={removeToken}
-          />
+      <Header token={token} removeToken={removeToken} />
       <Routes>
-        <Route path="/" element={<Home token={token} time={time} posts={posts} />} />
+        <Route
+          path="/"
+          element={<Home token={token} time={time} posts={posts} />}
+        />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user" element={<Profile />} />
