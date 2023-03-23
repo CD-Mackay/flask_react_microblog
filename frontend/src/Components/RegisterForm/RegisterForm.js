@@ -30,6 +30,7 @@ const RegisterForm = () => {
       body: JSON.stringify({
         email: RegisterForm.email,
         password: RegisterForm.password,
+        username: RegisterForm.username
       }),
     };
 
