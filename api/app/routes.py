@@ -23,7 +23,7 @@ def get_posts():
 @app.route('/profile')
 @jwt_required()
 def get_profile():
-    user = User.query.filter_by(email='no@limit.com').first()
+    user = User.query.filter_by(email='new@guy.com').first()
     return {'username': user.username}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users

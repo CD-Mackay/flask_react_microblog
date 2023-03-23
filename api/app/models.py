@@ -26,6 +26,6 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     def check_password(self, password):
       return check_password_hash(self.password_hash, password)
 
-# @login.user_loader WHAT DOES THIS MEAN??
+# @get_token.user_loader // Raises circular import error
 # def load_user(id):
 #     return User.query.get(int(id))
