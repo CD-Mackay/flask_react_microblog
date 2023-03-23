@@ -18,7 +18,10 @@ function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
-  const [username, setUsername] = useState("")
+  const [user, setUser] = useState({
+    username: "",
+    id: 0
+  });
 
   useEffect(() => {
     fetch("/time")
@@ -37,14 +40,15 @@ function App() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setUsername(data.username));
+      .then((data) => setUser({
+        username: data.username,
+        id:data.id
+      }));
   }, [token]);
-
-  console.log(username)
 
   return (
     <BrowserRouter>
-      <Header token={token} removeToken={removeToken} />
+      <Header token={token} removeToken={removeToken} user={user} />
       <Routes>
         <Route
           path="/"
