@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
 
-const NewPost = ({id, user}) => {
+const NewPost = ({ user}) => {
   const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",
