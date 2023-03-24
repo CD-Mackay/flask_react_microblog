@@ -39,7 +39,7 @@ const NewPost = ({ user}) => {
         id: user.id
       }),
     };
-    fetch("/newpost", requestOptions) // Backend routing not completed yet
+    fetch("/newpost", requestOptions)
       .then((response) => {
         console.log(response);
         if (!response.ok) throw new Error(response.status);
