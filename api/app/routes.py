@@ -66,7 +66,7 @@ def register_user():
 def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
-    ## How to add user to post content? 
+    user = request.json.get("id", None)
     post = Post(content=content, title=title, user_id=user)
     db.session.add(post)
     db.session.commit()
