@@ -52,7 +52,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home token={token} time={time} posts={posts} />}
+          element={<Home token={token} time={time} posts={posts} user={user} />}
         />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />

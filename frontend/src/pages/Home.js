@@ -7,7 +7,7 @@ import React from "react";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
-const Home = ({ token, time, posts }) => {
+const Home = ({ token, time, posts, user }) => {
 
   const dummyPosts = [
     {
@@ -32,7 +32,7 @@ const Home = ({ token, time, posts }) => {
 
       {/* {token && token !== "" && token !== undefined && token !== null && ( */}
       <PostList posts={posts} dPosts={dummyPosts} />
-      <NewPost />
+      <NewPost user={user} />
       {/* )} */}
     </div>
   );
