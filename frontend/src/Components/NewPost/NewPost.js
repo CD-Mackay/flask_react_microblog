@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
 
-const NewPost = () => {
+const NewPost = ({id, user}) => {
   const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",
@@ -36,7 +36,7 @@ const NewPost = () => {
       body: JSON.stringify({
         title: postForm.title,
         content: postForm.content,
-        // Still need some way to attach user id
+        id: user.id
       }),
     };
     fetch("/newpost", requestOptions) // Backend routing not completed yet
