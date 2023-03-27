@@ -18,7 +18,9 @@ def get_current_time():
 @app.route('/posts')
 @jwt_required()
 def get_posts():
-    return {'content': [{'author': 'some dude', 'content': 'I am a post, woooh look at me lorem ipsum', 'title': 'A post!' }]}
+    posts = Post.query.order_by(Post.id.desc()).all()
+    print(posts)
+    return {'posts': posts}
 
 @app.route('/profile')
 @jwt_required()
@@ -70,6 +72,7 @@ def make_post():
     post = Post(content=content, title=title, user_id=user)
     db.session.add(post)
     db.session.commit()
+    return {"response": "post successful!"}
 
 
 
