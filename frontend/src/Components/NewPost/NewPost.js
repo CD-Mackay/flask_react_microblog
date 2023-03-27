@@ -73,12 +73,14 @@ const NewPost = ({ user}) => {
         text={postForm.title}
         value={postForm.title}
         placeholder="Title"
+        name="title"
       />
       <textarea
         onChange={handleChange}
         text={postForm.content}
         value={postForm.content}
         placeholder="Write some stuff in here..."
+        name="content"
       />
       <Button onClick={handleNewPost} message="Make the post!" />
       <ShowError message={errorMessage} />
