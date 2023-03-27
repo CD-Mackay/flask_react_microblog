@@ -39,7 +39,7 @@ const NewPost = ({ user}) => {
         id: user.id
       }),
     };
-    fetch("/newpost", requestOptions)
+    fetch("/new", requestOptions)
       .then((response) => {
         console.log(response);
         if (!response.ok) throw new Error(response.status);
