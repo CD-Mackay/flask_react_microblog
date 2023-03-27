@@ -23,6 +23,8 @@ function App() {
     id: 0
   });
 
+  console.log("posts", posts);
+
   useEffect(() => {
     fetch("/time")
       .then((res) => res.json())
