@@ -1,5 +1,6 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+import json
 
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
@@ -9,6 +10,8 @@ class Post(db.Model): ## Define Posts model
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
+  def toJSON(self):
+    return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
     id = db.Column(db.Integer, primary_key=True)

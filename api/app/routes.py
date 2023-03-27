@@ -18,7 +18,8 @@ def get_current_time():
 @app.route('/posts')
 @jwt_required()
 def get_posts():
-    posts = Post.query.order_by(Post.timestamp.desc())
+    posts = Post.query.order_by(Post.id.desc()).all()
+    print(posts)
     return {'posts': posts}
 
 @app.route('/profile')
