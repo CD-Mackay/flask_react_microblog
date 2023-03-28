@@ -35,7 +35,7 @@ function App() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setPosts(data.content));
+      .then((data) => setPosts(data));
     fetch("/profile", {
       headers: {
         Authorization: "Bearer " + token,
