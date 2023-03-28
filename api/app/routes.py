@@ -20,9 +20,8 @@ def get_current_time():
 @jwt_required()
 def get_posts():
     posts = Post.query.order_by(Post.id.desc()).all() ## Returns non JSON serializable object? 
-    print("prejsonify", posts)
-    response = posts
-    return {'posts': response}
+    response = [post.serialized() for post in posts]
+    return response
 
 @app.route('/profile')
 @jwt_required()

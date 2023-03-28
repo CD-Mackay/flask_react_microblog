@@ -14,6 +14,14 @@ class Post(db.Model): ## Define Posts model
   def toJSON(self):
     return json.dumps(self, default=lambda o: o.__dict__)
 
+  def serialized(self):
+    return {
+      'id': self.id,
+      'content': self.content,
+      'title': self.title,
+      'user_id': self.user_id
+    }
+
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
