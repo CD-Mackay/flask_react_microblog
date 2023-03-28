@@ -10,8 +10,9 @@ class Post(db.Model): ## Define Posts model
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
+
   def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+    return json.dumps(self, default=lambda o: o.__dict__)
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
     id = db.Column(db.Integer, primary_key=True)
