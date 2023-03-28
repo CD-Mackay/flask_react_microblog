@@ -1,7 +1,8 @@
 from app import app, db
 from app.models import User, Post
 import time
-from flask import flash, redirect, request, jsonify
+import json
+from flask import flash, redirect, request, jsonify, make_response
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 
@@ -19,8 +20,9 @@ def get_current_time():
 @jwt_required()
 def get_posts():
     posts = Post.query.order_by(Post.id.desc()).all() ## Returns non JSON serializable object? 
-    print(posts)
-    return {'posts': posts}
+    print("prejsonify", posts)
+    response = posts
+    return {'posts': response}
 
 @app.route('/profile')
 @jwt_required()
