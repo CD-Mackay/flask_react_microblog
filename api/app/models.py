@@ -11,9 +11,6 @@ class Post(db.Model): ## Define Posts model
   def __repr__(self):
     return '<Post {}>'.format(self.content)
 
-  def toJSON(self):
-    return json.dumps(self, default=lambda o: o.__dict__)
-
   def serialized(self):
     return {
       'id': self.id,
