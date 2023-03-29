@@ -20,10 +20,11 @@ function App() {
   const [posts, setPosts] = useState("");
   const [user, setUser] = useState({
     username: "",
-    id: 0
+    id: 0,
+    posts: []
   });
 
-  console.log("posts", posts);
+  console.log(user);
 
   useEffect(() => {
     fetch("/time")
@@ -45,7 +46,8 @@ function App() {
       .then((res) => res.json())
       .then((data) => setUser({
         username: data.username,
-        id:data.id
+        id:data.id,
+        posts: data.posts
       }));
   }, [token]);
 
