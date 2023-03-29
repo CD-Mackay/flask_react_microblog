@@ -2,6 +2,7 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
+
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
   content = db.Column(db.String(250), index=True)

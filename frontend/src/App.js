@@ -20,10 +20,11 @@ function App() {
   const [posts, setPosts] = useState("");
   const [user, setUser] = useState({
     username: "",
-    id: 0
+    id: 0,
+    posts: []
   });
 
-  console.log("posts", posts);
+  console.log(user);
 
   useEffect(() => {
     fetch("/time")
@@ -34,8 +35,9 @@ function App() {
         Authorization: "Bearer " + token,
       },
     })
+      .catch((error) => console.log(error))
       .then((res) => res.json())
-      .then((data) => setPosts(data));
+      .then((data) => setPosts(data))
     fetch("/profile", {
       headers: {
         Authorization: "Bearer " + token,
@@ -44,7 +46,8 @@ function App() {
       .then((res) => res.json())
       .then((data) => setUser({
         username: data.username,
-        id:data.id
+        id:data.id,
+        posts: data.posts
       }));
   }, [token]);
 
@@ -58,7 +61,7 @@ function App() {
         />
         <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route path="/user" element={<Profile />} />
+        <Route path="/user/:id" element={<Profile posts={posts} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

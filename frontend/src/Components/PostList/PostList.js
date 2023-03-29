@@ -21,7 +21,7 @@ const PostList = ({ posts }) => {
     });
   };
 
-  return <div>{posts && <div>{showPosts()}</div>}</div>;
+  return <div>{posts && !posts.msg && <div>{showPosts()}</div>}</div>;
 };
 
 export default PostList;
