@@ -30,6 +30,8 @@ def get_posts():
 def get_profile():
     user = User.query.filter_by(email='new@guy.com').first()
     posts = user.posts.order_by(Post.id.desc()).all()
+    posts = [post.serialized() for post in posts]
+    print(posts)
     return {'username': user.username, 'id': user.id, 'posts': posts}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
