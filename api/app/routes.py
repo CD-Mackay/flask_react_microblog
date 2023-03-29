@@ -20,6 +20,8 @@ def get_current_time():
 @jwt_required()
 def get_posts():
     posts = Post.query.order_by(Post.id.desc()).all() ## Returns non JSON serializable object? 
+    if posts is None:
+        return {"error": "posts"}, 500
     response = [post.serialized() for post in posts]
     return response, 200
 
@@ -27,7 +29,8 @@ def get_posts():
 @jwt_required()
 def get_profile():
     user = User.query.filter_by(email='new@guy.com').first()
-    return {'username': user.username, 'id': user.id}
+    posts = user.posts.order_by(Post.id.desc()).all()
+    return {'username': user.username, 'id': user.id, 'posts': posts}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
