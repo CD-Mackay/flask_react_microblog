@@ -9,13 +9,16 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
 const Header = ({ token, removeToken, user }) => {
+
+  const { id } = user;
+
   return (
     <nav className="header-nav">
       <div><p>Welcome {user.username}!</p></div>
       <div className="button-wrapper">
         {token && <Button onClick={removeToken} message="Logout" />}
         {token && (
-          <Link to="/user/:id">
+          <Link to={`/user/${id}`}>
             <Button message="Profile" />
           </Link>
         )}
