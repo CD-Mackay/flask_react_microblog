@@ -14,8 +14,7 @@ const Profile = ({posts}) => {
   const profileId = Number(location.pathname.slice(6))
   const [profile, setProfile] = useState({
     username: "",
-    id: "",
-    posts: []
+    id: ""
   });
 
   const showUserPosts = () => {
