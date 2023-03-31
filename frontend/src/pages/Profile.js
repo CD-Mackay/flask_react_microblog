@@ -12,7 +12,11 @@ const Profile = ({posts}) => {
   const { token } = UseToken()
   const location = useLocation()
   const profileId = Number(location.pathname.slice(6))
-  const [profile, setProfile] = useState()
+  const [profile, setProfile] = useState({
+    username: "",
+    id: "",
+    posts: []
+  });
 
   const showUserPosts = () => {
     let userPosts = posts
@@ -41,7 +45,7 @@ const Profile = ({posts}) => {
     <div className="App">
       <p>I am Profilepage</p>
       {posts && !posts.msg && showUserPosts()}
-      <UserCard />
+      <UserCard username={profile.username}/>
     </div>
   )
 };

@@ -7,7 +7,7 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = () => {
+const UserCard = ({username}) => {
 
   const [followed, setFollowed] = useState(false);
 
@@ -18,10 +18,9 @@ const UserCard = () => {
   return (
     <div>
       <div className="user-header">
-      <h4>Username</h4>
+      <h4>{username}</h4>
       <Button message={followed ? "Unfollow" : "Follow"} onClick={handeFollow} />
       </div>
-      <p>List of Posts goes here</p>
     </div>
   );
 };
