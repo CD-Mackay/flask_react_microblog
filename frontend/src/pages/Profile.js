@@ -25,6 +25,9 @@ const Profile = ({posts}) => {
       headers: {
         Authorization: "Bearer " + token,
       },
+      body: JSON.stringify({
+        id: profileId
+      }),
     })
       .then((res) => res.json())
       .then((data) => setProfile({
