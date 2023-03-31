@@ -28,7 +28,8 @@ def get_posts():
 @app.route('/profile')
 @jwt_required()
 def get_profile():
-    user = User.query.filter_by(email='new@guy.com').first()
+    id = request.json.get("id", None)
+    user = User.query.filter_by(id=id).first()
     posts = user.posts.order_by(Post.id.desc()).all()
     posts = [post.serialized() for post in posts]
     print(posts)
