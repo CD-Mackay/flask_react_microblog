@@ -2,6 +2,10 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
+followers = db.Table('followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
 
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
