@@ -15,6 +15,30 @@ const UserCard = ({username}) => {
     followed ? setFollowed(false) : setFollowed(true);
   }
 
+  const handleFollowChange = (event) => {
+    event.preventDefault();
+    console.log(event);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+      },
+    }
+    fetch(`follow/${username}`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        return console.log(error);
+      });
+  }
+
   return (
     <div>
       <div className="user-header">
