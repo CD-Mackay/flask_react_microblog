@@ -1,10 +1,10 @@
 from app import app, db
 from app.models import User, Post
 import time
-import json
 from flask import flash, redirect, request, jsonify, make_response
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
+# from flask_login import current_user
 
 @app.route('/')
 @app.route('/index')
@@ -77,6 +77,22 @@ def make_post():
     db.session.add(post)
     db.session.commit()
     return {"response": "post successful!"}
+
+@app.route('/follow/<username>', methods=['POST'])
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return ('User not found'.format(username))
+    current_user.follow(user)
+    return "You are now following".format(username)
+
+@app.route('/unfollow/<username>', methods=['POST'])
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return ('User not found'.format(username))
+    current_user.unfollow(user)
+    return "You have unfollowed".format(username)
 
 
 
