@@ -7,7 +7,7 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = ({username}) => {
+const UserCard = ({username, currentUser}) => {
 
 
   const handleFollowChange = (event) => {
@@ -19,6 +19,9 @@ const UserCard = ({username}) => {
         Accept: "application.json",
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        id: currentUser.id
+      }),
     }
     fetch(`follow/${username}`, requestOptions)
       .then((response) => {

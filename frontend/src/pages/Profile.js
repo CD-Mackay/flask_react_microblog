@@ -7,7 +7,7 @@ import UserCard from '../Components/UserCard/UserCard';
 import PostList from '../Components/PostList/PostList';
 import UseToken from '../Components/UseToken';
 
-const Profile = ({posts}) => {
+const Profile = ({posts, currentUser}) => {
 
   const { token } = UseToken()
   const location = useLocation()
@@ -44,7 +44,7 @@ const Profile = ({posts}) => {
     <div className="App">
       <p>I am Profilepage</p>
       {posts && !posts.msg && showUserPosts()}
-      <UserCard username={profile.username}/>
+      <UserCard username={profile.username} currentUser={currentUser} />
     </div>
   )
 };
