@@ -9,11 +9,6 @@ import "./UserCard.css";
 
 const UserCard = ({username}) => {
 
-  const [followed, setFollowed] = useState(false);
-
-  const handeFollow = () => {
-    followed ? setFollowed(false) : setFollowed(true);
-  }
 
   const handleFollowChange = (event) => {
     event.preventDefault();
@@ -43,7 +38,7 @@ const UserCard = ({username}) => {
     <div>
       <div className="user-header">
       <h4>{username}</h4>
-      <Button message={followed ? "Unfollow" : "Follow"} onClick={handleFollowChange} />
+      <Button message={"Follow"} onClick={handleFollowChange} />
       </div>
     </div>
   );
