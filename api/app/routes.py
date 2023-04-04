@@ -80,6 +80,8 @@ def make_post():
 
 @app.route('/follow/<username>', methods=['POST'])
 def follow(username):
+    id = request.json.get("id", None)
+    current_user = user.query.filter_by(id=id).first()
     user = User.query.filter_by(username=username).first()
     if user is None:
         return ('User not found'.format(username))
@@ -88,6 +90,8 @@ def follow(username):
 
 @app.route('/unfollow/<username>', methods=['POST'])
 def unfollow(username):
+    id = request.json.get("id", None)
+    current_user = user.query.filter_by(id=id).first()
     user = User.query.filter_by(username=username).first()
     if user is None:
         return ('User not found'.format(username))
