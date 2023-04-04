@@ -43,7 +43,7 @@ const UserCard = ({username}) => {
     <div>
       <div className="user-header">
       <h4>{username}</h4>
-      <Button message={followed ? "Unfollow" : "Follow"} onClick={handeFollow} />
+      <Button message={followed ? "Unfollow" : "Follow"} onClick={handleFollowChange} />
       </div>
     </div>
   );
