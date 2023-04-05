@@ -35,8 +35,7 @@ const Profile = ({posts, currentUser}) => {
       .then((res) => res.json())
       .then((data) => setProfile({
         username: data.username,
-        id:data.id,
-        posts: data.posts
+        id:data.id
       }));
 
   }, [])

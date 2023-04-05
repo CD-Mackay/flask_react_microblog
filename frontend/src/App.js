@@ -18,7 +18,7 @@ function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
-  const [user, setUser] = useState({
+  const [user, setUser] = useState({ // Add this to local storage 
     username: "",
     id: 0,
     posts: []
@@ -38,17 +38,6 @@ function App() {
       .catch((error) => console.log(error))
       .then((res) => res.json())
       .then((data) => setPosts(data))
-    fetch("/profile", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setUser({
-        username: data.username,
-        id:data.id,
-        posts: data.posts
-      }));
   }, [token]);
 
   return (
@@ -59,7 +48,7 @@ function App() {
           path="/"
           element={<Home token={token} time={time} posts={posts} user={user} />}
         />
-        <Route path="/login" element={<Login saveToken={saveToken} />} />
+        <Route path="/login" element={<Login saveToken={saveToken}  setUser={setUser} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile posts={posts} currentUser={user} />} />
       </Routes>

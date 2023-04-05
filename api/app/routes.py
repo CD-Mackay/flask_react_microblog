@@ -25,10 +25,9 @@ def get_posts():
     response = [post.serialized() for post in posts]
     return response, 200
 
-@app.route('/profile')
+@app.route('/profile/<id>')
 @jwt_required()
-def get_profile():
-    id = request.json.get("id", None)
+def get_profile(id):
     user = User.query.filter_by(id=id).first()
     return {'username': user.username, 'id': user.id}
 
@@ -42,7 +41,7 @@ def get_token():
     elif not user.check_password(password):
         return {"error": "wrong password"}, 401
     access_token = create_access_token(identity=email)
-    response = {"access_token":access_token}
+    response = {"access_token":access_token, "id": user.id, "username": user.username}
     print(response)
     return response
     
