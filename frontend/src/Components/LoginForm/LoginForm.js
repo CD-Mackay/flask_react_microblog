@@ -8,9 +8,13 @@ import "./LoginForm.css";
 // Component Imports
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
+import GetUser from "../GetUser";
 
-const LoginForm = ({setUser}) => {
+const LoginForm = (
+  // {setUser}
+  ) => {
   const { saveToken } = UseToken();
+  const { saveUser } = GetUser();
   const navigate = useNavigate();
 
   const [loginForm, setLoginForm] = useState({
@@ -39,11 +43,9 @@ const LoginForm = ({setUser}) => {
         return response.json();
       })
       .then((data) => {
+        console.log("login data", data, data.user)
         saveToken(data.access_token);
-        setUser({
-          id: data.id,
-          username: data.username
-        })
+        saveUser(data.user)
         return navigate("/");
       })
       .catch((error) => {

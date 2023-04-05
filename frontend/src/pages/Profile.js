@@ -24,13 +24,10 @@ const Profile = ({posts, currentUser}) => {
   }
 
   useEffect(() => {
-    fetch("/profile", {
+    fetch(`/profile/${profileId}`, {
       headers: {
         Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        id: profileId
-      }),
+      }
     })
       .then((res) => res.json())
       .then((data) => setProfile({

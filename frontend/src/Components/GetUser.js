@@ -8,23 +8,23 @@ function GetUser() {
     return user && user
   }
 
-  const [user, setUser] = useState(getUser())
+  const [user, setUser] = useState(getUser());
 
   function saveUser(user) {
     console.log("user", user)
-    localStorage.setItem('user', user);
-    setUser(user);
+    localStorage.setItem('user', user.id);
+    setUser(user.id);
   };
 
-  function removeToken() {
+  function removeUser() {
     localStorage.removeItem("user");
-    setUser(null);
+    setUser(null)
   }
 
   return {
-    saveUser,
     user,
-    removeToken,
+    saveUser,
+    removeUser,
     getUser
   }
 }

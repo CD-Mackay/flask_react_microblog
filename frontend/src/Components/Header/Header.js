@@ -7,18 +7,26 @@ import "./Header.css";
 // Component Imports
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import GetUser from "../GetUser";
 
-const Header = ({ token, removeToken, user }) => {
+const Header = ({ token, removeToken }) => {
 
-  const { id } = user;
+  // const { id } = user;
+  const { getUser, removeUser, user } = GetUser();
+  console.log("header user", user);
+
+  const handleLogout = () => {
+    removeToken();
+    removeUser();
+  }
 
   return (
     <nav className="header-nav">
-      <div><p>Welcome {user.username}!</p></div>
+      <div><p>Welcome {user && user.username}!</p></div>
       <div className="button-wrapper">
-        {token && <Button onClick={removeToken} message="Logout" />}
+        {token && <Button onClick={handleLogout} message="Logout" />}
         {token && (
-          <Link to={`/user/${id}`}>
+          <Link to={`/user/${user && user.id}`}>
             <Button message="Profile" />
           </Link>
         )}
