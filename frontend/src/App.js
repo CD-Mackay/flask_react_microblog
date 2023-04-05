@@ -38,10 +38,13 @@ function App() {
       .catch((error) => console.log(error))
       .then((res) => res.json())
       .then((data) => setPosts(data))
-    fetch("/profile", {
+    fetch("/profile", { // API call to setup user state object requires data from state
       headers: {
         Authorization: "Bearer " + token,
       },
+      body: JSON.stringify({
+        id: user.id
+      }),
     })
       .then((res) => res.json())
       .then((data) => setUser({
@@ -59,7 +62,7 @@ function App() {
           path="/"
           element={<Home token={token} time={time} posts={posts} user={user} />}
         />
-        <Route path="/login" element={<Login saveToken={saveToken} />} />
+        <Route path="/login" element={<Login saveToken={saveToken}  setUser={setUser} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile posts={posts} currentUser={user} />} />
       </Routes>
