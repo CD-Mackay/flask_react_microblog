@@ -38,20 +38,6 @@ function App() {
       .catch((error) => console.log(error))
       .then((res) => res.json())
       .then((data) => setPosts(data))
-    fetch("/profile", { // API call to setup user state object requires data from state
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        id: user.id
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => setUser({
-        username: data.username,
-        id:data.id,
-        posts: data.posts
-      }));
   }, [token]);
 
   return (
