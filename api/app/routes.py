@@ -42,7 +42,7 @@ def get_token():
     elif not user.check_password(password):
         return {"error": "wrong password"}, 401
     access_token = create_access_token(identity=email)
-    response = {"access_token":access_token}
+    response = {"access_token":access_token, "id": user.id, "username": user.username}
     print(response)
     return response
     
