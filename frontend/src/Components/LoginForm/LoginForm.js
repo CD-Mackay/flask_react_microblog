@@ -9,7 +9,7 @@ import "./LoginForm.css";
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
 
-const LoginForm = () => {
+const LoginForm = ({setUser}) => {
   const { saveToken } = UseToken();
   const navigate = useNavigate();
 
@@ -40,6 +40,10 @@ const LoginForm = () => {
       })
       .then((data) => {
         saveToken(data.access_token);
+        setUser({
+          id: data.id,
+          username: data.username
+        })
         return navigate("/");
       })
       .catch((error) => {
