@@ -18,7 +18,7 @@ function App() {
   const { token, removeToken, saveToken } = UseToken();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
-  const [user, setUser] = useState({
+  const [user, setUser] = useState({ // Add this to local storage 
     username: "",
     id: 0,
     posts: []
