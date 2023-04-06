@@ -27,8 +27,6 @@ function App() {
     posts: [],
   });
 
-  console.log("user", user, "token", token) // Token persists but not user Id? 
-
   useEffect(() => {
     fetch("/time")
       .then((res) => res.json())
