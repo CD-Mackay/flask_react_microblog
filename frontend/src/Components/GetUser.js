@@ -12,8 +12,8 @@ function GetUser() {
 
   function saveUser(user) {
     console.log("user", user)
-    localStorage.setItem('user', user.id);
-    setUser(user.id);
+    localStorage.setItem('user', user);
+    setUser(user);
   };
 
   function removeUser() {
