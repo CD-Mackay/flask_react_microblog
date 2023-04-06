@@ -7,7 +7,7 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = ({username, currentUser}) => {
+const UserCard = ({profile}) => {
 
 
   const handleFollowChange = (event) => {
@@ -20,10 +20,10 @@ const UserCard = ({username, currentUser}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: currentUser.id
+        id: profile.id
       }),
     }
-    fetch(`follow/${username}`, requestOptions)
+    fetch(`follow/${profile.username}`, requestOptions)
       .then((response) => {
         console.log(response);
         if (!response.ok) throw new Error(response.status);
@@ -40,7 +40,7 @@ const UserCard = ({username, currentUser}) => {
   return (
     <div>
       <div className="user-header">
-      <h4>{username}</h4>
+      <h4>{profile.username}</h4>
       <Button message={"Follow"} onClick={handleFollowChange} />
       </div>
     </div>
