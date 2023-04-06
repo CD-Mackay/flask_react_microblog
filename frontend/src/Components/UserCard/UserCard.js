@@ -1,5 +1,5 @@
 //Library Imports
-import React, { useState } from "react";
+import React from "react";
 import Button from "../Button/Button";
 
 // Styling Imports
@@ -41,7 +41,8 @@ const UserCard = ({profile}) => {
     <div>
       <div className="user-header">
       <h4>{profile.username}</h4>
-      <Button message={"Follow"} onClick={handleFollowChange} />
+      {/* Update API to allow isfollowed data to be passed to frontend */}
+      <Button message={"Follow"} onClick={handleFollowChange} /> 
       </div>
     </div>
   );

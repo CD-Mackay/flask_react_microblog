@@ -25,7 +25,7 @@ def get_posts():
     response = [post.serialized() for post in posts]
     return response, 200
 
-@app.route('/profile/<id>')
+@app.route('/profile/<id>') ## Find way to pass current_user to this function, view follow/unfollow on Frontend
 @jwt_required()
 def get_profile(id):
     user = User.query.filter_by(id=id).first()
