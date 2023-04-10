@@ -25,11 +25,13 @@ def get_posts():
     response = [post.serialized() for post in posts]
     return response, 200
 
-@app.route('/profile/<id>') ## Find way to pass current_user to this function, view follow/unfollow on Frontend
+@app.route('/profile/<id>/<currentid>') ## Find way to pass current_user to this function, view follow/unfollow on Frontend
 @jwt_required()
-def get_profile(id):
+def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
-    return {'username': user.username, 'id': user.id}
+    # current_user = User.query.filter_by(id=currentid).first()
+    # is_followed = current_user.is_following(user)
+    return {'username': user.username, 'id': user.id, 'is_following': is_followed}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
