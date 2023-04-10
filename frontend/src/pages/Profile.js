@@ -7,14 +7,14 @@ import UserCard from '../Components/UserCard/UserCard';
 import PostList from '../Components/PostList/PostList';
 import UseToken from '../Components/UseToken';
 
-const Profile = ({posts}) => {
+const Profile = ({posts, userProfile}) => {
 
   const { token } = UseToken()
   const location = useLocation()
   const profileId = Number(location.pathname.slice(6))
   const [profile, setProfile] = useState({
     username: "",
-    id: ""
+    id: "",
   });
 
   const showUserPosts = () => {

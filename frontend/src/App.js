@@ -48,7 +48,7 @@ function App() {
         .then((data) =>
           setUserProfile({
             username: data.username,
-            id: data.id,
+            id: data.id
           })
         );
     }
@@ -82,7 +82,7 @@ function App() {
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route
           path="/user/:id"
-          element={<Profile posts={posts} />}
+          element={<Profile posts={posts} userProfile={userProfile}/>}
         />
       </Routes>
       <Footer />
