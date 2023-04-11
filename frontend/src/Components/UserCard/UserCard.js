@@ -7,10 +7,10 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = ({ profile }) => {
-  const handleFollowChange = (event) => {
+const UserCard = ({ profile, user }) => {
+
+  const followUser = async (event) => {
     event.preventDefault();
-    console.log(event);
     const requestOptions = {
       method: "POST",
       headers: {
@@ -21,18 +21,18 @@ const UserCard = ({ profile }) => {
         id: profile.id,
       }),
     };
-    fetch(`follow/${profile.username}`, requestOptions)
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) throw new Error(response.status);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        return console.log(error);
-      });
+    try {
+      const response = await fetch(
+        `follow/${profile.id}/${user}`,
+        requestOptions
+      );
+      console.log(response);
+      if (!response.ok) throw new Error(response.status);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -42,7 +42,7 @@ const UserCard = ({ profile }) => {
         {profile.followed !== undefined && (
           <Button
             message={profile.followed === true ? "Unfollow" : "Follow"}
-            onClick={handleFollowChange}
+            onClick={followUser}
           />
         )}
       </div>

@@ -47,7 +47,7 @@ const Profile = ({ posts, userProfile }) => {
     <div className="App">
       <p>I am Profilepage</p>
       {posts && !posts.msg && showUserPosts()}
-      <UserCard profile={profile} />
+      <UserCard profile={profile} user={user} />
     </div>
   );
 };
