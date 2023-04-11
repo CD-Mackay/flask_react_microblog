@@ -27,31 +27,46 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("/time")
-      .then((res) => res.json())
-      .then((data) => setTime(data.time));
-    fetch("/posts", {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .catch((error) => console.log(error))
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-    if (user) {
-      fetch(`/profile/${user}`, {
+    const getTime = async () => {
+      try {
+        const res = await fetch("/time");
+        const data = await res.json();
+        setTime(data.time);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getPosts = async () => {
+      try {
+        const res = await fetch("/posts", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getTime();
+    getPosts();
+    const fetchUserProfile = async (user, token) => {
+      if (!user) return;
+      const res = await fetch(`/profile/${user}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
-      })
-        .then((res) => res.json())
-        .then((data) =>
-          setUserProfile({
-            username: data.username,
-            id: data.id
-          })
-        );
-    }
+      });
+      const data = await res.json();
+      setUserProfile({
+        username: data.username,
+        id: data.id,
+      });
+    };
+
+    fetchUserProfile(user, token);
   }, [token]);
 
   return (
@@ -82,7 +97,7 @@ function App() {
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route
           path="/user/:id"
-          element={<Profile posts={posts} userProfile={userProfile}/>}
+          element={<Profile posts={posts} userProfile={userProfile} />}
         />
       </Routes>
       <Footer />
