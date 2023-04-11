@@ -89,7 +89,7 @@ def make_post():
     db.session.commit()
     return {"response": "post successful!"}
 
-@app.route('/follow/<id>/<userid>')
+@app.route('/user/follow/<id>/<userid>', methods=['POST'])
 def follow_user(id, userid):
     user = User.query.filter_by(id=id).first()
     current_user = User.query.filter_by(id=userid).first()
@@ -98,7 +98,7 @@ def follow_user(id, userid):
     return "You are now following".format(user.username)
 
 
-@app.route('/unfollow/<id>/<userid>', methods=['POST'])
+@app.route('/user/unfollow/<id>/<userid>', methods=['POST'])
 @jwt_required()
 def unfollow(id, userid):
     user = User.query.filter_by(id=id).first()
