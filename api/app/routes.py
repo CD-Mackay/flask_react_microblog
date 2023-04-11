@@ -4,7 +4,6 @@ import time
 from flask import flash, redirect, request, jsonify, make_response
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
-# from flask_login import current_user
 
 @app.route('/')
 @app.route('/index')
@@ -19,7 +18,7 @@ def get_current_time():
 @app.route('/posts')
 @jwt_required()
 def get_posts():
-    posts = Post.query.order_by(Post.id.desc()).all() ## Returns non JSON serializable object? 
+    posts = Post.query.order_by(Post.id.desc()).all() 
     if posts is None:
         return {"error": "posts"}, 500
     response = [post.serialized() for post in posts]
@@ -29,9 +28,16 @@ def get_posts():
 @jwt_required()
 def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
-    # current_user = User.query.filter_by(id=currentid).first()
-    # is_followed = current_user.is_following(user)
+    current_user = User.query.filter_by(id=currentid).first()
+    is_followed = current_user.is_following(user)
     return {'username': user.username, 'id': user.id, 'is_following': is_followed}
+
+## Remove one of these routes, use logic on front-end to verify if current user is viewing own profile or not
+
+@app.route('/user/<id>')
+def get_user():
+    user = User.query.filter_by(id=id).first()
+    return {'username': user.username, 'id': user.id}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
@@ -48,6 +54,7 @@ def get_token():
     
 
 @app.route("/logout", methods=["POST"])
+@jwt_required()
 def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
@@ -69,6 +76,7 @@ def register_user():
     return response
 
 @app.route('/new', methods=['POST'])
+@jwt_required()
 def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
@@ -79,6 +87,7 @@ def make_post():
     return {"response": "post successful!"}
 
 @app.route('/follow/<username>', methods=['POST'])
+@jwt_required()
 def follow(username):
     id = request.json.get("id", None)
     current_user = user.query.filter_by(id=id).first()
@@ -89,6 +98,7 @@ def follow(username):
     return "You are now following".format(username)
 
 @app.route('/unfollow/<username>', methods=['POST'])
+@jwt_required()
 def unfollow(username):
     id = request.json.get("id", None)
     current_user = user.query.filter_by(id=id).first()
