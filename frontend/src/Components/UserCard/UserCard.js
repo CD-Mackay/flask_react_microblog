@@ -7,9 +7,7 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = ({profile}) => {
-
-
+const UserCard = ({ profile }) => {
   const handleFollowChange = (event) => {
     event.preventDefault();
     console.log(event);
@@ -20,9 +18,9 @@ const UserCard = ({profile}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: profile.id
+        id: profile.id,
       }),
-    }
+    };
     fetch(`follow/${profile.username}`, requestOptions)
       .then((response) => {
         console.log(response);
@@ -30,19 +28,23 @@ const UserCard = ({profile}) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data)
+        console.log(data);
       })
       .catch((error) => {
         return console.log(error);
       });
-  }
+  };
 
   return (
     <div>
       <div className="user-header">
-      <h4>{profile.username}</h4>
-      {/* Update API to allow isfollowed data to be passed to frontend */}
-      <Button message={"Follow"} onClick={handleFollowChange} /> 
+        <h4>{profile.username}</h4>
+        {profile.followed !== undefined && (
+          <Button
+            message={profile.followed === true ? "Unfollow" : "Follow"}
+            onClick={handleFollowChange}
+          />
+        )}
       </div>
     </div>
   );
