@@ -7,31 +7,46 @@ import "./UserCard.css";
 
 // Component Imports
 
-const UserCard = ({ profile, user }) => {
-
-  const followUser = async (event) => {
+const UserCard = ({ profile, user, token }) => {
+  const handleFollowChange = async (event) => {
     event.preventDefault();
     const requestOptions = {
       method: "POST",
       headers: {
         Accept: "application.json",
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
         id: profile.id,
       }),
     };
-    try {
-      const response = await fetch(
-        `follow/${profile.id}/${user}`,
-        requestOptions
-      );
-      console.log(response);
-      if (!response.ok) throw new Error(response.status);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
+    if (profile.followed === true) {
+      try {
+        const response = await fetch(
+          `unfollow/${profile.id}/${user}`,
+          requestOptions
+        );
+        console.log(response);
+        if (!response.ok) throw new Error(response.status);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (profile.followed === false) {
+      try {
+        const response = await fetch(
+          `follow/${profile.id}/${user}`,
+          requestOptions
+        );
+        console.log(response);
+        if (!response.ok) throw new Error(response.status);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -42,7 +57,7 @@ const UserCard = ({ profile, user }) => {
         {profile.followed !== undefined && (
           <Button
             message={profile.followed === true ? "Unfollow" : "Follow"}
-            onClick={followUser}
+            onClick={handleFollowChange}
           />
         )}
       </div>
