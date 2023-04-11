@@ -28,6 +28,8 @@ def get_posts():
 @jwt_required()
 def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
+    if id == currentid:
+        return {'username': user.username, 'id': user.id}
     current_user = User.query.filter_by(id=currentid).first()
     is_followed = current_user.is_following(user)
     return {'username': user.username, 'id': user.id, 'is_following': is_followed}
