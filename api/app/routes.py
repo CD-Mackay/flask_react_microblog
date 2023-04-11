@@ -90,6 +90,7 @@ def make_post():
     return {"response": "post successful!"}
 
 @app.route('/user/follow/<id>/<userid>', methods=['POST'])
+@jwt_required()
 def follow_user(id, userid):
     user = User.query.filter_by(id=id).first()
     current_user = User.query.filter_by(id=userid).first()
@@ -104,6 +105,7 @@ def unfollow(id, userid):
     user = User.query.filter_by(id=id).first()
     current_user = User.query.filter_by(id=userid).first()
     current_user.unfollow(user)
+    db.session.commit()
     return "You have unfollowed".format(user.username)
 
 
