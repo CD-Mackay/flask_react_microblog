@@ -47,7 +47,7 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     
     def follow(self, user):
       if not self.is_following(user):
-        self.follow.append(user)
+        self.followed.append(user)
       
     def unfollow(self, user):
       if self.is_following(user):

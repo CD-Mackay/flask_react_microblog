@@ -54,7 +54,7 @@ function App() {
     getPosts();
     const fetchUserProfile = async (user, token) => {
       if (!user) return;
-      const res = await fetch(`/profile/${user}`, {
+      const res = await fetch(`/profile/${user}/${user}`, {
         headers: {
           Authorization: "Bearer " + token,
         },

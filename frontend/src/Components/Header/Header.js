@@ -12,7 +12,7 @@ import GetUser from "../GetUser";
 const Header = ({ token, removeToken, userProfile}) => {
 
   // const { id } = user;
-  const { getUser, removeUser, user } = GetUser();
+  const { removeUser, user } = GetUser();
 
   const handleLogout = () => {
     removeToken();
@@ -25,7 +25,7 @@ const Header = ({ token, removeToken, userProfile}) => {
       <div className="button-wrapper">
         {token && <Button onClick={handleLogout} message="Logout" />}
         {token && (
-          <Link to={`/user/${user && userProfile.id}`}>
+          <Link to={`/user/${user && user}`}>
             <Button message="Profile" />
           </Link>
         )}
