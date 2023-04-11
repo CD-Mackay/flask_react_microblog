@@ -24,7 +24,7 @@ def get_posts():
     response = [post.serialized() for post in posts]
     return response, 200
 
-@app.route('/profile/<id>/<currentid>') ## Find way to pass current_user to this function, view follow/unfollow on Frontend
+@app.route('/profile/<id>/<currentid>')
 @jwt_required()
 def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
@@ -53,6 +53,7 @@ def get_token():
     access_token = create_access_token(identity=email)
     response = {"access_token":access_token, "user": user.id}
     return response
+
     
 
 @app.route("/logout", methods=["POST"])
@@ -88,27 +89,22 @@ def make_post():
     db.session.commit()
     return {"response": "post successful!"}
 
-@app.route('/follow/<username>', methods=['POST'])
-@jwt_required()
-def follow(username):
-    id = request.json.get("id", None)
-    current_user = user.query.filter_by(id=id).first()
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        return ('User not found'.format(username))
+@app.route('/follow/<id>/<userid>')
+def follow_user(id, userid):
+    user = User.query.filter_by(id=id).first()
+    current_user = User.query.filter_by(id=userid).first()
     current_user.follow(user)
-    return "You are now following".format(username)
+    db.session.commit()
+    return "You are now following".format(user.username)
 
-@app.route('/unfollow/<username>', methods=['POST'])
+
+@app.route('/unfollow/<id>/<userid>', methods=['POST'])
 @jwt_required()
-def unfollow(username):
-    id = request.json.get("id", None)
-    current_user = user.query.filter_by(id=id).first()
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        return ('User not found'.format(username))
+def unfollow(id, userid):
+    user = User.query.filter_by(id=id).first()
+    current_user = User.query.filter_by(id=userid).first()
     current_user.unfollow(user)
-    return "You have unfollowed".format(username)
+    return "You have unfollowed".format(user.username)
 
 
 
