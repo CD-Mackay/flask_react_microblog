@@ -46,4 +46,7 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u1.followed.count(), 0)
         self.assertEqual(u2.followers.count(), 0)
 
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+
         
