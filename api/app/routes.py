@@ -68,7 +68,6 @@ def register_user():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     username = request.json.get("username", None)
-    print(email, password, username)
     user = User(username=username, email=email)
     user.set_password(password)
     db.session.add(user)
