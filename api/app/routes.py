@@ -68,14 +68,22 @@ def register_user():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     username = request.json.get("username", None)
-    user = User(username=username, email=email)
-    user.set_password(password)
-    db.session.add(user)
-    db.session.commit()
-    access_token = create_access_token(identity=email)
-    response = {"access_token":access_token}
-    print(response)
-    return response
+    check_email = User.query.filter_by(email=email).first()
+    print(check_email, check_email is not None)
+    if check_email is not None:
+        return {"error": "account with this email already exists"} ## None of these return statements can be triggered?
+    check_username = User.query.filter_by(username=username).first()
+    if check_username is not None:
+        return {"error": "username has been taken"}
+    elif check_email is None and check_username is None:
+        user = User(username=username, email=email)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        access_token = create_access_token(identity=email)
+        response = {"access_token":access_token}
+        print(response)
+        return response
 
 @app.route('/new', methods=['POST'])
 @jwt_required()
