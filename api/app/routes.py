@@ -21,8 +21,8 @@ def get_posts():
     posts = Post.query.order_by(Post.id.desc()).all() 
     if posts is None:
         return {"error": "posts"}, 500
-    for post in posts:
-        print("author", User.query.filter_by(id=post.user_id))
+    # for post in posts:
+    #     print("author", User.query.filter_by(id=post.user_id))
     response = [post.serialized() for post in posts]
     return response, 200
 
