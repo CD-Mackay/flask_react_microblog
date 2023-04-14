@@ -10,8 +10,10 @@ import "./PostList.css";
 const PostList = ({ posts }) => {
   const showPosts = () => {
     return posts.map((element, index) => {
+      console.log(element)
       return (
         <PostListItem
+          author={element.author} // Author is available on API but not frontend?
           user_id={element.user_id}
           content={element.content}
           title={element.title}
