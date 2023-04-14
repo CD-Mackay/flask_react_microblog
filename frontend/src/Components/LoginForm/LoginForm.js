@@ -54,9 +54,6 @@ const LoginForm = () =>
           saveUser(data.user);
           return navigate("/");
         })
-        .catch((error) => {
-          return console.log("loginError:", error);
-        });
 
       setLoginForm({
         email: "",
