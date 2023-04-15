@@ -21,9 +21,11 @@ def get_posts():
     posts = Post.query.order_by(Post.id.desc()).all() 
     if posts is None:
         return {"error": "posts"}, 500
-    # for post in posts:
-    #     print("author", User.query.filter_by(id=post.user_id))
+    for post in posts:
+        print("author", post.author.username)
     response = [post.serialized() for post in posts]
+    for post in response:
+        print("serialized", post)
     return response, 200
 
 @app.route('/profile/<id>/<currentid>')
