@@ -21,7 +21,8 @@ class Post(db.Model): ## Define Posts model
       'id': self.id,
       'content': self.content,
       'title': self.title,
-      'user_id': self.user_id
+      'user_id': self.user_id,
+      'author': self.author.username
     }
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
