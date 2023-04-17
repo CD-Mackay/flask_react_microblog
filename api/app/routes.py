@@ -71,10 +71,10 @@ def register_user():
     check_email = User.query.filter_by(email=email).first()
     print(check_email, check_email is not None)
     if check_email is not None:
-        return {"error": "account with this email already exists"} ## None of these return statements can be triggered?
+        return {"error": "account with this email already exists"}, 401 ## None of these return statements can be triggered?
     check_username = User.query.filter_by(username=username).first()
     if check_username is not None:
-        return {"error": "username has been taken"}
+        return {"error": "username has been taken"}, 401
     elif check_email is None and check_username is None:
         user = User(username=username, email=email)
         user.set_password(password)
