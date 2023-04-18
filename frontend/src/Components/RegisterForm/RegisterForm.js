@@ -15,15 +15,6 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("")
 
-  function isJson(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
-
   const [RegisterForm, setRegisterForm] = useState({
     email: "",
     password: "",
