@@ -1,9 +1,8 @@
 from app import app, db
 from app.models import User, Post
 import time
-from flask import flash, redirect, request, jsonify, make_response
-from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
-                               unset_jwt_cookies, jwt_required, JWTManager
+from flask import request, jsonify
+from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required
 
 @app.route('/')
 @app.route('/index')
