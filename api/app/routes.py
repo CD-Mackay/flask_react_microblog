@@ -1,7 +1,7 @@
 from app import app, db
 from app.models import User, Post
 import time
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required
 
 @app.route('/')
@@ -68,12 +68,18 @@ def register_user():
     password = request.json.get("password", None)
     username = request.json.get("username", None)
     check_email = User.query.filter_by(email=email).first()
-    print(check_email, check_email is not None)
     if check_email is not None:
-        return {"error": "account with this email already exists"}, 401 ## None of these return statements can be triggered?
+        response = make_response('Response')
+        response.headers['customHeader'] = 'Email already exists'
+        response.statusText = 'Email already exists'
+        response.status_code = 401
+        return response
     check_username = User.query.filter_by(username=username).first()
     if check_username is not None:
-        return {"error": "username has been taken"}, 401
+        response = make_response('Response')
+        response.headers['customHeader'] = 'Username already exists'
+        response.status_code = 401
+        return response
     elif check_email is None and check_username is None:
         user = User(username=username, email=email)
         user.set_password(password)
