@@ -8,10 +8,21 @@ import "./RegisterForm.css";
 // Component Imports
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
+import ShowError from "../ShowError/ShowError";
 
 const RegisterForm = () => {
   const { saveToken } = UseToken();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("")
+
+  function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 
   const [RegisterForm, setRegisterForm] = useState({
     email: "",
@@ -36,8 +47,14 @@ const RegisterForm = () => {
 
     fetch("/register", requestOptions)
       .then((response) => {
-        console.log("response", response)
-        if (!response.ok) throw new Error(response.status);
+        if (!response.ok) {
+          let errorResponse = response.headers.get('customheader')
+          setErrorMessage(errorResponse);
+          setTimeout(() => {
+            setErrorMessage("")
+          }, 2000)
+          throw new Error(response.status);
+        }
         return response.json();
       })
       .then((data) => {
@@ -93,6 +110,7 @@ const RegisterForm = () => {
       />
 
       <Button message="Register" onClick={handleRegister} />
+      <ShowError message={errorMessage} />
     </form>
   );
 };
