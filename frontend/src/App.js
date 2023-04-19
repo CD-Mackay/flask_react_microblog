@@ -95,10 +95,7 @@ function App() {
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route
-          path="/user/:id"
-          element={<Profile posts={posts} userProfile={userProfile} />}
-        />
+        <Route path="/user/:id" element={<Profile posts={posts} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

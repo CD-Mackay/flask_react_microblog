@@ -8,7 +8,7 @@ import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 import GetUser
  from "../Components/GetUser";
-const Profile = ({ posts, userProfile }) => {
+const Profile = ({ posts }) => {
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
