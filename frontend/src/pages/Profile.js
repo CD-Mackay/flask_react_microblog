@@ -19,7 +19,6 @@ const Profile = ({ posts, userProfile }) => {
     followed: null
   });
 
-  console.log("profile", profile)
 
   const showUserPosts = () => {
     let userPosts = posts.filter((post) => post.user_id === profileId);
