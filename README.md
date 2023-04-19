@@ -6,9 +6,12 @@
 ## Usage
   - This project will require two terminals to run. 
   - Frontend: 
-      - To run the front-end cd into the /frontend directory. Run npm install to install dependencies, and npm start to begin the application
+      - To run the front-end cd into the /frontend directory(`cd frontend`). 
+      - Run `npm install` to install dependencies
+      - Run `npm start` to begin the application
   
   - API: 
-      - CD into /api directory. From here run the command python3 -m venv venv to initialize the virtual environment. 
-      - Run pip install to install neccessary dependencies
-      - flask run command initializes API. 
+      - CD into /api directory (`cd api`). 
+      - From here run the command `python3 -m venv venv` to initialize the virtual environment. 
+      - Run `pip install` to install neccessary dependencies
+      - Run `flask run` command to initialize API. 
