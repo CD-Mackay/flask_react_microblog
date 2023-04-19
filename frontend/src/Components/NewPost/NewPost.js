@@ -10,6 +10,7 @@ import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
 
 const NewPost = ({ user}) => {
+  console.log(user)
   const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",

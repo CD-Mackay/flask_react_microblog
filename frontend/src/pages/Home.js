@@ -7,7 +7,7 @@ import React from "react";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
-const Home = ({ token, time, posts, user }) => {
+const Home = ({ token, time, posts, userProfile }) => {
 
   return (
     <div className="App">
@@ -15,7 +15,7 @@ const Home = ({ token, time, posts, user }) => {
 
       {/* {token && token !== "" && token !== undefined && token !== null && ( */}
       <PostList posts={posts} />
-      <NewPost user={user} />
+      <NewPost user={userProfile} />
       {/* )} */}
     </div>
   );
