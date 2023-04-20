@@ -20,6 +20,7 @@ function App() {
   const { user } = GetUser();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
+  const [followedPosts, setFollowedPosts] = useState("");
   const [userProfile, setUserProfile] = useState({
     username: "",
     id: 0,
@@ -49,9 +50,23 @@ function App() {
         console.log(error);
       }
     };
+    const getFollowedPosts = async () => {
+      try {
+        const res = await fetch(`/followed_posts/${user}`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        const data = await res.json();
+        setFollowedPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     getTime();
     getPosts();
+    getFollowedPosts();
     const fetchUserProfile = async (user, token) => {
       if (!user) return;
       const res = await fetch(`/profile/${user}/${user}`, {
@@ -79,6 +94,17 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <Home
+              token={token}
+              time={time}
+              posts={followedPosts}
+              userProfile={userProfile}
+            />
+          }
+        />
+        <Route
+          path="/explore"
           element={
             <Home
               token={token}

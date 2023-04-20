@@ -23,6 +23,15 @@ def get_posts():
     response = [post.serialized() for post in posts]
     return response, 200
 
+@app.route('/followed_posts/<userid>')
+@jwt_required()
+def get_followed_posts(userid):
+    user = User.query.filter_by(id=userid).first()
+    posts = user.followed_posts()
+    response = [post.serialized() for post in posts]
+    return response, 200
+
+
 @app.route('/profile/<id>/<currentid>')
 @jwt_required()
 def get_profile(id, currentid):
