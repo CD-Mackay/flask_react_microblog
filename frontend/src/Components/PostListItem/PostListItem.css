@@ -1,6 +1,8 @@
 .post-item {
   border: 1px solid gray;
   width: 200px;
+  margin: 5px;
+  border-radius: 5px;
 }
 
 .title-card {
