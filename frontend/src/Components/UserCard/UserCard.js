@@ -10,7 +10,6 @@ import "./UserCard.css";
 const UserCard = ({ profile, user, token }) => {
 
   const [followed, setFollowed] = useState(profile.followed);
-  console.log("profile", profile)
   const handleFollowChange = async (event) => {
     event.preventDefault();
     const requestOptions = {
@@ -31,7 +30,6 @@ const UserCard = ({ profile, user, token }) => {
           requestOptions
         );
         setFollowed(false)
-        console.log(response);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
         console.log(data);
@@ -44,7 +42,6 @@ const UserCard = ({ profile, user, token }) => {
           `follow/${profile.id}/${user}`,
           requestOptions
         );
-        console.log(response);
         setFollowed(true)
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
