@@ -9,8 +9,8 @@ import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
 
-const NewPost = ({ user}) => {
-  console.log(user)
+const NewPost = ({ user }) => {
+  console.log(user);
   const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",
@@ -23,8 +23,8 @@ const NewPost = ({ user}) => {
     if (!token) {
       setErrorMessage("You must be logged in to post");
       setTimeout(() => {
-        setErrorMessage("")
-      }, 2000)
+        setErrorMessage("");
+      }, 2000);
       return;
     }
     event.preventDefault();
@@ -38,7 +38,7 @@ const NewPost = ({ user}) => {
       body: JSON.stringify({
         title: postForm.title,
         content: postForm.content,
-        id: user.id
+        id: user.id,
       }),
     };
     fetch("/new", requestOptions)
@@ -84,7 +84,9 @@ const NewPost = ({ user}) => {
         placeholder="Write some stuff in here..."
         name="content"
       />
-      <Button onClick={handleNewPost} message="Make the post!" />
+      <div className="button-wrapper">
+        <Button onClick={handleNewPost} message="Post!" />
+      </div>
       <ShowError message={errorMessage} />
     </form>
   );
