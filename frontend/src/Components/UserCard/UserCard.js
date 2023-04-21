@@ -1,5 +1,5 @@
 //Library Imports
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
 
 // Styling Imports
@@ -8,6 +8,9 @@ import "./UserCard.css";
 // Component Imports
 
 const UserCard = ({ profile, user, token }) => {
+
+  const [followed, setFollowed] = useState(profile.followed);
+  console.log("profile", profile)
   const handleFollowChange = async (event) => {
     event.preventDefault();
     const requestOptions = {
@@ -27,6 +30,7 @@ const UserCard = ({ profile, user, token }) => {
           `unfollow/${profile.id}/${user}`,
           requestOptions
         );
+        setFollowed(false)
         console.log(response);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
@@ -41,6 +45,7 @@ const UserCard = ({ profile, user, token }) => {
           requestOptions
         );
         console.log(response);
+        setFollowed(true)
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
         console.log(data);
@@ -50,13 +55,17 @@ const UserCard = ({ profile, user, token }) => {
     }
   };
 
+  useEffect(() => {
+    setFollowed(profile.followed)
+  }, [profile])
+
   return (
     <div>
       <div className="user-header">
         <h4>{profile.username}</h4>
         {profile.followed !== undefined && (
           <Button
-            message={profile.followed === true ? "Unfollow" : "Follow"}
+            message={followed === true ? "Unfollow" : "Follow"}
             onClick={handleFollowChange}
           />
         )}
