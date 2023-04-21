@@ -7,8 +7,11 @@
 
 .title-card {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
 }
 
-h6 {
+.post-title {
   margin: 5px;
 }
