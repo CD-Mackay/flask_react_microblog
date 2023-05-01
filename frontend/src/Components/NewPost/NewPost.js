@@ -49,9 +49,6 @@ const NewPost = ({ user }) => {
       })
       .then((data) => {
         return data;
-      })
-      .catch((error) => {
-        return console.log(error);
       });
 
     setPostForm({

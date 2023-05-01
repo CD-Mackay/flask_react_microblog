@@ -52,9 +52,6 @@ const RegisterForm = () => {
         saveToken(data.access_token);
         return navigate("/");
       })
-      .catch((error) => {
-        return console.log(error);
-      });
 
     setRegisterForm({
       email: "",
