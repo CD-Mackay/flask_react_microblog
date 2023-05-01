@@ -85,7 +85,7 @@ function App() {
   }, [token]);
 
   return (
-    <BrowserRouter>
+    <>
       {/* <Header
         token={token}
         removeToken={removeToken}
@@ -123,8 +123,8 @@ function App() {
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile posts={posts} />} />
       </Routes>
-      {/* <Footer /> */}
-    </BrowserRouter>
+      <Footer />
+    </>
   );
 }
 
