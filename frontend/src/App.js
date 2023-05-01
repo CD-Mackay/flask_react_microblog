@@ -86,11 +86,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header
+      {/* <Header
         token={token}
         removeToken={removeToken}
         userProfile={userProfile}
-      />
+      /> */}
       <Routes>
         <Route
           path="/"
@@ -123,7 +123,7 @@ function App() {
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile posts={posts} />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
