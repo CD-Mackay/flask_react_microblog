@@ -8,10 +8,12 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import GetUser from "../GetUser";
+import UseToken from "../UseToken";
 
-const Header = ({ token, removeToken, userProfile }) => {
+const Header = ({ userProfile }) => {
   // const { id } = user;
   const { removeUser, user } = GetUser();
+  const { token, removeToken } = UseToken();
 
   const handleLogout = () => {
     removeToken();
@@ -21,7 +23,7 @@ const Header = ({ token, removeToken, userProfile }) => {
   return (
     <nav className="header-nav">
       <div>
-        <p>Welcome {user && userProfile.username}!</p>
+        {/* <p>Welcome {user && userProfile.username}!</p> */}
       </div>
       <div className="button-wrapper">
         {token && <Button onClick={handleLogout} message="Logout" />}

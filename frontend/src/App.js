@@ -85,12 +85,12 @@ function App() {
   }, [token]);
 
   return (
-    <BrowserRouter>
-      <Header
+    <>
+      {/* <Header
         token={token}
         removeToken={removeToken}
         userProfile={userProfile}
-      />
+      /> */}
       <Routes>
         <Route
           path="/"
@@ -124,7 +124,7 @@ function App() {
         <Route path="/user/:id" element={<Profile posts={posts} />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
