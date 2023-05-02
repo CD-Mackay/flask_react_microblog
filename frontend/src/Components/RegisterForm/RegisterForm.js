@@ -1,6 +1,7 @@
 //Library Imports
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Styling Imports
 import "./RegisterForm.css";
@@ -13,7 +14,7 @@ import ShowError from "../ShowError/ShowError";
 const RegisterForm = () => {
   const { saveToken } = UseToken();
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [RegisterForm, setRegisterForm] = useState({
     email: "",
@@ -32,18 +33,18 @@ const RegisterForm = () => {
       body: JSON.stringify({
         email: RegisterForm.email,
         password: RegisterForm.password,
-        username: RegisterForm.username
+        username: RegisterForm.username,
       }),
     };
 
     fetch("/register", requestOptions)
       .then((response) => {
         if (!response.ok) {
-          let errorResponse = response.headers.get('customheader')
+          let errorResponse = response.headers.get("customheader");
           setErrorMessage(errorResponse);
           setTimeout(() => {
-            setErrorMessage("")
-          }, 2000)
+            setErrorMessage("");
+          }, 2000);
           throw new Error(response.status);
         }
         return response.json();
@@ -51,7 +52,7 @@ const RegisterForm = () => {
       .then((data) => {
         saveToken(data.access_token);
         return navigate("/");
-      })
+      });
 
     setRegisterForm({
       email: "",
@@ -71,7 +72,11 @@ const RegisterForm = () => {
   }
 
   return (
-    <form className="Register-form">
+    <form className="register-form">
+      <p>
+        Register your account to start posting about Flask, React, or anything
+        more interesting.
+      </p>
       <input
         onChange={handleChange}
         type="email"
@@ -96,8 +101,12 @@ const RegisterForm = () => {
         placeholder="Password"
         value={RegisterForm.password}
       />
-
-      <Button message="Register" onClick={handleRegister} />
+      <div className="register-buttons">
+        <Button message="Register" onClick={handleRegister} />
+        <Link to="/login">
+          <Button message="Already have an account?" />
+        </Link>
+      </div>
       <ShowError message={errorMessage} />
     </form>
   );
