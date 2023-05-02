@@ -10,7 +10,8 @@
   flex-direction: column;
   gap: 5px;
   padding: 10px;
-  width: 70%;
+  max-width: 900px;
+  min-width: 250px;
   margin: 10px;
 }
 textarea {

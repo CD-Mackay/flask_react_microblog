@@ -65,27 +65,29 @@ const NewPost = ({ user }) => {
     }));
   }
   return (
-    <form className="new-post">
-      <input
-        onChange={handleChange}
-        type="text"
-        text={postForm.title}
-        value={postForm.title}
-        placeholder="Title"
-        name="title"
-      />
-      <textarea
-        onChange={handleChange}
-        text={postForm.content}
-        value={postForm.content}
-        placeholder="Write some stuff in here..."
-        name="content"
-      />
-      <div className="button-wrapper">
-        <Button onClick={handleNewPost} message="Post!" />
-      </div>
+    <>
+      <form className="new-post">
+        <input
+          onChange={handleChange}
+          type="text"
+          text={postForm.title}
+          value={postForm.title}
+          placeholder="Title"
+          name="title"
+        />
+        <textarea
+          onChange={handleChange}
+          text={postForm.content}
+          value={postForm.content}
+          placeholder="Write some stuff in here..."
+          name="content"
+        />
+        <div className="button-wrapper">
+          <Button onClick={handleNewPost} message="Post!" />
+        </div>
+      </form>
       <ShowError message={errorMessage} />
-    </form>
+    </> 
   );
 };
 
