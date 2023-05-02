@@ -103,9 +103,9 @@ const RegisterForm = () => {
       />
       <div className="register-buttons">
         <Button message="Register" onClick={handleRegister} />
-        <Button message="Already have an account?">
-          <Link to="/login" />
-        </Button>
+        <Link to="/login">
+          <Button message="Already have an account?" />
+        </Link>
       </div>
       <ShowError message={errorMessage} />
     </form>

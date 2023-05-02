@@ -87,9 +87,9 @@ const LoginForm = () => {
       />
       <div className="button-wrapper">
         <Button message="Login" onClick={(event) => handleLogin(event)} />
-        <Button message="Don't have an account?">
-          <Link to="/register" />
-        </Button>
+        <Link to="/register">
+          <Button message="Don't have an account?" />
+        </Link>
       </div>
       <ShowError message={errorMessage} />
     </form>
