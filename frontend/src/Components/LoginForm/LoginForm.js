@@ -1,6 +1,6 @@
 //Library Imports
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Styling Imports
 import "./LoginForm.css";
@@ -85,8 +85,12 @@ const LoginForm = () => {
         placeholder="Password"
         value={loginForm.password}
       />
-
-      <Button message="Login" onClick={(event) => handleLogin(event)} />
+      <div className="button-wrapper">
+        <Button message="Login" onClick={(event) => handleLogin(event)} />
+        <Button message="Don't have an account?">
+          <Link to="/register" />
+        </Button>
+      </div>
       <ShowError message={errorMessage} />
     </form>
   );

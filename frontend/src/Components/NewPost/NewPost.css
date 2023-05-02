@@ -1,5 +1,6 @@
 .button-wrapper {
   display: flex;
+  justify-content: center;
 }
 
 .new-post {
