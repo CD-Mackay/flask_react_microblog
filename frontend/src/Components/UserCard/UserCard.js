@@ -59,7 +59,7 @@ const UserCard = ({ profile, user, token }) => {
   return (
     <div>
       <div className="user-header">
-        <h4 testid="username">{profile.username}</h4>
+        <h4 data-testid="username">{profile.username}</h4>
         {profile.followed !== undefined && (
           <Button
             message={followed === true ? "Unfollow" : "Follow"}
