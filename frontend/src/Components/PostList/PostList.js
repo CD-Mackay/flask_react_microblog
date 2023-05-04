@@ -13,7 +13,7 @@ const PostList = ({ posts }) => {
       console.log(element)
       return (
         <PostListItem
-          author={element.author} // Author is available on API but not frontend?
+          author={element.author}
           user_id={element.user_id}
           content={element.content}
           title={element.title}
