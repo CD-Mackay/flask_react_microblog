@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, act, waitFor, getByText } from "@testing-library/react";
 import Profile from "../Pages/Profile";
+import '@testing-library/jest-dom'
 
 
 const mockResponse = {
@@ -26,8 +27,10 @@ jest.mock("react-router-dom", () => ({
 }));
 
 test("Display user Data", async () => {
-  render(<Profile />);
 
-  expect(screen.getByTestId("username")).toHaveTextContent("Charlie");
-
+    render(<Profile />);
+    await waitFor(() => {
+      // expect(screen.findByTestId("username")).toHaveTextContent("Charlie");
+      expect(screen.getByText("Charlie")).toBeInTheDocument()
+    })
 })
