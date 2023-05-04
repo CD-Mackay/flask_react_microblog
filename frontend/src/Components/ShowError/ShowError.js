@@ -10,7 +10,7 @@ const ShowError = ({ message }) => {
 
 
   return (
-    <div className="error">
+    <div className="error" data-testid="error">
       <p>{message}</p>
     </div>
   );
