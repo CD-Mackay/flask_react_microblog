@@ -18,6 +18,12 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useLocation: () => ({
+    pathname: "localhost:3000/user/42"
+  })
+}));
 
 test("Display user Data", async () => {
   render(<Profile />);
