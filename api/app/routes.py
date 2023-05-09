@@ -21,7 +21,6 @@ def get_posts():
     if posts is None:
         return {"error": "posts"}, 500
     response = [post.serialized() for post in posts]
-    print("response:", response)
     return response, 200
 
 
