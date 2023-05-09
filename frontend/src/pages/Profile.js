@@ -21,6 +21,7 @@ const Profile = ({ posts }) => {
 
 
   const showUserPosts = () => {
+    console.log("Runing showUserPosts!")
     let userPosts = posts.filter((post) => post.user_id === profileId);
     return <PostList posts={userPosts} />;
   };
@@ -45,7 +46,7 @@ const Profile = ({ posts }) => {
   return (
     <div className="App">
       <p>I am Profilepage</p>
-      {posts && !posts.msg && showUserPosts()}
+      {posts && showUserPosts()}
       <UserCard profile={profile} user={user} token={token} />
     </div>
   );
