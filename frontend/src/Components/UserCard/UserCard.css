@@ -1,0 +1,4 @@
+.user-card {
+  grid-area: side;
+  align-self: start;
+}

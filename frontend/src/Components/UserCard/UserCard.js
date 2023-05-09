@@ -57,7 +57,7 @@ const UserCard = ({ profile, user, token }) => {
   }, [profile])
 
   return (
-    <div>
+    <div className="user-card">
       <div className="user-header">
         <h4 data-testid="username">{profile.username}</h4>
         {profile.followed !== undefined && (

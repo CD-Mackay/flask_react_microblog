@@ -6,8 +6,7 @@ import { useLocation } from "react-router-dom";
 import UserCard from "../Components/UserCard/UserCard";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
-import GetUser
- from "../Components/GetUser";
+import GetUser from "../Components/GetUser";
 const Profile = ({ posts }) => {
   const { token } = UseToken();
   const { user } = GetUser();
@@ -16,12 +15,11 @@ const Profile = ({ posts }) => {
   const [profile, setProfile] = useState({
     username: "",
     id: "",
-    followed: null
+    followed: null,
   });
 
-
   const showUserPosts = () => {
-    console.log("Runing showUserPosts!")
+    console.log("Runing showUserPosts!");
     let userPosts = posts.filter((post) => post.user_id === profileId);
     return <PostList posts={userPosts} />;
   };
@@ -37,7 +35,7 @@ const Profile = ({ posts }) => {
       return {
         username: data.username,
         id: data.id,
-        followed: data.is_following
+        followed: data.is_following,
       };
     }
 
@@ -45,9 +43,8 @@ const Profile = ({ posts }) => {
   }, []);
   return (
     <div className="App">
-      <p>I am Profilepage</p>
-      {posts && showUserPosts()}
       <UserCard profile={profile} user={user} token={token} />
+      {posts && showUserPosts()}
     </div>
   );
 };
