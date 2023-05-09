@@ -82,7 +82,7 @@ function App() {
     };
 
     fetchUserProfile(user, token);
-  }, [token]);
+  }, [token, posts, user]);
 
   return (
     <>
