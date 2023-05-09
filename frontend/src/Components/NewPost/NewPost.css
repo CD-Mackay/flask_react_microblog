@@ -13,6 +13,8 @@
   max-width: 900px;
   min-width: 250px;
   margin: 10px;
+  grid-area: side;
+  align-self: start;
 }
 textarea {
   border-radius: 5px;

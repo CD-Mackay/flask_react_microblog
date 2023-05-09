@@ -44,7 +44,6 @@ const Profile = ({ posts }) => {
   return (
     <div className="App">
       <UserCard profile={profile} user={user} token={token} />
-      <p>I am Profilepage</p>
       {posts && showUserPosts()}
     </div>
   );
