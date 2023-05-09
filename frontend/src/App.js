@@ -27,6 +27,20 @@ function App() {
     posts: [],
   });
 
+  const fetchUserProfile = async (user, token) => {
+    if (!user) return;
+    const res = await fetch(`/profile/${user}/${user}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const data = await res.json();
+    setUserProfile({
+      username: data.username,
+      id: data.id,
+    });
+  };
+
   useEffect(() => {
     const getTime = async () => {
       try {
@@ -67,22 +81,10 @@ function App() {
     getTime();
     getPosts();
     getFollowedPosts();
-    const fetchUserProfile = async (user, token) => {
-      if (!user) return;
-      const res = await fetch(`/profile/${user}/${user}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      const data = await res.json();
-      setUserProfile({
-        username: data.username,
-        id: data.id,
-      });
-    };
 
     fetchUserProfile(user, token);
-  }, [token]);
+    console.log("rendering!!");
+  }, [token, user]);
 
   return (
     <>
@@ -90,29 +92,17 @@ function App() {
         <Route
           path="/"
           element={
-            <Home
-              token={token}
-              time={time}
-              posts={followedPosts}
-              userProfile={userProfile}
-            />
+            <Home time={time} posts={followedPosts} userProfile={userProfile} />
           }
         />
         <Route
           path="/explore"
-          element={
-            <Home
-              token={token}
-              time={time}
-              posts={posts}
-              userProfile={userProfile}
-            />
-          }
+          element={<Home time={time} posts={posts} userProfile={userProfile} />}
         />
         <Route
           path="/login"
           element={
-            <Login saveToken={saveToken} setUserProfile={setUserProfile} />
+            <Login saveToken={saveToken} fetchUserProfile={fetchUserProfile} />
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />

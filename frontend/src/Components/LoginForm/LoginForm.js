@@ -11,7 +11,7 @@ import UseToken from "../UseToken";
 import GetUser from "../GetUser";
 import ShowError from "../ShowError/ShowError";
 
-const LoginForm = () => {
+const LoginForm = ({ fetchUserProfile }) => {
   const { saveToken } = UseToken();
   const { saveUser } = GetUser();
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ const LoginForm = () => {
       .then((data) => {
         saveToken(data.access_token);
         saveUser(data.user);
+        fetchUserProfile(data.user, data.access_token);
         return navigate("/");
       });
 

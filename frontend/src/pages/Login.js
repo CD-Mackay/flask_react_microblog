@@ -1,19 +1,15 @@
 // Library Imports
-import React from 'react';
+import React from "react";
 
 // Component Imports
-import LoginForm from '../Components/LoginForm/LoginForm';
+import LoginForm from "../Components/LoginForm/LoginForm";
 
-const Login = (
-  // {setUser}
-  ) => {
+const Login = ({fetchUserProfile}) => {
   return (
     <div className="App">
-      <LoginForm 
-      // setUser={setUser}
-       />
+      <LoginForm fetchUserProfile={fetchUserProfile} />
     </div>
-  )
+  );
 };
 
-export default Login
+export default Login;
