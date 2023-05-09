@@ -11,7 +11,6 @@ function GetUser() {
   const [user, setUser] = useState(getUser());
 
   function saveUser(user) {
-    console.log("user", user)
     localStorage.setItem('user', user);
     setUser(user);
   };

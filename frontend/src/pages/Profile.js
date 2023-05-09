@@ -19,7 +19,6 @@ const Profile = ({ posts }) => {
   });
 
   const showUserPosts = () => {
-    console.log("Runing showUserPosts!");
     let userPosts = posts.filter((post) => post.user_id === profileId);
     return <PostList posts={userPosts} />;
   };

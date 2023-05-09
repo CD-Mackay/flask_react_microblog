@@ -47,7 +47,6 @@ const LoginForm = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("login data", data, data.user);
         saveToken(data.access_token);
         saveUser(data.user);
         return navigate("/");
