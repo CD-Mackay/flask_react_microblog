@@ -10,7 +10,6 @@ import "./PostList.css";
 const PostList = ({ posts }) => {
   const showPosts = () => {
     return posts.map((element, index) => {
-      console.log(element)
       return (
         <PostListItem
           author={element.author}
@@ -23,7 +22,11 @@ const PostList = ({ posts }) => {
     });
   };
 
-  return <div className="post-list">{posts && !posts.msg && <div>{showPosts()}</div>}</div>;
+  return (
+    <div className="post-list">
+      {posts && !posts.msg && <div>{showPosts()}</div>}
+    </div>
+  );
 };
 
 export default PostList;

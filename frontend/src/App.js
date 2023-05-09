@@ -9,14 +9,14 @@ import GetUser from "./Components/GetUser";
 
 //Library Imports
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 //Styling Imports
 import "./App.css";
 import Profile from "./Pages/Profile";
 
 function App() {
-  const { token, removeToken, saveToken } = UseToken();
+  const { token, saveToken } = UseToken();
   const { user } = GetUser();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");

@@ -7,7 +7,7 @@ import React from "react";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 
-const Home = ({ token, time, posts, userProfile }) => {
+const Home = ({ time, posts, userProfile }) => {
   return (
     <div className="App">
       <p>{time}</p>
