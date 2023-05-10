@@ -20,7 +20,7 @@ function App() {
   const { token, saveToken } = UseToken();
   const { user } = GetUser();
   const [time, setTime] = useState(0);
-  const [posts, setPosts] = useState("");
+  // const [posts, setPosts] = useState("");
   // const [followedPosts, setFollowedPosts] = useState("");
   const [userProfile, setUserProfile] = useState({
     username: "",
@@ -52,19 +52,19 @@ function App() {
         console.log(error);
       }
     };
-    const getPosts = async () => {
-      try {
-        const res = await fetch("/posts", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const getPosts = async () => {
+    //   try {
+    //     const res = await fetch("/posts", {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     const data = await res.json();
+    //     setPosts(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
     // const getFollowedPosts = async () => {
     //   try {
     //     const res = await fetch(`/followed_posts/${user}`, {
@@ -80,7 +80,7 @@ function App() {
     // };
 
     getTime();
-    getPosts();
+    // getPosts();
     // getFollowedPosts();
 
     fetchUserProfile(user, token);
