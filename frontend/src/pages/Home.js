@@ -9,7 +9,7 @@ import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
-const Home = ({ time, posts, userProfile }) => {
+const Home = ({ time, userProfile }) => {
 
   const { user } = GetUser();
   const { token } = UseToken();
@@ -37,7 +37,7 @@ const Home = ({ time, posts, userProfile }) => {
     <div className="App">
       <p>{time}</p>
       <NewPost user={userProfile} />
-      <PostList posts={posts} />
+      <PostList posts={followedPosts} />
     </div>
   );
 };

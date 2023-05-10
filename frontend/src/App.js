@@ -92,13 +92,11 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Home time={time} posts={posts} userProfile={userProfile} />
-          }
+          element={<Home time={time} userProfile={userProfile} />}
         />
         <Route
           path="/explore"
-          element={<Explore time={time} posts={posts} userProfile={userProfile} />}
+          element={<Explore time={time} userProfile={userProfile} />}
         />
         <Route
           path="/login"
@@ -107,7 +105,9 @@ function App() {
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route path="/user/:id" element={<Profile posts={posts} />} />
+        <Route path="/user/:id" element={<Profile 
+        // posts={posts}
+         />} />
       </Routes>
     </>
   );

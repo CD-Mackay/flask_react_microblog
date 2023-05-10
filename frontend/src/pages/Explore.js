@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Style Imports
 
@@ -8,7 +8,7 @@ import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
-const Explore = ({ time, posts, userProfile }) => {
+const Explore = ({ time, userProfile }) => {
 
   const [posts, setPosts] = useState("");
 
