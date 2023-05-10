@@ -21,7 +21,7 @@ function App() {
   const { user } = GetUser();
   const [time, setTime] = useState(0);
   const [posts, setPosts] = useState("");
-  const [followedPosts, setFollowedPosts] = useState("");
+  // const [followedPosts, setFollowedPosts] = useState("");
   const [userProfile, setUserProfile] = useState({
     username: "",
     id: 0,
@@ -65,23 +65,23 @@ function App() {
         console.log(error);
       }
     };
-    const getFollowedPosts = async () => {
-      try {
-        const res = await fetch(`/followed_posts/${user}`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setFollowedPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const getFollowedPosts = async () => {
+    //   try {
+    //     const res = await fetch(`/followed_posts/${user}`, {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     const data = await res.json();
+    //     setFollowedPosts(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
 
     getTime();
     getPosts();
-    getFollowedPosts();
+    // getFollowedPosts();
 
     fetchUserProfile(user, token);
     console.log("rendering!!"); // How to make posts appear on first load after login
@@ -93,7 +93,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Home time={time} posts={followedPosts} userProfile={userProfile} />
+            <Home time={time} posts={posts} userProfile={userProfile} />
           }
         />
         <Route
