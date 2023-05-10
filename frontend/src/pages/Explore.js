@@ -1,6 +1,5 @@
 // Library Imports
 import React, { useEffect, useState } from "react";
-import GetUser from "../Components/GetUser";
 
 // Style Imports
 
@@ -9,37 +8,35 @@ import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
-const Home = ({ time, userProfile }) => {
+const Explore = ({ time, userProfile }) => {
 
-  const { user } = GetUser();
+  const [posts, setPosts] = useState("");
+
   const { token } = UseToken();
 
-  const [followedPosts, setFollowedPosts] = useState("");
-
-
   useEffect(() => {
-    const getFollowedPosts = async () => {
+    const getPosts = async () => {
       try {
-        const res = await fetch(`/followed_posts/${user}`, {
+        const res = await fetch("/posts", {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
         const data = await res.json();
-        setFollowedPosts(data);
+        setPosts(data);
       } catch (error) {
         console.log(error);
       }
     };
-
+    getPosts();
   }, []);
   return (
     <div className="App">
       <p>{time}</p>
       <NewPost user={userProfile} />
-      <PostList posts={followedPosts} />
+      <PostList posts={posts} />
     </div>
   );
 };
 
-export default Home;
+export default Explore;

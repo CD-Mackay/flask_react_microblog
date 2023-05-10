@@ -5,6 +5,7 @@ import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
 import Register from "./Pages/Register";
 import Footer from "./Components/Footer/Footer";
+import Explore from "./Pages/Explore";
 import GetUser from "./Components/GetUser";
 
 //Library Imports
@@ -19,8 +20,8 @@ function App() {
   const { token, saveToken } = UseToken();
   const { user } = GetUser();
   const [time, setTime] = useState(0);
-  const [posts, setPosts] = useState("");
-  const [followedPosts, setFollowedPosts] = useState("");
+  // const [posts, setPosts] = useState("");
+  // const [followedPosts, setFollowedPosts] = useState("");
   const [userProfile, setUserProfile] = useState({
     username: "",
     id: 0,
@@ -51,36 +52,36 @@ function App() {
         console.log(error);
       }
     };
-    const getPosts = async () => {
-      try {
-        const res = await fetch("/posts", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const getFollowedPosts = async () => {
-      try {
-        const res = await fetch(`/followed_posts/${user}`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setFollowedPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    // const getPosts = async () => {
+    //   try {
+    //     const res = await fetch("/posts", {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     const data = await res.json();
+    //     setPosts(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    // const getFollowedPosts = async () => {
+    //   try {
+    //     const res = await fetch(`/followed_posts/${user}`, {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     const data = await res.json();
+    //     setFollowedPosts(data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
 
     getTime();
-    getPosts();
-    getFollowedPosts();
+    // getPosts();
+    // getFollowedPosts();
 
     fetchUserProfile(user, token);
     console.log("rendering!!"); // How to make posts appear on first load after login
@@ -91,13 +92,11 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Home time={time} posts={followedPosts} userProfile={userProfile} />
-          }
+          element={<Home time={time} userProfile={userProfile} />}
         />
         <Route
           path="/explore"
-          element={<Home time={time} posts={posts} userProfile={userProfile} />}
+          element={<Explore time={time} userProfile={userProfile} />}
         />
         <Route
           path="/login"
@@ -106,7 +105,9 @@ function App() {
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route path="/user/:id" element={<Profile posts={posts} />} />
+        <Route path="/user/:id" element={<Profile 
+        // posts={posts}
+         />} />
       </Routes>
     </>
   );
