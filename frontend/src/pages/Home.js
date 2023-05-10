@@ -1,13 +1,18 @@
 // Library Imports
 import React, { useEffect, useState } from "react";
+import GetUser from "../Components/GetUser";
 
 // Style Imports
 
 // Component Imports
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
+import UseToken from "../Components/UseToken";
 
 const Home = ({ time, posts, userProfile }) => {
+
+  const { user } = GetUser();
+  const { token } = UseToken();
 
   const [followedPosts, setFollowedPosts] = useState("");
 
