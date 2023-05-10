@@ -5,6 +5,7 @@ import Home from "./Pages/Home.js";
 import Login from "./Pages/Login.js";
 import Register from "./Pages/Register";
 import Footer from "./Components/Footer/Footer";
+import Explore from "./Pages/Explore";
 import GetUser from "./Components/GetUser";
 
 //Library Imports
@@ -97,7 +98,7 @@ function App() {
         />
         <Route
           path="/explore"
-          element={<Home time={time} posts={posts} userProfile={userProfile} />}
+          element={<Explore time={time} posts={posts} userProfile={userProfile} />}
         />
         <Route
           path="/login"
