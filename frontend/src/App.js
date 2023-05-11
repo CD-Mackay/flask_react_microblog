@@ -43,60 +43,16 @@ function App() {
   };
 
   useEffect(() => {
-    const getTime = async () => {
-      try {
-        const res = await fetch("/time");
-        const data = await res.json();
-        setTime(data.time);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // const getPosts = async () => {
-    //   try {
-    //     const res = await fetch("/posts", {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     const data = await res.json();
-    //     setPosts(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // const getFollowedPosts = async () => {
-    //   try {
-    //     const res = await fetch(`/followed_posts/${user}`, {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     const data = await res.json();
-    //     setFollowedPosts(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
-    getTime();
-    // getPosts();
-    // getFollowedPosts();
-
-    fetchUserProfile(user, token);
-    console.log("rendering!!"); // How to make posts appear on first load after login
+    fetchUserProfile(user, token); // Put this into context? 
   }, [token, user]);
 
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={<Home time={time} userProfile={userProfile} />}
-        />
+        <Route path="/" element={<Home userProfile={userProfile} />} />
         <Route
           path="/explore"
-          element={<Explore time={time} userProfile={userProfile} />}
+          element={<Explore userProfile={userProfile} />}
         />
         <Route
           path="/login"
@@ -105,9 +61,7 @@ function App() {
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
-        <Route path="/user/:id" element={<Profile 
-        // posts={posts}
-         />} />
+        <Route path="/user/:id" element={<Profile />} />
       </Routes>
     </>
   );

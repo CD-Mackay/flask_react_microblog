@@ -10,10 +10,6 @@ def index():
     return 'Hello world'
 
 
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
-
 @app.route('/posts')
 @jwt_required()
 def get_posts():
