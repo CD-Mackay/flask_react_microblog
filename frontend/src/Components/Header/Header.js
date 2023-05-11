@@ -12,7 +12,6 @@ import GetUser from "../GetUser";
 import UseToken from "../UseToken";
 
 const Header = ({ userProfile }) => {
-  // const { id } = user;
   const { removeUser, user } = GetUser();
   const { token, removeToken } = UseToken();
 

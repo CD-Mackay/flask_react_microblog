@@ -43,46 +43,13 @@ function App() {
   };
 
   useEffect(() => {
-    // const getPosts = async () => {
-    //   try {
-    //     const res = await fetch("/posts", {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     const data = await res.json();
-    //     setPosts(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // const getFollowedPosts = async () => {
-    //   try {
-    //     const res = await fetch(`/followed_posts/${user}`, {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     const data = await res.json();
-    //     setFollowedPosts(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
-    // getPosts();
-    // getFollowedPosts();
-
     fetchUserProfile(user, token);
   }, [token, user]);
 
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={<Home userProfile={userProfile} />}
-        />
+        <Route path="/" element={<Home userProfile={userProfile} />} />
         <Route
           path="/explore"
           element={<Explore userProfile={userProfile} />}
