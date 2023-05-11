@@ -10,12 +10,10 @@ import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
 const Home = ({ time, userProfile }) => {
-
   const { user } = GetUser();
   const { token } = UseToken();
 
   const [followedPosts, setFollowedPosts] = useState("");
-
 
   useEffect(() => {
     const getFollowedPosts = async () => {
@@ -31,7 +29,7 @@ const Home = ({ time, userProfile }) => {
         console.log(error);
       }
     };
-
+    getFollowedPosts();
   }, []);
   return (
     <div className="App">
