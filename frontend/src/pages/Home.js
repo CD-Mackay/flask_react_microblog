@@ -1,6 +1,7 @@
 // Library Imports
 import React, { useEffect, useState } from "react";
 import GetUser from "../Components/GetUser";
+import moment from 'moment';
 
 // Style Imports
 
@@ -33,7 +34,6 @@ const Home = ({ time, userProfile }) => {
   }, []);
   return (
     <div className="App">
-      <p>{time}</p>
       <NewPost user={userProfile} />
       <PostList posts={followedPosts} />
     </div>
