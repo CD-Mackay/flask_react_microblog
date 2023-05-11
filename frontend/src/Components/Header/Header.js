@@ -1,5 +1,6 @@
 //Library Imports
 import React from "react";
+import moment from 'moment';
 
 // Styling Imports
 import "./Header.css";
@@ -24,6 +25,7 @@ const Header = ({ userProfile }) => {
     <nav className="header-nav">
       <div>
         {/* <p>Welcome {user && userProfile.username}!</p> */}
+        <p>{moment().format('MMMM Do YYYY, h:mm:ss a')}</p>
       </div>
       <div className="button-wrapper">
         {token && <Button onClick={handleLogout} message="Logout" />}
