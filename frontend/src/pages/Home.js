@@ -10,7 +10,7 @@ import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
-const Home = ({ time, userProfile }) => {
+const Home = ({ userProfile }) => {
   const { user } = GetUser();
   const { token } = UseToken();
 

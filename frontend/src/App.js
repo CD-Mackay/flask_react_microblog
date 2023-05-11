@@ -74,7 +74,6 @@ function App() {
     // getFollowedPosts();
 
     fetchUserProfile(user, token);
-    console.log("rendering!!"); // How to make posts appear on first load after login
   }, [token, user]);
 
   return (
