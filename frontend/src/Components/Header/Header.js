@@ -31,9 +31,9 @@ const Header = () => {
     <nav className="header-nav">
       <div>
         <p>Welcome {userProfile.username && userProfile.username}!</p>
-        <p>{moment().format('MMMM Do YYYY, h:mm:ss a')}</p>
       </div>
       <div className="button-wrapper">
+      <span>{moment().format('MMMM Do YYYY, h:mm:ss a')}</span>
         {token && <Button onClick={handleLogout} message="Logout" />}
         {token && (
           <>
