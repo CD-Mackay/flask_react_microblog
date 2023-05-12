@@ -55,15 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route
-          path="/login"
-          element={
-            <Login
-              saveToken={saveToken}
-              // fetchUserProfile={fetchUserProfile}
-            />
-          }
-        />
+        <Route path="/login" element={<Login saveToken={saveToken} />} />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
         <Route path="/user/:id" element={<Profile />} />
       </Routes>
