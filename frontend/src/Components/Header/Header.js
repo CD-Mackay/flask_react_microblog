@@ -1,5 +1,5 @@
 //Library Imports
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import moment from 'moment';
 
 // Styling Imports
@@ -10,8 +10,11 @@ import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import GetUser from "../GetUser";
 import UseToken from "../UseToken";
+import { UserContext } from "../../Contexts/UserContext";
 
-const Header = ({ userProfile }) => {
+const Header = () => {
+
+  const { userProfile, fetchUserProfile } = useContext(UserContext)
   const { removeUser, user } = GetUser();
   const { token, removeToken } = UseToken();
 
@@ -20,10 +23,14 @@ const Header = ({ userProfile }) => {
     removeUser();
   };
 
+  useEffect(() => {
+    fetchUserProfile(user, token);
+  }, [])
+
   return (
     <nav className="header-nav">
       <div>
-        {/* <p>Welcome {user && userProfile.username}!</p> */}
+        <p>Welcome {userProfile.username && userProfile.username}!</p>
         <p>{moment().format('MMMM Do YYYY, h:mm:ss a')}</p>
       </div>
       <div className="button-wrapper">
