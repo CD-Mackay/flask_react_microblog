@@ -1,5 +1,5 @@
 //Library Imports
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 // Styling Imports
@@ -10,11 +10,13 @@ import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import GetUser from "../GetUser";
 import ShowError from "../ShowError/ShowError";
+import { UserContext } from "../../Contexts/UserContext";
 
-const LoginForm = ({ fetchUserProfile }) => {
+const LoginForm = () => {
   const { saveToken } = UseToken();
   const { saveUser } = GetUser();
   const navigate = useNavigate();
+  const { fetchUserProfile, userProfile} = useContext(UserContext)
 
   const [errorMessage, setErrorMessage] = useState("");
   const [loginForm, setLoginForm] = useState({
