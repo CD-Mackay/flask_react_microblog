@@ -8,7 +8,7 @@ import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 
-const Explore = ({ userProfile }) => {
+const Explore = () => {
   const [posts, setPosts] = useState("");
 
   const { token } = UseToken();
@@ -31,7 +31,7 @@ const Explore = ({ userProfile }) => {
   }, []);
   return (
     <div className="App">
-      <NewPost user={userProfile} />
+      <NewPost />
       <PostList posts={posts} />
     </div>
   );

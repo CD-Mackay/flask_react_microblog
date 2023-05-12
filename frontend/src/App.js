@@ -47,27 +47,21 @@ function App() {
   // };
 
   useEffect(() => {
-    fetchUserProfile(user, token); // Put this into context? 
+    fetchUserProfile(user, token); // Put this into context?
   }, [token, user]);
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home 
-        // userProfile={userProfile} 
-        />} />
-        <Route
-          path="/explore"
-          element={<Explore 
-            // userProfile={userProfile}
-           />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/explore" element={<Explore />} />
         <Route
           path="/login"
           element={
-            <Login saveToken={saveToken} 
-            // fetchUserProfile={fetchUserProfile}
-             />
+            <Login
+              saveToken={saveToken}
+              // fetchUserProfile={fetchUserProfile}
+            />
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
