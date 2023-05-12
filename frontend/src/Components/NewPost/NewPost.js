@@ -1,5 +1,5 @@
 //Library Imports
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 // Styling Imports
 import "./NewPost.css";
@@ -8,14 +8,16 @@ import "./NewPost.css";
 import Button from "../Button/Button";
 import UseToken from "../UseToken";
 import ShowError from "../ShowError/ShowError";
+import { UserContext } from "../../Contexts/UserContext";
 
-const NewPost = ({ user }) => {
+const NewPost = () => {
   const { token } = UseToken();
   const [postForm, setPostForm] = useState({
     title: "",
     content: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const { userProfile } = useContext(UserContext);
 
   const handleNewPost = (event) => {
     event.preventDefault();
@@ -37,7 +39,7 @@ const NewPost = ({ user }) => {
       body: JSON.stringify({
         title: postForm.title,
         content: postForm.content,
-        id: user.id,
+        id: userProfile.id,
       }),
     };
     fetch("/new", requestOptions)
