@@ -9,18 +9,21 @@ import Explore from "./Pages/Explore";
 import GetUser from "./Components/GetUser";
 
 //Library Imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 //Styling Imports
 import "./App.css";
 import Profile from "./Pages/Profile";
+import { UserContext } from "./Contexts/UserContext";
 
 function App() {
   const { token, saveToken } = UseToken();
   const { user } = GetUser();
   const [time, setTime] = useState(0);
-  
+
+  const { userProfile, fetchUserProfile } = useContext(UserContext);
+
   // const [posts, setPosts] = useState("");
   // const [followedPosts, setFollowedPosts] = useState("");
   // const [userProfile, setUserProfile] = useState({
@@ -50,15 +53,21 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home userProfile={userProfile} />} />
+        <Route path="/" element={<Home 
+        // userProfile={userProfile} 
+        />} />
         <Route
           path="/explore"
-          element={<Explore userProfile={userProfile} />}
+          element={<Explore 
+            // userProfile={userProfile}
+           />}
         />
         <Route
           path="/login"
           element={
-            <Login saveToken={saveToken} fetchUserProfile={fetchUserProfile} />
+            <Login saveToken={saveToken} 
+            // fetchUserProfile={fetchUserProfile}
+             />
           }
         />
         <Route path="/register" element={<Register saveToken={saveToken} />} />
