@@ -28,7 +28,7 @@ const Explore = () => {
       }
     };
     getPosts();
-  }, []);
+  }, [token]);
   return (
     <div className="App">
       <NewPost />
