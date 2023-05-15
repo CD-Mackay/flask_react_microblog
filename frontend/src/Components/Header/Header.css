@@ -8,3 +8,8 @@
   position: fixed;
   top: 0;
 }
+
+.header-text {
+  display: flex;
+  justify-content: space-between;
+}

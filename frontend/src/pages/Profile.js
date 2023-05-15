@@ -7,21 +7,20 @@ import UserCard from "../Components/UserCard/UserCard";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 import GetUser from "../Components/GetUser";
-const Profile = ({ posts }) => {
+const Profile = () => {
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
   const profileId = Number(location.pathname.slice(6));
+  const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({
     username: "",
     id: "",
     followed: null,
   });
-
-  const showUserPosts = () => {
-    let userPosts = posts.filter((post) => post.user_id === profileId);
-    return <PostList posts={userPosts} />;
-  };
+  const userPosts = posts
+    ? posts.filter((post) => post.user_id === profileId)
+    : [];
 
   useEffect(() => {
     async function fetchProfile(profileId, token, user) {
@@ -39,11 +38,28 @@ const Profile = ({ posts }) => {
     }
 
     fetchProfile(profileId, token, user).then((profile) => setProfile(profile));
-  });
+    const getPosts = async () => {
+      try {
+        const res = await fetch("/posts", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        const data = await res.json();
+        setPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPosts();
+  }, []);
   return (
     <div className="App">
       <UserCard profile={profile} user={user} token={token} />
-      {posts && showUserPosts()}
+      <div className="profile-posts-wrapper">
+        <p>posts by {profile.username}</p>
+        {posts && <PostList posts={userPosts} />}
+      </div>
     </div>
   );
 };

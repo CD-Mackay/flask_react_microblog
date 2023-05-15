@@ -1,6 +1,5 @@
 //Library Imports
 import React, { useEffect, useContext } from "react";
-import moment from 'moment';
 
 // Styling Imports
 import "./Header.css";
@@ -13,8 +12,7 @@ import UseToken from "../UseToken";
 import { UserContext } from "../../Contexts/UserContext";
 
 const Header = () => {
-
-  const { userProfile, fetchUserProfile } = useContext(UserContext)
+  const { userProfile, fetchUserProfile } = useContext(UserContext);
   const { removeUser, user } = GetUser();
   const { token, removeToken } = UseToken();
 
@@ -25,15 +23,14 @@ const Header = () => {
 
   useEffect(() => {
     fetchUserProfile(user, token);
-  }, [user, token])
+  }, [user, token]);
 
   return (
     <nav className="header-nav">
-      <div>
+      <div className="header-text">
         <p>Welcome {userProfile.username && userProfile.username}!</p>
       </div>
       <div className="button-wrapper">
-      <span>{moment().format('MMMM Do YYYY, h:mm:ss a')}</span>
         {token && <Button onClick={handleLogout} message="Logout" />}
         {token && (
           <>

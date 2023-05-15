@@ -1,5 +1,6 @@
 //Library Imports
 import React from "react";
+import moment from "moment";
 
 // Styling Imports
 import "./Footer.css";
@@ -8,8 +9,9 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-      <div className="footer">
-      </div>
+    <div className="footer">
+      <p>{moment().format("MMMM Do YYYY, h:mm:ss a")}</p>
+    </div>
   );
 };
 
