@@ -39,7 +39,7 @@ const Profile = ({ posts }) => {
     }
 
     fetchProfile(profileId, token, user).then((profile) => setProfile(profile));
-  });
+  }, []);
   return (
     <div className="App">
       <UserCard profile={profile} user={user} token={token} />
