@@ -16,7 +16,7 @@ const LoginForm = () => {
   const { saveToken } = UseToken();
   const { saveUser } = GetUser();
   const navigate = useNavigate();
-  const { fetchUserProfile, userProfile} = useContext(UserContext)
+  const { fetchUserProfile } = useContext(UserContext)
 
   const [errorMessage, setErrorMessage] = useState("");
   const [loginForm, setLoginForm] = useState({
