@@ -2,8 +2,7 @@ import {
   fireEvent,
   render,
   screen,
-  waitFor,
-  act,
+  waitFor
 } from "@testing-library/react";
 import LoginForm from "../Components/LoginForm/LoginForm";
 import "@testing-library/jest-dom";

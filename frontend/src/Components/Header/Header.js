@@ -25,7 +25,7 @@ const Header = () => {
 
   useEffect(() => {
     fetchUserProfile(user, token);
-  }, [user, token, fetchUserProfile])
+  }, [user, token])
 
   return (
     <nav className="header-nav">

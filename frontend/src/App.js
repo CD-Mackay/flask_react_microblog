@@ -23,8 +23,8 @@ function App() {
 
 
   useEffect(() => {
-    fetchUserProfile(user, token); // Put this into context?
-  }, [token, user, fetchUserProfile]);
+    fetchUserProfile(user, token); 
+  }, []);
 
   return (
     <>
