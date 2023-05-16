@@ -8,7 +8,6 @@ import "./UserCard.css";
 // Component Imports
 
 const UserCard = ({ profile, user, token }) => {
-
   const [followed, setFollowed] = useState(profile.followed);
   const handleFollowChange = async (event) => {
     event.preventDefault();
@@ -29,7 +28,7 @@ const UserCard = ({ profile, user, token }) => {
           `unfollow/${profile.id}/${user}`,
           requestOptions
         );
-        setFollowed(false)
+        setFollowed(false);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
         console.log(data);
@@ -42,7 +41,7 @@ const UserCard = ({ profile, user, token }) => {
           `follow/${profile.id}/${user}`,
           requestOptions
         );
-        setFollowed(true)
+        setFollowed(true);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
         console.log(data);
@@ -53,8 +52,8 @@ const UserCard = ({ profile, user, token }) => {
   };
 
   useEffect(() => {
-    setFollowed(profile.followed)
-  }, [profile])
+    setFollowed(profile.followed);
+  }, [profile]);
 
   return (
     <div className="user-card">
@@ -65,6 +64,9 @@ const UserCard = ({ profile, user, token }) => {
             message={followed === true ? "Unfollow" : "Follow"}
             onClick={handleFollowChange}
           />
+        )}
+        {profile.followed === undefined && (
+          <Button message={"You cannot follow yourself"} disabled={true} />
         )}
       </div>
     </div>

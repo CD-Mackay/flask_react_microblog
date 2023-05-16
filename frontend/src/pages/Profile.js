@@ -52,7 +52,7 @@ const Profile = () => {
       }
     };
     getPosts();
-  }, []);
+  }, [location]);
   return (
     <div className="App">
       <UserCard profile={profile} user={user} token={token} />
