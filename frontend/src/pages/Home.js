@@ -1,6 +1,7 @@
 // Library Imports
 import React, { useEffect, useState } from "react";
 import GetUser from "../Components/GetUser";
+import { Link } from "react-router-dom";
 
 // Style Imports
 
@@ -8,6 +9,7 @@ import GetUser from "../Components/GetUser";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
+import Button from "../Components/Button/Button";
 
 const Home = () => {
   const { user } = GetUser();
@@ -34,7 +36,18 @@ const Home = () => {
   return (
     <div className="App">
       <NewPost />
-      <PostList posts={followedPosts} />
+      {followedPosts && <PostList posts={followedPosts} />}
+      {followedPosts.length === 0 && (
+        <div>
+          <p>
+            Looks like you aren't following anyone yet, click here to view new
+            posts
+          </p>
+          <Link to="/explore">
+            <Button message="Explore" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
