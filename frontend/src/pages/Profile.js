@@ -7,6 +7,7 @@ import UserCard from "../Components/UserCard/UserCard";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 import GetUser from "../Components/GetUser";
+import Button from "../Components/Button/Button";
 const Profile = () => {
   const { token } = UseToken();
   const { user } = GetUser();
@@ -53,9 +54,16 @@ const Profile = () => {
     };
     getPosts();
   }, [location]);
+
   return (
     <div className="App">
-      <UserCard profile={profile} user={user} token={token} />
+      <div>
+        <UserCard profile={profile} user={user} token={token} />
+        {profile.id == user && <form>
+          <input type="text" />
+          <Button message={"Change username!"} />
+        </form>}
+      </div>
       <div className="profile-posts-wrapper">
         <p>posts by {profile.username}</p>
         {posts && <PostList posts={userPosts} />}
