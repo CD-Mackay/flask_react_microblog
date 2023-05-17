@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 // Component Imports
@@ -8,7 +8,9 @@ import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 import GetUser from "../Components/GetUser";
 import Button from "../Components/Button/Button";
+import { UserContext } from "../Contexts/UserContext";
 const Profile = () => {
+  const { changeUserName } = useContext(UserContext);
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
@@ -19,6 +21,15 @@ const Profile = () => {
     id: "",
     followed: null,
   });
+  const [nameChange, setNameChange] = useState("");
+
+  // function handleChange(event) {
+  //   const { value, name } = event.target;
+  //   setNameChange((prevNote) => ({
+  //     ...prevNote,
+  //     [name]: value,
+  //   }));
+  // }
   const userPosts = posts
     ? posts.filter((post) => post.user_id === profileId)
     : [];
@@ -59,10 +70,22 @@ const Profile = () => {
     <div className="App">
       <div>
         <UserCard profile={profile} user={user} token={token} />
-        {profile.id == user && <form>
-          <input type="text" />
-          <Button message={"Change username!"} />
-        </form>}
+        {profile.id == user && (
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              onChange={(e) => setNameChange(e.target.value)}
+              text={nameChange}
+              name="nameChange"
+              placeholder="try a new name?"
+              value={nameChange}
+            />
+            <Button
+              message={"Change username!"}
+              onClick={() => changeUserName(user, nameChange, token)}
+            />
+          </form>
+        )}
       </div>
       <div className="profile-posts-wrapper">
         <p>posts by {profile.username}</p>
