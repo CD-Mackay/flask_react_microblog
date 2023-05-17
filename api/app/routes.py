@@ -126,6 +126,15 @@ def unfollow(id, userid):
     db.session.commit()
     return "You have unfollowed".format(user.username)
 
+@app.route('/change_username/<id>/<newname>', methods=['POST'])
+@jwt_required()
+def change_username(id, newname):
+    user = User.query.filter_by(id=id).first()
+    user.username = newname
+    db.session.commit()
+    return "You have changed your username to".format(user.username)
+
+
 
 
 
