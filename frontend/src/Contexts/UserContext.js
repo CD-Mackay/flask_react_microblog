@@ -19,6 +19,7 @@ export function UserContextProvider(props) {
       },
     });
     const data = await res.json();
+    console.log("setting userprofile")
     setUserProfile({
       username: data.username,
       id: data.id,

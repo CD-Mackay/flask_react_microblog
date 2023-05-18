@@ -21,7 +21,6 @@ const Header = () => {
     removeUser();
   };
 
-
   useEffect(() => {
     fetchUserProfile(user, token);
   }, [user, token]);
@@ -32,9 +31,9 @@ const Header = () => {
         <p>Welcome {userProfile.username && userProfile.username}!</p>
       </div>
       <div className="button-wrapper">
-        {token && <Button onClick={handleLogout} message="Logout" />}
         {token && (
           <>
+            <Button onClick={handleLogout} message="Logout" />
             <Link to={`/user/${user && user}`}>
               <Button message="Profile" />
             </Link>
