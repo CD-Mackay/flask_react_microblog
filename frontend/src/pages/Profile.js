@@ -68,7 +68,7 @@ const Profile = () => {
 
   return (
     <div className="App">
-      <div>
+      <div className="card-wrapper">
         <UserCard profile={profile} user={user} token={token} />
         {profile.id == user && (
           <form onSubmit={(e) => e.preventDefault()}>
