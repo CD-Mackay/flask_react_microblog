@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 // Component Imports
@@ -8,9 +8,7 @@ import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
 import GetUser from "../Components/GetUser";
 import Button from "../Components/Button/Button";
-import { UserContext } from "../Contexts/UserContext";
 const Profile = () => {
-  const { changeUserName } = useContext(UserContext);
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
@@ -23,13 +21,17 @@ const Profile = () => {
   });
   const [nameChange, setNameChange] = useState("");
 
-  // function handleChange(event) {
-  //   const { value, name } = event.target;
-  //   setNameChange((prevNote) => ({
-  //     ...prevNote,
-  //     [name]: value,
-  //   }));
-  // }
+  const changeUserName = async (user, newName, token) => {
+    const res = await fetch(`/change_username/${user}/${newName}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+  }
+  
   const userPosts = posts
     ? posts.filter((post) => post.user_id === profileId)
     : [];

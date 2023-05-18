@@ -25,17 +25,6 @@ export function UserContextProvider(props) {
     });
   };
 
-  const changeUserName = async (user, newName, token) => {
-    const res = await fetch(`/change_username/${user}/${newName}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-  }
-
 
   /**
    * Context Component to handle Connect Four Game Logic
@@ -45,8 +34,7 @@ export function UserContextProvider(props) {
     <UserContext.Provider
       value={{
         fetchUserProfile,
-        userProfile,
-        changeUserName
+        userProfile
       }}
     >
       {props.children}
