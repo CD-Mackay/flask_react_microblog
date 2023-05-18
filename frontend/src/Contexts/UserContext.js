@@ -19,22 +19,12 @@ export function UserContextProvider(props) {
       },
     });
     const data = await res.json();
+    console.log("setting userprofile")
     setUserProfile({
       username: data.username,
       id: data.id,
     });
   };
-
-  const changeUserName = async (user, newName, token) => {
-    const res = await fetch(`/change_username/${user}/${newName}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-  }
 
 
   /**
@@ -46,7 +36,7 @@ export function UserContextProvider(props) {
       value={{
         fetchUserProfile,
         userProfile,
-        changeUserName
+        setUserProfile
       }}
     >
       {props.children}

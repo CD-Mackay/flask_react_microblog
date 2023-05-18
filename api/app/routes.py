@@ -132,7 +132,8 @@ def change_username(id, newname):
     user = User.query.filter_by(id=id).first()
     user.username = newname
     db.session.commit()
-    return "You have changed your username to".format(user.username)
+    response = {"message": "you have changed your username to {}".format(newname)}
+    return response
 
 
 
