@@ -34,7 +34,8 @@ export function UserContextProvider(props) {
     <UserContext.Provider
       value={{
         fetchUserProfile,
-        userProfile
+        userProfile,
+        setUserProfile
       }}
     >
       {props.children}

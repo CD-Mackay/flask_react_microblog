@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 // Component Imports
@@ -9,10 +9,12 @@ import UseToken from "../Components/UseToken";
 import GetUser from "../Components/GetUser";
 import Button from "../Components/Button/Button";
 import ShowError from "../Components/ShowError/ShowError";
+import { UserContext } from "../Contexts/UserContext";
 const Profile = () => {
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
+  const { userProfile, setUserProfile } = useContext(UserContext);
   const profileId = Number(location.pathname.slice(6));
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({
@@ -34,6 +36,12 @@ const Profile = () => {
       const data = await res.json();
       setMessage(data.message);
       setNameChange("")
+      const updated = {
+        id: userProfile.id,
+        username: newName,
+        posts: userProfile.posts
+      }
+      setUserProfile(updated);
       setTimeout(() => {
         setMessage("")
       }, 2000)

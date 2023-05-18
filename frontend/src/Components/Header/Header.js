@@ -21,6 +21,7 @@ const Header = () => {
     removeUser();
   };
 
+
   useEffect(() => {
     fetchUserProfile(user, token);
   }, [user, token]);
