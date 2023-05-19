@@ -12,6 +12,10 @@
   height: 100%;
 }
 
+#login-home-message {
+  grid-area: feed;
+}
+
 
 
 

@@ -86,8 +86,8 @@ const NewPost = () => {
         <div className="button-wrapper">
           <Button onClick={handleNewPost} message="Post!" />
         </div>
+        <ShowError message={errorMessage} />
       </form>
-      <ShowError message={errorMessage} />
     </>
   );
 };
