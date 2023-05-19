@@ -39,7 +39,7 @@ const Home = () => {
     <div className="App">
       <NewPost />
       {followedPosts && <PostList posts={followedPosts} />}
-      {followedPosts.length === 0 && (
+      {followedPosts.length === 0 && token && (
         <div>
           <p>
             Looks like you aren't following anyone yet, click here to view new
@@ -50,6 +50,12 @@ const Home = () => {
           </Link>
         </div>
       )}
+      <div>
+        <p>Login or Sign up to start reading blog posts</p>
+        <Link to="/login">
+          <Button message="Login" />
+        </Link>
+      </div>
     </div>
   );
 };
