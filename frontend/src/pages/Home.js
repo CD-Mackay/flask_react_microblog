@@ -17,6 +17,7 @@ const Home = () => {
 
   const [followedPosts, setFollowedPosts] = useState([]);
 
+
   useEffect(() => {
     const getFollowedPosts = async () => {
       try {
