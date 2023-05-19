@@ -28,7 +28,9 @@ const Header = () => {
   return (
     <nav className="header-nav">
       <div className="header-text">
-        <p>Welcome {userProfile.username && userProfile.username}!</p>
+        {token && (
+          <p>Welcome {userProfile.username && userProfile.username}!</p>
+        )}
       </div>
       <div className="button-wrapper">
         {token && (
