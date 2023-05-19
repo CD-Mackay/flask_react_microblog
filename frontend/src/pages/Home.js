@@ -52,7 +52,7 @@ const Home = () => {
         </div>
       )}
       {!token && (
-        <div>
+        <div id="login-home-message">
           <p>Login or Sign up to start reading blog posts</p>
           <Link to="/login">
             <Button message="Login" />
