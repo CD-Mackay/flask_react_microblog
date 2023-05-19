@@ -31,7 +31,9 @@ const Home = () => {
         console.log(error);
       }
     };
-    getFollowedPosts();
+    if (token) {
+      getFollowedPosts();
+    }
   }, []);
   return (
     <div className="App">
