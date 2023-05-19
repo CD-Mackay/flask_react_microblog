@@ -27,7 +27,9 @@ const Explore = () => {
         console.log(error);
       }
     };
-    getPosts();
+    if (token) {
+      getPosts();
+    }
   }, [token]);
   return (
     <div className="App">

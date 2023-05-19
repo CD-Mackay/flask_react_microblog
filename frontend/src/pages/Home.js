@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import GetUser from "../Components/GetUser";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,8 @@ const Home = () => {
   const { user } = GetUser();
   const { token } = UseToken();
 
-  const [followedPosts, setFollowedPosts] = useState("");
+  const [followedPosts, setFollowedPosts] = useState([]);
+
 
   useEffect(() => {
     const getFollowedPosts = async () => {
@@ -31,13 +32,15 @@ const Home = () => {
         console.log(error);
       }
     };
-    getFollowedPosts();
+    if (token && followedPosts !== []) {
+      getFollowedPosts();
+    }
   }, []);
   return (
     <div className="App">
       <NewPost />
       {followedPosts && <PostList posts={followedPosts} />}
-      {followedPosts.length === 0 && (
+      {followedPosts.length === 0 && token && (
         <div>
           <p>
             Looks like you aren't following anyone yet, click here to view new
@@ -45,6 +48,14 @@ const Home = () => {
           </p>
           <Link to="/explore">
             <Button message="Explore" />
+          </Link>
+        </div>
+      )}
+      {!token && (
+        <div>
+          <p>Login or Sign up to start reading blog posts</p>
+          <Link to="/login">
+            <Button message="Login" />
           </Link>
         </div>
       )}
