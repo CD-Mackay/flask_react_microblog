@@ -50,12 +50,14 @@ const Home = () => {
           </Link>
         </div>
       )}
-      <div>
-        <p>Login or Sign up to start reading blog posts</p>
-        <Link to="/login">
-          <Button message="Login" />
-        </Link>
-      </div>
+      {!token && (
+        <div>
+          <p>Login or Sign up to start reading blog posts</p>
+          <Link to="/login">
+            <Button message="Login" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
