@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import GetUser from "../Components/GetUser";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const Home = () => {
   const { user } = GetUser();
   const { token } = UseToken();
 
-  const [followedPosts, setFollowedPosts] = useState("");
+  const [followedPosts, setFollowedPosts] = useState([]);
 
   useEffect(() => {
     const getFollowedPosts = async () => {
@@ -31,7 +31,7 @@ const Home = () => {
         console.log(error);
       }
     };
-    if (token) {
+    if (token && followedPosts !== []) {
       getFollowedPosts();
     }
   }, []);
