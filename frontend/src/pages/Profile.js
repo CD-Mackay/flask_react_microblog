@@ -57,12 +57,15 @@ const Profile = () => {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
+            Accept: "application.json",
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
           password: newInfo
         })
       });
       const data = await res.json();
+      console.log(data);
       setMessage(data.message);
       setProfileChange("");
       setTimeout(() => {
