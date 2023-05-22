@@ -23,7 +23,7 @@ const Profile = () => {
     followed: null,
   });
   const [pageView, setPageView] = useState("profile"); // edit, password, username
-  const [nameChange, setNameChange] = useState("");
+  const [profileChange, setProfileChange] = useState("");
   const [message, setMessage] = useState("");
 
   const changeUserName = async (user, newName, token) => {
@@ -36,13 +36,32 @@ const Profile = () => {
       });
       const data = await res.json();
       setMessage(data.message);
-      setNameChange("");
+      setProfileChange("");
       const updated = {
         id: userProfile.id,
         username: newName,
         posts: userProfile.posts,
       };
       setUserProfile(updated);
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const changePassword = async (user, newName, token) => {
+    try {
+      const res = await fetch(`/change_password/${user}/${newName}`, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await res.json();
+      setMessage(data.message);
+      setProfileChange("");
       setTimeout(() => {
         setMessage("");
       }, 2000);
@@ -106,6 +125,38 @@ const Profile = () => {
             />
           </>
         )}
+        {pageView === "username" && 
+        <form onSubmit={(e) => e.preventDefault()}>
+        <input
+          type="text"
+          onChange={(e) => setProfileChange(e.target.value)}
+          text={profileChange}
+          name="profileChange"
+          placeholder="try a new name?"
+          value={profileChange}
+        />
+        <Button
+          message={"Change username!"}
+          onClick={() => changeUserName(user, profileChange, token)}
+        />
+      </form>
+        }
+        {pageView === "password" && 
+        <form onSubmit={(e) => e.preventDefault()}>
+        <input
+          type="text"
+          onChange={(e) => setProfileChange(e.target.value)}
+          text={profileChange}
+          name="profileChange"
+          placeholder="Change password?"
+          value={profileChange}
+        />
+        <Button
+          message={"Change Password!"}
+          onClick={() => changePassword(user, profileChange, token)}
+        />
+      </form>
+        }
         <ShowError message={message} />
       </div>
       <div className="profile-posts-wrapper">
