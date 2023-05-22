@@ -135,6 +135,19 @@ def change_username(id, newname):
     response = {"message": "you have changed your username to {}".format(newname)}
     return response
 
+@app.route('/change_password/<id>', methods=['POST'])
+@jwt_required()
+def change_password(id):
+    newPass = request.json.get("password", None)
+    user = User.query.filter_by(id=id).first()
+    user.password_hash = ""
+    user.set_password(newPass)
+    db.session.commit()
+    response = {"message": "password updated successfully!"}
+    return response
+
+
+
 
 
 
