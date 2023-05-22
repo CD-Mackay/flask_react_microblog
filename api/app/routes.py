@@ -140,7 +140,7 @@ def change_username(id, newname):
 def change_password(id):
     newPass = request.json.get("password", None)
     user = User.query.filter_by(id=id).first()
-    print(user)
+    user.password_hash = ""
     user.set_password(newPass)
     db.session.commit()
     response = {"message": "password updated successfully!"}
