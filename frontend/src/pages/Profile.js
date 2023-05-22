@@ -22,6 +22,7 @@ const Profile = () => {
     id: "",
     followed: null,
   });
+  const [pageView, setPageView] = useState("profile"); // edit, password, username
   const [nameChange, setNameChange] = useState("");
   const [message, setMessage] = useState("");
 
@@ -35,21 +36,20 @@ const Profile = () => {
       });
       const data = await res.json();
       setMessage(data.message);
-      setNameChange("")
+      setNameChange("");
       const updated = {
         id: userProfile.id,
         username: newName,
-        posts: userProfile.posts
-      }
+        posts: userProfile.posts,
+      };
       setUserProfile(updated);
       setTimeout(() => {
-        setMessage("")
-      }, 2000)
-    } catch(error) {
+        setMessage("");
+      }, 2000);
+    } catch (error) {
       console.log(error);
     }
-    
-  }
+  };
 
   const userPosts = posts
     ? posts.filter((post) => post.user_id === profileId)
@@ -91,21 +91,20 @@ const Profile = () => {
     <div className="App">
       <div className="card-wrapper">
         <UserCard profile={profile} user={user} token={token} />
-        {profile.id == user && (
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              onChange={(e) => setNameChange(e.target.value)}
-              text={nameChange}
-              name="nameChange"
-              placeholder="try a new name?"
-              value={nameChange}
+        {profile.id == user && pageView === "profile" && (
+          <Button onClick={() => setPageView("edit")} message="Edit Profile" />
+        )}
+        {profile.id == user && pageView === "edit" && (
+          <>
+            <Button
+              onClick={() => setPageView("password")}
+              message="Change Password"
             />
             <Button
-              message={"Change username!"}
-              onClick={() => changeUserName(user, nameChange, token)}
+              onClick={() => setPageView("username")}
+              message="Change Username"
             />
-          </form>
+          </>
         )}
         <ShowError message={message} />
       </div>
