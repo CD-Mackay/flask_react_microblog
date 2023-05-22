@@ -51,13 +51,16 @@ const Profile = () => {
     }
   };
 
-  const changePassword = async (user, newName, token) => {
+  const changePassword = async (user, newInfo, token) => {
     try {
-      const res = await fetch(`/change_password/${user}/${newName}`, {
+      const res = await fetch(`/change_password/${user}`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
         },
+        body: JSON.stringify({
+          password: newInfo
+        })
       });
       const data = await res.json();
       setMessage(data.message);
