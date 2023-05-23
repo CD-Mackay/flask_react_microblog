@@ -1,5 +1,6 @@
 //Library Imports
 import React, { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Styling Imports
 import "./Header.css";
@@ -15,10 +16,12 @@ const Header = () => {
   const { userProfile, fetchUserProfile } = useContext(UserContext);
   const { removeUser, user } = GetUser();
   const { token, removeToken } = UseToken();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     removeToken();
     removeUser();
+    return navigate("/")
   };
 
   useEffect(() => {
