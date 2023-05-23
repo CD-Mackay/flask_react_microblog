@@ -141,7 +141,7 @@ const Profile = () => {
         <ShowError message={message} />
       </div>
       <div className="profile-posts-wrapper">
-        <p>posts by {profile.username}</p>
+        <p>posts by {profile.id.toString() === user ? "you" : profile.username}</p>
         {posts && <PostList posts={userPosts} />}
       </div>
     </div>
