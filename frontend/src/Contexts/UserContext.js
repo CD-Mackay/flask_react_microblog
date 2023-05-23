@@ -40,6 +40,20 @@ export function UserContextProvider(props) {
     };
   }
 
+  const getPosts = async (token) => {
+    try {
+      const res = await fetch("/posts", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   /**
    * Context Component to handle Connect Four Game Logic
@@ -51,7 +65,8 @@ export function UserContextProvider(props) {
         fetchUserProfile,
         userProfile,
         setUserProfile,
-        fetchProfile
+        fetchProfile,
+        getPosts
       }}
     >
       {props.children}
