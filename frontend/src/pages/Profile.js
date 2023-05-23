@@ -14,7 +14,7 @@ const Profile = () => {
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
-  const { userProfile, setUserProfile } = useContext(UserContext);
+  const { userProfile, setUserProfile, fetchProfile } = useContext(UserContext);
   const profileId = Number(location.pathname.slice(6));
   // State Declarations
   const [posts, setPosts] = useState([]);
@@ -82,20 +82,6 @@ const Profile = () => {
     : [];
 
   useEffect(() => {
-    async function fetchProfile(profileId, token, user) {
-      const response = await fetch(`/profile/${profileId}/${user}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      const data = await response.json();
-      return {
-        username: data.username,
-        id: data.id,
-        followed: data.is_following,
-      };
-    }
-
     fetchProfile(profileId, token, user).then((profile) => setProfile(profile));
     const getPosts = async () => {
       try {
@@ -105,12 +91,12 @@ const Profile = () => {
           },
         });
         const data = await res.json();
-        setPosts(data);
+        return data;
       } catch (error) {
         console.log(error);
       }
     };
-    getPosts();
+    getPosts().then((posts) => setPosts(posts));
   }, [location]);
 
   return (

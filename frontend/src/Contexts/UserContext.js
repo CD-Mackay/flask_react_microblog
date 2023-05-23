@@ -26,6 +26,20 @@ export function UserContextProvider(props) {
     });
   };
 
+  async function fetchProfile(profileId, token, user) {
+    const response = await fetch(`/profile/${profileId}/${user}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    const data = await response.json();
+    return {
+      username: data.username,
+      id: data.id,
+      followed: data.is_following,
+    };
+  }
+
 
   /**
    * Context Component to handle Connect Four Game Logic
@@ -36,7 +50,8 @@ export function UserContextProvider(props) {
       value={{
         fetchUserProfile,
         userProfile,
-        setUserProfile
+        setUserProfile,
+        fetchProfile
       }}
     >
       {props.children}
