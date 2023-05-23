@@ -14,8 +14,10 @@ const Profile = () => {
   const { token } = UseToken();
   const { user } = GetUser();
   const location = useLocation();
-  const { userProfile, setUserProfile } = useContext(UserContext);
+  const { userProfile, setUserProfile, fetchProfile, getPosts } =
+    useContext(UserContext);
   const profileId = Number(location.pathname.slice(6));
+  // State Declarations
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({
     username: "",
@@ -57,12 +59,12 @@ const Profile = () => {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
-            Accept: "application.json",
-            "Content-Type": "application/json",
+          Accept: "application.json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          password: newInfo
-        })
+          password: newInfo,
+        }),
       });
       const data = await res.json();
       console.log(data);
@@ -81,45 +83,18 @@ const Profile = () => {
     : [];
 
   useEffect(() => {
-    async function fetchProfile(profileId, token, user) {
-      const response = await fetch(`/profile/${profileId}/${user}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      const data = await response.json();
-      return {
-        username: data.username,
-        id: data.id,
-        followed: data.is_following,
-      };
-    }
-
     fetchProfile(profileId, token, user).then((profile) => setProfile(profile));
-    const getPosts = async () => {
-      try {
-        const res = await fetch("/posts", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getPosts();
+    getPosts(token).then((posts) => setPosts(posts));
   }, [location]);
 
   return (
     <div className="App">
       <div className="card-wrapper">
         <UserCard profile={profile} user={user} token={token} />
-        {profile.id == user && pageView === "profile" && (
+        {profile.id.toString() === user && pageView === "profile" && (
           <Button onClick={() => setPageView("edit")} message="Edit Profile" />
         )}
-        {profile.id == user && pageView === "edit" && (
+        {profile.id.toString() === user && pageView === "edit" && (
           <>
             <Button
               onClick={() => setPageView("password")}
@@ -131,42 +106,42 @@ const Profile = () => {
             />
           </>
         )}
-        {pageView === "username" && 
-        <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          onChange={(e) => setProfileChange(e.target.value)}
-          text={profileChange}
-          name="profileChange"
-          placeholder="try a new name?"
-          value={profileChange}
-        />
-        <Button
-          message={"Change username!"}
-          onClick={() => changeUserName(user, profileChange, token)}
-        />
-      </form>
-        }
-        {pageView === "password" && 
-        <form onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          onChange={(e) => setProfileChange(e.target.value)}
-          text={profileChange}
-          name="profileChange"
-          placeholder="Change password?"
-          value={profileChange}
-        />
-        <Button
-          message={"Change Password!"}
-          onClick={() => changePassword(user, profileChange, token)}
-        />
-      </form>
-        }
+        {pageView === "username" && (
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              onChange={(e) => setProfileChange(e.target.value)}
+              text={profileChange}
+              name="profileChange"
+              placeholder="try a new name?"
+              value={profileChange}
+            />
+            <Button
+              message={"Change username!"}
+              onClick={() => changeUserName(user, profileChange, token)}
+            />
+          </form>
+        )}
+        {pageView === "password" && (
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="text"
+              onChange={(e) => setProfileChange(e.target.value)}
+              text={profileChange}
+              name="profileChange"
+              placeholder="Change password?"
+              value={profileChange}
+            />
+            <Button
+              message={"Change Password!"}
+              onClick={() => changePassword(user, profileChange, token)}
+            />
+          </form>
+        )}
         <ShowError message={message} />
       </div>
       <div className="profile-posts-wrapper">
-        <p>posts by {profile.username}</p>
+        <p>posts by {profile.id.toString() === user ? "you" : profile.username}</p>
         {posts && <PostList posts={userPosts} />}
       </div>
     </div>
