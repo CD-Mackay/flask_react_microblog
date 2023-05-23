@@ -41,7 +41,7 @@ const Home = () => {
       <NewPost />
       {followedPosts && <PostList posts={followedPosts} />}
       {followedPosts.length === 0 && token && (
-        <div>
+        <div style={{gridArea: "feed"}}>
           <p>
             Looks like you aren't following anyone yet, click here to view new
             posts
