@@ -16,6 +16,7 @@ const Profile = () => {
   const location = useLocation();
   const { userProfile, setUserProfile } = useContext(UserContext);
   const profileId = Number(location.pathname.slice(6));
+  // State Declarations
   const [posts, setPosts] = useState([]);
   const [profile, setProfile] = useState({
     username: "",
@@ -116,10 +117,10 @@ const Profile = () => {
     <div className="App">
       <div className="card-wrapper">
         <UserCard profile={profile} user={user} token={token} />
-        {profile.id == user && pageView === "profile" && (
+        {profile.id.toString() === user && pageView === "profile" && (
           <Button onClick={() => setPageView("edit")} message="Edit Profile" />
         )}
-        {profile.id == user && pageView === "edit" && (
+        {profile.id.toString() === user && pageView === "edit" && (
           <>
             <Button
               onClick={() => setPageView("password")}
