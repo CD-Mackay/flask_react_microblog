@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Style Imports
 
@@ -7,28 +7,17 @@ import React, { useEffect, useState } from "react";
 import NewPost from "../Components/NewPost/NewPost";
 import PostList from "../Components/PostList/PostList";
 import UseToken from "../Components/UseToken";
+import { UserContext } from "../Contexts/UserContext";
 
 const Explore = () => {
   const [posts, setPosts] = useState("");
 
   const { token } = UseToken();
+  const { getPosts } = useContext(UserContext);
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const res = await fetch("/posts", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        const data = await res.json();
-        setPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     if (token) {
-      getPosts();
+      getPosts(token).then((posts) => setPosts(posts));
     }
   }, [token]);
   return (
