@@ -1,5 +1,7 @@
 //Library Imports
 import React from "react";
+import {FaArrowCircleDown, FaArrowCircleUp} from 'react-icons/fa';
+
 
 // Styling Imports
 import "./PostListItem.css";
@@ -17,6 +19,10 @@ const PostListItem = ({ user_id, content, title, author }) => {
         </Link>
       </div>
       <p>{content}</p>
+      <div className="vote-buttons">
+        <FaArrowCircleDown />
+        <FaArrowCircleUp />
+      </div>
     </div>
   );
 };
