@@ -21,7 +21,7 @@ const Header = () => {
   const handleLogout = () => {
     removeToken();
     removeUser();
-    return navigate("/")
+    return navigate("/");
   };
 
   useEffect(() => {
@@ -32,7 +32,9 @@ const Header = () => {
     <nav className="header-nav">
       <div className="header-text">
         {token && (
-          <p>Welcome {userProfile.username && userProfile.username}!</p>
+          <Link to={`/user/${user}`} className="header-link">
+            <p>Welcome {userProfile.username && userProfile.username}!</p>
+          </Link>
         )}
       </div>
       <div className="button-wrapper">
