@@ -17,7 +17,6 @@ const Home = () => {
 
   const [followedPosts, setFollowedPosts] = useState([]);
 
-
   useEffect(() => {
     const getFollowedPosts = async () => {
       try {
@@ -41,7 +40,7 @@ const Home = () => {
       <NewPost />
       {followedPosts && <PostList posts={followedPosts} />}
       {followedPosts.length === 0 && token && (
-        <div style={{gridArea: "feed"}}>
+        <div style={{ gridArea: "feed" }}>
           <p>
             Looks like you aren't following anyone yet, click here to view new
             posts

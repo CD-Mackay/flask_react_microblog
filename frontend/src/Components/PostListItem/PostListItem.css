@@ -2,7 +2,7 @@
   border: 1px solid gray;
   width: 100%;
   margin: 5px;
-  height: 120px;
+  min-height: 120px;
   border-radius: 5px;
 }
 
@@ -11,6 +11,12 @@
   align-items: center;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 5px;
+}
+
+.vote-buttons {
+  display: flex;
+  justify-content: space-between;
   padding: 5px;
 }
 

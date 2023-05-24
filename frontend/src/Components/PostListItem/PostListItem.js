@@ -17,6 +17,10 @@ const PostListItem = ({ user_id, content, title, author }) => {
         </Link>
       </div>
       <p>{content}</p>
+      <div className="vote-buttons">
+        <p>Upvote</p>
+        <p>Downvote</p>
+      </div>
     </div>
   );
 };
