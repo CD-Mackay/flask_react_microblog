@@ -1,7 +1,7 @@
 //Library Imports
 import React from "react";
 import {FaArrowCircleDown, FaArrowCircleUp} from 'react-icons/fa';
-
+import UseToken from "../UseToken";
 
 // Styling Imports
 import "./PostListItem.css";
@@ -9,7 +9,32 @@ import "./PostListItem.css";
 // Component Imports
 import { Link } from 'react-router-dom'
 
-const PostListItem = ({ user_id, content, title, author }) => {
+const PostListItem = ({ user_id, content, title, author, postId }) => {
+
+  const { token } = UseToken();
+
+  const handleVote = async (id, score) => {
+    console.log("voting!", score === 1 ? "up" : "down")
+    // const requestOptions = {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application.json",
+    //     "Content-Type": "application/json",
+    //     Authorization: "Bearer " + token,
+    //   },
+    //   body: JSON.stringify({
+    //   }),
+    // };
+    // fetch("/new", requestOptions)
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (!response.ok) throw new Error(response.status);
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     return data;
+    //   });
+  }
   return (
     <div className="post-item" data-testid="post-item">
       <div className="title-card">
@@ -20,8 +45,8 @@ const PostListItem = ({ user_id, content, title, author }) => {
       </div>
       <p>{content}</p>
       <div className="vote-buttons">
-        <FaArrowCircleDown />
-        <FaArrowCircleUp />
+        <FaArrowCircleDown onClick={() => handleVote(postId, -1)}/>
+        <FaArrowCircleUp onClick={() => handleVote(postId, 1)}/>
       </div>
     </div>
   );
