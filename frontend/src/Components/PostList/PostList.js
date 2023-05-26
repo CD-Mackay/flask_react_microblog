@@ -12,7 +12,7 @@ const PostList = ({ posts }) => {
     return posts.map((element, index) => {
       return (
         <PostListItem
-        postId={element.id}
+          postId={element.id}
           author={element.author}
           user_id={element.user_id}
           content={element.content}
