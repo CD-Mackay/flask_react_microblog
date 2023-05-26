@@ -15,25 +15,27 @@ const PostListItem = ({ user_id, content, title, author, postId }) => {
 
   const handleVote = async (id, score) => {
     console.log("voting!", score === 1 ? "up" : "down")
-    // const requestOptions = {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application.json",
-    //     "Content-Type": "application/json",
-    //     Authorization: "Bearer " + token,
-    //   },
-    //   body: JSON.stringify({
-    //   }),
-    // };
-    // fetch("/new", requestOptions)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (!response.ok) throw new Error(response.status);
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     return data;
-    //   });
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application.json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        postId: id,
+        score: score
+      }),
+    };
+    fetch("/vote", requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => {
+        return data;
+      });
   }
   return (
     <div className="post-item" data-testid="post-item">
