@@ -116,6 +116,15 @@ def follow_user(id, userid):
     db.session.commit()
     return "You are now following".format(user.username)
 
+@app.route('/vote', methods=['POST'])
+@jwt_required()
+def vote():
+    post_id = request.json.get("postId", None)
+    score = request.json.get("score", None)
+    post = Post.query.filter_by(id=post_id).first()
+    ## Add score column and update score method to POst Model
+
+
 
 @app.route('/user/unfollow/<id>/<userid>', methods=['POST'])
 @jwt_required()
