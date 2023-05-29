@@ -17,6 +17,7 @@ const PostList = ({ posts }) => {
           user_id={element.user_id}
           content={element.content}
           title={element.title}
+          score={element.score}
           key={index}
         />
       );

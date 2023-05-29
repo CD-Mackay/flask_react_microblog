@@ -101,7 +101,7 @@ def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
     user = request.json.get("id", None)
-    post = Post(content=content, title=title, user_id=user)
+    post = Post(content=content, title=title, user_id=user, score=0)
     db.session.add(post)
     db.session.commit()
     return {"response": "post successful!"}
@@ -121,7 +121,13 @@ def vote():
     post_id = request.json.get("postId", None)
     score = request.json.get("score", None)
     post = Post.query.filter_by(id=post_id).first()
-    ## Add score column and update score method to POst Model
+    if score == 1:
+        post.upvote()
+    elif score == -1:
+        post.downvote()
+    db.session.commit()
+    response = {"message": "Your opinion has been noted"}
+    return response, 200
 
 
 
