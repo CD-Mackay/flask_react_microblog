@@ -118,6 +118,7 @@ def follow_user(id, userid):
 @app.route('/vote/<post_id>/<action_vote>', methods=['POST'])
 @jwt_required()
 def vote(post_id, action_vote):
+    print(action_vote)
     user_id = request.json.get('user_id', None)
     current_user = User.query.filter_by(id=user_id).first()
     post = Post.query.filter_by(id=post_id).first_or_404()

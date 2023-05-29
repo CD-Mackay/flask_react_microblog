@@ -31,7 +31,7 @@ class Post(db.Model): ## Define Posts model
   title = db.Column(db.String(200), index=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
   score = db.Column(db.Integer, index=True)
-  post_votes = db.relationship('PostVote', backref='post_votes', lazy='dynamic')
+  post_votes = db.relationship('Vote', backref='post_votes', lazy='dynamic')
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
@@ -51,7 +51,7 @@ class Post(db.Model): ## Define Posts model
       'user_id': self.user_id,
       'author': self.author.username,
       'score': self.score,
-      'post_votes': self.post_votes
+      # 'post_votes': self.post_votes
     }
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
@@ -60,7 +60,7 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    user_post_vote = db.relationship('PostVote', backref='author', lazy='dynamic')
+    user_post_vote = db.relationship('Vote', backref='author', lazy='dynamic')
     followed = db.relationship(
       'User', secondary=followers,
       primaryjoin=(followers.c.follower_id == id),
