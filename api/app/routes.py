@@ -121,6 +121,11 @@ def vote():
     post_id = request.json.get("postId", None)
     score = request.json.get("score", None)
     post = Post.query.filter_by(id=post_id).first()
+    if score == 1:
+        post.upvote()
+    elif score == -1:
+        post.downvote()
+    return 200
     ## Add score column and update score method to POst Model
 
 
