@@ -39,7 +39,6 @@ def get_profile(id, currentid):
     is_followed = current_user.is_following(user)
     return {'username': user.username, 'id': user.id, 'is_following': is_followed}
 
-## Remove one of these routes, use logic on front-end to verify if current user is viewing own profile or not
 
 @app.route('/user/<id>')
 def get_user():
