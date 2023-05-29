@@ -8,9 +8,11 @@ import "./PostListItem.css";
 
 // Component Imports
 import { Link } from "react-router-dom";
+import GetUser from "../GetUser";
 
 const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const { token } = UseToken();
+  const { user } = GetUser();
 
   const handleVote = async (id, score) => {
     console.log("voting!", score === 1 ? "up" : "down");
@@ -22,11 +24,10 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        postId: id,
-        score: score,
+        user_id: user
       }),
     };
-    fetch("/vote", requestOptions)
+    fetch(`/vote/${id}/${score}`, requestOptions)
       .then((response) => {
         console.log(response);
         if (!response.ok) throw new Error(response.status);

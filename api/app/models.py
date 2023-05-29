@@ -1,11 +1,29 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
+import datetime
 
 followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
+
+class Vote(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+  user = db.relationship('User', backref=db.backref('user_post_votes'))
+  post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+  post = db.relationship('Post', backref=db.backref('all_post_votes'))
+  upvote = db.Column(db.Boolean, nullable = False)
+
+  def __repr__(self):
+    if self.upvote == True:
+      vote = 'Up'
+    else:
+      vote = 'Down'
+    return '<Vote - {}, from {} for {}>'.format(vote, self.user.username, self.post.header)
+ 
+
 
 class Post(db.Model): ## Define Posts model
   id = db.Column(db.Integer, primary_key = True)
@@ -13,6 +31,7 @@ class Post(db.Model): ## Define Posts model
   title = db.Column(db.String(200), index=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
   score = db.Column(db.Integer, index=True)
+  post_votes = db.relationship('Vote', backref='post_votes', lazy='dynamic')
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
@@ -31,7 +50,8 @@ class Post(db.Model): ## Define Posts model
       'title': self.title,
       'user_id': self.user_id,
       'author': self.author.username,
-      'score': self.score
+      'score': self.score,
+      # 'post_votes': self.post_votes
     }
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
@@ -40,11 +60,15 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    user_post_vote = db.relationship('Vote', backref='author', lazy='dynamic')
     followed = db.relationship(
       'User', secondary=followers,
       primaryjoin=(followers.c.follower_id == id),
       secondaryjoin=(followers.c.followed_id == id),
       backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+    voted = db.relationship(
+      'Post', 
+    )
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
