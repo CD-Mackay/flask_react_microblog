@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Post
+from app.models import User, Post, Vote
 import time
 from flask import request, jsonify, make_response
 from flask_jwt_extended import create_access_token, unset_jwt_cookies, jwt_required
@@ -115,16 +115,22 @@ def follow_user(id, userid):
     db.session.commit()
     return "You are now following".format(user.username)
 
-@app.route('/vote', methods=['POST'])
+@app.route('/vote/<post_id>/<action_vote>', methods=['POST'])
 @jwt_required()
-def vote():
-    post_id = request.json.get("postId", None)
-    score = request.json.get("score", None)
-    post = Post.query.filter_by(id=post_id).first()
-    if score == 1:
-        post.upvote()
-    elif score == -1:
-        post.downvote()
+def vote(post_id, action_vote):
+    user_id = request.json.get('user_id', None)
+    current_user = User.query.filter_by(id=user_id).first()
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    vote = Vote.query.filter_by(
+        user = current_user,
+        post = post).first()
+    if vote:
+        if vote.upvote != bool(int(action_vote)):
+            vote.upvote = bool(int(action_vote))
+            db.session.commit()
+    
+    vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
+    db.session.add(vote)
     db.session.commit()
     response = {"message": "Your opinion has been noted"}
     return response, 200
