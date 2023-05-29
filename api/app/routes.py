@@ -101,7 +101,7 @@ def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
     user = request.json.get("id", None)
-    post = Post(content=content, title=title, user_id=user)
+    post = Post(content=content, title=title, user_id=user, score=0)
     db.session.add(post)
     db.session.commit()
     return {"response": "post successful!"}
