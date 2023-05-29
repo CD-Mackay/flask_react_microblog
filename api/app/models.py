@@ -12,14 +12,17 @@ class Post(db.Model): ## Define Posts model
   content = db.Column(db.String(250), index=True)
   title = db.Column(db.String(200), index=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
-  ## score = db.Column(db.Integer, index=True)
+  score = db.Column(db.Integer, index=True)
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
   
-  # def upvote(self):
+  def upvote(self):
+    self.score = self.score + 1
+
   
-  # def downvote(self): implement these two methods
+  def downvote(self):
+    self.score = self.score - 1
 
   def serialized(self):
     return {
@@ -27,7 +30,8 @@ class Post(db.Model): ## Define Posts model
       'content': self.content,
       'title': self.title,
       'user_id': self.user_id,
-      'author': self.author.username
+      'author': self.author.username,
+      'score': self.score
     }
 
 class User(db.Model): ## Define User Model. Contains id, username, email, password and posts list.
