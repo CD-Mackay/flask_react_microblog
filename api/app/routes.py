@@ -128,6 +128,9 @@ def vote(post_id, action_vote):
         if vote.upvote != bool(int(action_vote)):
             vote.upvote = bool(int(action_vote))
             db.session.commit()
+        else:
+            response = {"message": "you already voted lol"}
+            return response
     
     vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
     db.session.add(vote)
