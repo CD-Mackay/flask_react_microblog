@@ -9,7 +9,7 @@ import "./PostListItem.css";
 // Component Imports
 import { Link } from "react-router-dom";
 
-const PostListItem = ({ user_id, content, title, author, postId }) => {
+const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const { token } = UseToken();
 
   const handleVote = async (id, score) => {
@@ -47,6 +47,7 @@ const PostListItem = ({ user_id, content, title, author, postId }) => {
       <p>{content}</p>
       <div className="vote-buttons">
         <FaArrowCircleDown onClick={() => handleVote(postId, -1)} />
+        <span>{score}</span>
         <FaArrowCircleUp onClick={() => handleVote(postId, 1)} />
       </div>
     </div>
