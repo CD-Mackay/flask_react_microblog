@@ -125,8 +125,9 @@ def vote():
         post.upvote()
     elif score == -1:
         post.downvote()
-    return 200
-    ## Add score column and update score method to POst Model
+    db.session.commit()
+    response = {"message": "Your opinion has been noted"}
+    return response, 200
 
 
 
