@@ -34,10 +34,10 @@ def get_followed_posts(userid):
 def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
     if id == currentid:
-        return {'username': user.username, 'id': user.id, 'user_post_vote': user.user_post_vote}
+        return {'username': user.username, 'id': user.id}
     current_user = User.query.filter_by(id=currentid).first()
     is_followed = current_user.is_following(user)
-    return {'username': user.username, 'id': user.id, 'is_following': is_followed, 'user_post_vote': user.user_post_vote}
+    return {'username': user.username, 'id': user.id, 'is_following': is_followed}
 
 
 @app.route('/user/<id>')
@@ -101,7 +101,7 @@ def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
     user = request.json.get("id", None)
-    post = Post(content=content, title=title, user_id=user, score=0)
+    post = Post(content=content, title=title, user_id=user, upvotes=0, downvotes=0)
     db.session.add(post)
     db.session.commit()
     return {"response": "post successful!"}
@@ -118,27 +118,19 @@ def follow_user(id, userid):
 @app.route('/vote/<post_id>/<action_vote>', methods=['POST'])
 @jwt_required()
 def vote(post_id, action_vote):
-    print(action_vote)
+    print(action_vote, action_vote == -1, action_vote == 1)
     user_id = request.json.get('user_id', None)
     current_user = User.query.filter_by(id=user_id).first()
     post = Post.query.filter_by(id=post_id).first_or_404()
-    if action_vote == -1:
+    if action_vote == "-1":
+        print("downvoting!", post.downvotes)
         post.downvote()
         db.session.commit()
-    elif action_vote == 1:
+        print(post.downvotes)
+    elif action_vote == "1":
+        print("upvoting!!")
         post.upvote()
         db.session.commit()
-    # vote = Vote.query.filter_by(
-    #     user = current_user,
-    #     post = post).first()
-    # if vote:
-    #     if vote.upvote != bool(int(action_vote)):
-    #         vote.upvote = bool(int(action_vote))
-    #         db.session.commit()
-    #     else:
-    #         response = {"message": "you already voted lol"}
-    #         return response
-    
     vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
     db.session.add(vote)
     db.session.commit()

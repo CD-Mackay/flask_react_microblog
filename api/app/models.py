@@ -39,11 +39,10 @@ class Post(db.Model): ## Define Posts model
     return '<Post {}>'.format(self.content)
   
   def upvote(self):
-    self.upvote = self.upvote + 1
+    self.upvotes = self.upvotes + 1
 
-  
   def downvote(self):
-    self.upvote = self.upvote + 1
+    self.downvotes = self.downvotes + 1
 
   def serialized(self):
     return {
