@@ -122,6 +122,12 @@ def vote(post_id, action_vote):
     user_id = request.json.get('user_id', None)
     current_user = User.query.filter_by(id=user_id).first()
     post = Post.query.filter_by(id=post_id).first_or_404()
+    if action_vote == -1:
+        post.downvote()
+        db.session.commit()
+    elif action_vote == 1:
+        post.upvote()
+        db.session.commit()
     vote = Vote.query.filter_by(
         user = current_user,
         post = post).first()
