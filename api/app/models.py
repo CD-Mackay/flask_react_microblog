@@ -32,16 +32,18 @@ class Post(db.Model): ## Define Posts model
   user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
   score = db.Column(db.Integer, index=True)
   post_votes = db.relationship('Vote', backref='post_votes', lazy='dynamic', overlaps="all_post_votes,post")
+  upvotes = db.Column(db.Integer)
+  downvotes = db.Column(db.Integer)
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
   
   def upvote(self):
-    self.score = self.score + 1
+    self.upvote = self.upvote + 1
 
   
   def downvote(self):
-    self.score = self.score - 1
+    self.upvote = self.upvote + 1
 
   def serialized(self):
     return {
@@ -50,7 +52,8 @@ class Post(db.Model): ## Define Posts model
       'title': self.title,
       'user_id': self.user_id,
       'author': self.author.username,
-      'score': self.score,
+      'upvotes': self.upvotes,
+      'downvotes': self.downvotes
       # 'post_votes': self.post_votes
     }
 

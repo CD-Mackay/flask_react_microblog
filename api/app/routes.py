@@ -34,16 +34,16 @@ def get_followed_posts(userid):
 def get_profile(id, currentid):
     user = User.query.filter_by(id=id).first()
     if id == currentid:
-        return {'username': user.username, 'id': user.id}
+        return {'username': user.username, 'id': user.id, 'user_post_vote': user.user_post_vote}
     current_user = User.query.filter_by(id=currentid).first()
     is_followed = current_user.is_following(user)
-    return {'username': user.username, 'id': user.id, 'is_following': is_followed}
+    return {'username': user.username, 'id': user.id, 'is_following': is_followed, 'user_post_vote': user.user_post_vote}
 
 
 @app.route('/user/<id>')
 def get_user():
     user = User.query.filter_by(id=id).first()
-    return {'username': user.username, 'id': user.id}
+    return {'username': user.username, 'id': user.id, 'user_post_vote': user.user_post_vote}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
@@ -128,16 +128,16 @@ def vote(post_id, action_vote):
     elif action_vote == 1:
         post.upvote()
         db.session.commit()
-    vote = Vote.query.filter_by(
-        user = current_user,
-        post = post).first()
-    if vote:
-        if vote.upvote != bool(int(action_vote)):
-            vote.upvote = bool(int(action_vote))
-            db.session.commit()
-        else:
-            response = {"message": "you already voted lol"}
-            return response
+    # vote = Vote.query.filter_by(
+    #     user = current_user,
+    #     post = post).first()
+    # if vote:
+    #     if vote.upvote != bool(int(action_vote)):
+    #         vote.upvote = bool(int(action_vote))
+    #         db.session.commit()
+    #     else:
+    #         response = {"message": "you already voted lol"}
+    #         return response
     
     vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
     db.session.add(vote)
