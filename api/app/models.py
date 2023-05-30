@@ -21,7 +21,15 @@ class Vote(db.Model):
       vote = 'Up'
     else:
       vote = 'Down'
-    return '<Vote - {}, from {} for {}>'.format(vote, self.user.username, self.post.header)
+    return '<Vote - {}, from {} for {}>'.format(vote, self.user.username, self.post.title)
+  
+  def serialized(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'post_id': self.post_id,
+      'upvote': self.upvote
+    }
  
 
 

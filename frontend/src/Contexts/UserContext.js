@@ -20,6 +20,7 @@ export function UserContextProvider(props) {
     });
     const data = await res.json();
     console.log("setting userprofile")
+    console.log(data);
     setUserProfile({
       username: data.username,
       id: data.id,
@@ -33,6 +34,7 @@ export function UserContextProvider(props) {
       },
     });
     const data = await response.json();
+    console.log(data);
     return {
       username: data.username,
       id: data.id,

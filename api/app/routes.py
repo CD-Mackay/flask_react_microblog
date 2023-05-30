@@ -138,6 +138,11 @@ def vote(post_id, action_vote):
     return response, 200
 
 
+@app.route('/votes')
+def get_votes():
+    votes = Vote.query.all()
+    response = [vote.serialized() for vote in votes]    
+    return response
 
 @app.route('/user/unfollow/<id>/<userid>', methods=['POST'])
 @jwt_required()
