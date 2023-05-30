@@ -13,7 +13,7 @@ class Vote(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   user = db.relationship('User', backref=db.backref('user_post_votes'))
   post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-  post = db.relationship('Post', backref=db.backref('all_post_votes'))
+  post = db.relationship('Post', backref=db.backref('all_post_votes'), overlaps="all_post_votes,post")
   upvote = db.Column(db.Boolean, nullable = False)
 
   def __repr__(self):
@@ -21,7 +21,15 @@ class Vote(db.Model):
       vote = 'Up'
     else:
       vote = 'Down'
-    return '<Vote - {}, from {} for {}>'.format(vote, self.user.username, self.post.header)
+    return '<Vote - {}, from {} for {}>'.format(vote, self.user.username, self.post.title)
+  
+  def serialized(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'post_id': self.post_id,
+      'upvote': self.upvote
+    }
  
 
 
@@ -31,17 +39,18 @@ class Post(db.Model): ## Define Posts model
   title = db.Column(db.String(200), index=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
   score = db.Column(db.Integer, index=True)
-  post_votes = db.relationship('Vote', backref='post_votes', lazy='dynamic')
+  post_votes = db.relationship('Vote', backref='post_votes', lazy='dynamic', overlaps="all_post_votes,post")
+  upvotes = db.Column(db.Integer)
+  downvotes = db.Column(db.Integer)
 
   def __repr__(self):
     return '<Post {}>'.format(self.content)
   
   def upvote(self):
-    self.score = self.score + 1
+    self.upvotes = self.upvotes + 1
 
-  
   def downvote(self):
-    self.score = self.score - 1
+    self.downvotes = self.downvotes + 1
 
   def serialized(self):
     return {
@@ -50,7 +59,8 @@ class Post(db.Model): ## Define Posts model
       'title': self.title,
       'user_id': self.user_id,
       'author': self.author.username,
-      'score': self.score,
+      'upvotes': self.upvotes,
+      'downvotes': self.downvotes
       # 'post_votes': self.post_votes
     }
 
@@ -60,7 +70,7 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    user_post_vote = db.relationship('Vote', backref='author', lazy='dynamic')
+    user_post_vote = db.relationship('Vote', backref='author', lazy='dynamic', overlaps="user,user_post_votes")
     followed = db.relationship(
       'User', secondary=followers,
       primaryjoin=(followers.c.follower_id == id),

@@ -43,7 +43,7 @@ def get_profile(id, currentid):
 @app.route('/user/<id>')
 def get_user():
     user = User.query.filter_by(id=id).first()
-    return {'username': user.username, 'id': user.id}
+    return {'username': user.username, 'id': user.id, 'user_post_vote': user.user_post_vote}
 
 @app.route('/token',methods=['POST']) ## /token route handles login requests by assigning JWT to logged in users
 def get_token():
@@ -101,7 +101,7 @@ def make_post():
     title = request.json.get("title", None)
     content = request.json.get("content", None)
     user = request.json.get("id", None)
-    post = Post(content=content, title=title, user_id=user, score=0)
+    post = Post(content=content, title=title, user_id=user, upvotes=0, downvotes=0)
     db.session.add(post)
     db.session.commit()
     return {"response": "post successful!"}
@@ -118,21 +118,19 @@ def follow_user(id, userid):
 @app.route('/vote/<post_id>/<action_vote>', methods=['POST'])
 @jwt_required()
 def vote(post_id, action_vote):
-    print(action_vote)
+    print(action_vote, action_vote == -1, action_vote == 1)
     user_id = request.json.get('user_id', None)
     current_user = User.query.filter_by(id=user_id).first()
     post = Post.query.filter_by(id=post_id).first_or_404()
-    vote = Vote.query.filter_by(
-        user = current_user,
-        post = post).first()
-    if vote:
-        if vote.upvote != bool(int(action_vote)):
-            vote.upvote = bool(int(action_vote))
-            db.session.commit()
-        else:
-            response = {"message": "you already voted lol"}
-            return response
-    
+    if action_vote == "-1":
+        print("downvoting!", post.downvotes)
+        post.downvote()
+        db.session.commit()
+        print(post.downvotes)
+    elif action_vote == "1":
+        print("upvoting!!")
+        post.upvote()
+        db.session.commit()
     vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
     db.session.add(vote)
     db.session.commit()
@@ -140,6 +138,11 @@ def vote(post_id, action_vote):
     return response, 200
 
 
+@app.route('/votes')
+def get_votes():
+    votes = Vote.query.all()
+    response = [vote.serialized() for vote in votes]    
+    return response
 
 @app.route('/user/unfollow/<id>/<userid>', methods=['POST'])
 @jwt_required()

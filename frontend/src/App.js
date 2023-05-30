@@ -22,8 +22,24 @@ function App() {
   const { fetchUserProfile } = useContext(UserContext);
 
 
+  const getVotes = async (token) => {
+    try {
+      const res = await fetch("/votes", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchUserProfile(user, token); 
+    getVotes(token)
   }, []);
 
   return (
