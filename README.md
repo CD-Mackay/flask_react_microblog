@@ -29,7 +29,7 @@ import "./ComponentName.css";
 
 // Component Imports
 
-const ComponentName = ({ posts }) => {
+const ComponentName = ({ props(if applicable) }) => {
 
 
   return (
