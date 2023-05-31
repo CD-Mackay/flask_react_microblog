@@ -67,7 +67,6 @@ const Profile = () => {
         }),
       });
       const data = await res.json();
-      console.log(data);
       setMessage(data.message);
       setProfileChange("");
       setTimeout(() => {
