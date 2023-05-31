@@ -17,7 +17,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const { votes } = useContext(UserContext);
 
   const postVote = votes.filter((element) => element.post_id === postId);
-  const postObj = postVote.length === 1 ? postVote[0] : { upvote: null };
+  const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
 
   console.log(postObj, postId);
 
