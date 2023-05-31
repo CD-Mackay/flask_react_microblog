@@ -1,5 +1,5 @@
 //Library Imports
-import React from "react";
+import React, { useContext } from "react";
 import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 import UseToken from "../UseToken";
 
@@ -9,13 +9,19 @@ import "./PostListItem.css";
 // Component Imports
 import { Link } from "react-router-dom";
 import GetUser from "../GetUser";
+import { UserContext } from "../../Contexts/UserContext";
 
 const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const { token } = UseToken();
   const { user } = GetUser();
+  const { votes } = useContext(UserContext);
+
+  const postVote = votes.filter((element) => element.post_id === postId);
+  const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
+
+  console.log(postObj, postId);
 
   const handleVote = async (id, score) => {
-    console.log("voting!", score === 1 ? "up" : "down");
     const requestOptions = {
       method: "POST",
       headers: {
@@ -24,7 +30,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        user_id: user
+        user_id: user,
       }),
     };
     fetch(`/vote/${id}/${score}`, requestOptions)
@@ -37,6 +43,9 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         return data;
       });
   };
+
+  const downIconStyle = { color: postObj.upvote === false ? "blue" : "gray" };
+  const upIconStyle = { color: postObj.upvote === true ? "red" : "gray" };
   return (
     <div className="post-item" data-testid="post-item">
       <div className="title-card">
@@ -47,9 +56,23 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
       </div>
       <p>{content}</p>
       <div className="vote-buttons">
-        <FaArrowCircleDown onClick={() => handleVote(postId, -1)} />
+        <FaArrowCircleDown
+          style={downIconStyle}
+          onClick={
+            postObj.upvote === false
+              ? () => console.log("you already downvoted")
+              : () => handleVote(postId, -1)
+          }
+        />
         <span>{score}</span>
-        <FaArrowCircleUp onClick={() => handleVote(postId, 1)} />
+        <FaArrowCircleUp
+          style={upIconStyle}
+          onClick={
+            postObj.upvote
+              ? () => console.log("you already upvoted")
+              : () => handleVote(postId, 1)
+          }
+        />
       </div>
     </div>
   );
