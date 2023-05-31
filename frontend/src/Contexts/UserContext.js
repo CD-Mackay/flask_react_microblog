@@ -7,9 +7,10 @@ export function UserContextProvider(props) {
 
     const [userProfile, setUserProfile] = useState({
     username: "",
-    id: 0,
-    posts: [],
+    id: 0
   });
+
+  const [votes, setVotes] = useState([])
 
   const fetchUserProfile = async (user, token) => {
     if (!user) return;
@@ -34,7 +35,6 @@ export function UserContextProvider(props) {
       },
     });
     const data = await response.json();
-    console.log(data);
     return {
       username: data.username,
       id: data.id,
@@ -56,6 +56,21 @@ export function UserContextProvider(props) {
     }
   };
 
+  const getVotes = async (token) => {
+    try {
+      const res = await fetch("/votes", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const data = await res.json();
+      setVotes(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   /**
    * Context Component to handle Connect Four Game Logic
@@ -68,7 +83,9 @@ export function UserContextProvider(props) {
         userProfile,
         setUserProfile,
         fetchProfile,
-        getPosts
+        getPosts,
+        getVotes,
+        votes
       }}
     >
       {props.children}
