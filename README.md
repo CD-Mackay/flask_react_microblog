@@ -15,3 +15,32 @@
       - From here run the command `python3 -m venv venv` to initialize the virtual environment. 
       - Run `pip install` to install neccessary dependencies
       - Run `flask run` command to initialize API. 
+
+
+## Component Structure
+  - Each component shall be structured as follows
+
+```
+  //Library Imports
+import React from "react";
+
+// Styling Imports
+import "./ComponentName.css";
+
+// Component Imports
+
+const ComponentName = ({ posts }) => {
+
+
+  return (
+    <>
+    Component
+    </>
+  );
+};
+
+export default ComponentName;
+```
+  - Library imports shall include imports for all React features, as well as features from any third-party library(including pre-made components).
+  - Styling imports shall include relevant CSS files only.
+  - Component imports shall include only Components from within the project itself.
