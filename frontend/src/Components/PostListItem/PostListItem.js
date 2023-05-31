@@ -43,6 +43,9 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         return data;
       });
   };
+
+  const downIconStyle = { color: postObj.upvote === false ? "blue" : "gray" };
+  const upIconStyle = { color: postObj.upvote === true ? "red" : "gray" };
   return (
     <div className="post-item" data-testid="post-item">
       <div className="title-card">
@@ -54,6 +57,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
       <p>{content}</p>
       <div className="vote-buttons">
         <FaArrowCircleDown
+          style={downIconStyle}
           onClick={
             postObj.upvote === false
               ? () => console.log("you already downvoted")
@@ -62,6 +66,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         />
         <span>{score}</span>
         <FaArrowCircleUp
+          style={upIconStyle}
           onClick={
             postObj.upvote
               ? () => console.log("you already upvoted")
