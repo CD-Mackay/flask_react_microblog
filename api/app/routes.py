@@ -131,7 +131,12 @@ def vote(post_id, action_vote):
         print("upvoting!!")
         post.upvote()
         db.session.commit()
-    vote = Vote(user = current_user, post = post, upvote = bool(int(action_vote)))
+    upvote = None
+    if action_vote == "1":
+        upvote = True
+    elif action_vote == "-1":
+        upvote = False
+    vote = Vote(user = current_user, post = post, upvote = upvote)
     db.session.add(vote)
     db.session.commit()
     response = {"message": "Your opinion has been noted"}

@@ -71,6 +71,9 @@ class User(db.Model): ## Define User Model. Contains id, username, email, passwo
     password_hash = db.Column(db.String)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     user_post_vote = db.relationship('Vote', backref='author', lazy='dynamic', overlaps="user,user_post_votes")
+    # user_post_vote = db.relationship(
+      # 'Vote', primaryjoin=(Vote.user_id == id),backref=db.backref('vote', lazy='dynamic'), lazy='dynamic'
+    # )
     followed = db.relationship(
       'User', secondary=followers,
       primaryjoin=(followers.c.follower_id == id),
