@@ -31,7 +31,6 @@ const UserCard = ({ profile, user, token }) => {
         setFollowed(false);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -44,7 +43,6 @@ const UserCard = ({ profile, user, token }) => {
         setFollowed(true);
         if (!response.ok) throw new Error(response.status);
         const data = await response.json();
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
