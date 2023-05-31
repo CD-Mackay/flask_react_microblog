@@ -19,7 +19,6 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const postVote = votes.filter((element) => element.post_id === postId);
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
 
-  console.log(postObj, postId);
 
   const handleVote = async (id, score) => {
     const requestOptions = {
