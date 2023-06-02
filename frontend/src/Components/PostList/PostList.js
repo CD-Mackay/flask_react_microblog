@@ -12,8 +12,8 @@ const PostList = ({ posts }) => {
 
   const showPosts = () => {
     orderBy === "recent"
-      ? posts.sort((a, b) => a.id - b.id)
-      : posts.sort((a, b) => b.id - a.id);
+      ? posts.sort((a, b) => b.id - a.id)
+      : posts.sort((a, b) => a.id - b.id);
 
     return posts.map((element, index) => {
       return (
