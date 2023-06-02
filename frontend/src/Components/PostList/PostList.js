@@ -1,6 +1,5 @@
 //Library Imports
-import React, { useContext } from "react";
-import { UserContext } from "../../Contexts/UserContext";
+import React from "react";
 import PostListItem from "../PostListItem/PostListItem";
 
 // Styling Imports
@@ -10,7 +9,6 @@ import "./PostList.css";
 
 const PostList = ({ posts }) => {
 
-  const { votes } = useContext(UserContext);
 
   const showPosts = () => {
     return posts.map((element, index) => {
