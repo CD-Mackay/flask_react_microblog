@@ -13,7 +13,13 @@ const PostList = ({ posts }) => {
   const showPosts = () => {
     orderBy === "new"
       ? posts.sort((a, b) => b.id - a.id)
-      : posts.sort((a, b) => (b.upvotes + b.downvotes) - (a.upvotes + a.downvotes));
+      : orderBy === "hot"
+      ? posts.sort(
+          (a, b) => b.upvotes - b.downvotes - (a.upvotes - a.downvotes)
+        )
+      : posts.sort(
+          (a, b) => b.upvotes + b.downvotes - (a.upvotes + a.downvotes)
+        );
 
     return posts.map((element, index) => {
       return (
