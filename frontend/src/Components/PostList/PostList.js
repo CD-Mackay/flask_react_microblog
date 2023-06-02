@@ -8,12 +8,12 @@ import "./PostList.css";
 // Component Imports
 
 const PostList = ({ posts }) => {
-  const [orderBy, setOrderBy] = useState("recent");
+  const [orderBy, setOrderBy] = useState("new");
 
   const showPosts = () => {
-    orderBy === "recent"
+    orderBy === "new"
       ? posts.sort((a, b) => b.id - a.id)
-      : posts.sort((a, b) => a.id - b.id);
+      : posts.sort((a, b) => (b.upvotes + b.downvotes) - (a.upvotes + a.downvotes));
 
     return posts.map((element, index) => {
       return (
@@ -35,6 +35,7 @@ const PostList = ({ posts }) => {
       <select id="orderBy" onChange={(e) => setOrderBy(e.target.value)}>
         <option value="new">new</option>
         <option value="hot">hot</option>
+        <option value="controverial">controversial</option>
       </select>
       {posts && !posts.msg && <div>{showPosts()}</div>}
     </div>
