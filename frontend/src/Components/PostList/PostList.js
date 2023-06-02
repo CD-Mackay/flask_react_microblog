@@ -32,6 +32,10 @@ const PostList = ({ posts }) => {
 
   return (
     <div className="post-list">
+      <select id="orderBy" onChange={(e) => setOrderBy(e.target.value)}>
+        <option value="new">new</option>
+        <option value="hot">hot</option>
+      </select>
       {posts && !posts.msg && <div>{showPosts()}</div>}
     </div>
   );
