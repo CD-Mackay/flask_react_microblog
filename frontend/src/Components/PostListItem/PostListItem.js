@@ -34,7 +34,6 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
     };
     fetch(`/vote/${id}/${score}`, requestOptions)
       .then((response) => {
-        console.log(response);
         if (!response.ok) throw new Error(response.status);
         return response.json();
       })
