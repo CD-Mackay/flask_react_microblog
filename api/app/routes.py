@@ -146,7 +146,7 @@ def vote(post_id, action_vote):
 @app.route('/votes')
 def get_votes():
     votes = Vote.query.all()
-    response = [vote.serialized() for vote in votes]    
+    response = [vote.serialized() for vote in votes]  ## Refactor this to conditionally select user_post_votes  
     return response
 
 @app.route('/user/unfollow/<id>/<userid>', methods=['POST'])
