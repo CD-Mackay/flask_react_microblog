@@ -92,7 +92,7 @@ const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvo
           {author}
         </Link>
       </div>
-      <p>{content}{postId}</p>
+      <p>{content}</p>
       <div className="vote-buttons">
         <FaArrowCircleDown
           style={downIconStyle}
