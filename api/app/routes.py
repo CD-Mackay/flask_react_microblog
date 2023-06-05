@@ -154,9 +154,13 @@ def update_vote(post_id, action_vote):
         print("downvoting!", post.downvotes)
         post.downvote()
         db.session.commit()
+        post.downvote()
+        db.session.commit()
         print(post.downvotes)
     elif action_vote == "1":
         print("upvoting!!")
+        post.upvote()
+        db.session.commit()
         post.upvote()
         db.session.commit()
     upvote = None
@@ -166,6 +170,9 @@ def update_vote(post_id, action_vote):
         upvote = False
     vote = Vote.query.filter_by(id=voteId).first()
     db.session.delete(vote)
+    db.session.commit()
+    new_vote = Vote(user = current_user, post = post, upvote = upvote)
+    db.session.add(new_vote)
     db.session.commit()
     response = {"message": "Your opinion has been noted"}
     return response, 200
