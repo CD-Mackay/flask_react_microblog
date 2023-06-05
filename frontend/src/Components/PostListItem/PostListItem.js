@@ -1,5 +1,5 @@
 //Library Imports
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 import UseToken from "../UseToken";
 
@@ -18,6 +18,10 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
 
   const postVote = votes.filter((element) => element.post_id === postId);
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
+  const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
+
+  console.log(voteStatus, postObj);
+
 
 
   const handleVote = async (id, score) => {
@@ -38,12 +42,17 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         return response.json();
       })
       .then((data) => {
+        if (score === -1) {
+          setVoteStatus({upvote: false})
+        } else if (score === 1) {
+          setVoteStatus({upvote: true})
+        }
         return data;
       });
   };
 
-  const downIconStyle = { color: postObj.upvote === false ? "blue" : "gray" };
-  const upIconStyle = { color: postObj.upvote === true ? "red" : "gray" };
+  const downIconStyle = { color: voteStatus.upvote === false ? "blue" : "gray" };
+  const upIconStyle = { color: voteStatus.upvote === true ? "red" : "gray" };
   return (
     <div className="post-item" data-testid="post-item">
       <div className="title-card">
