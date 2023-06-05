@@ -16,11 +16,13 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const { user } = GetUser();
   const { votes } = useContext(UserContext);
 
-  const postVote = votes.filter((element) => element.post_id === postId);
+  const postVote = votes.filter((element) => element.post_id === postId).sort((a, b) => b.id - a.id);
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
   const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
 
-  console.log(voteStatus, postObj);
+  if (postId === 12) {
+    console.log(postVote)
+  }
 
 
 
