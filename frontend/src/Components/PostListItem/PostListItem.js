@@ -20,8 +20,8 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
   const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
 
-  if (postId === 11) {
-    console.log(postVote)
+  if (postId === 13) {
+    console.log(postObj, voteStatus)
   }
 
 
@@ -63,7 +63,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         },
         body: JSON.stringify({
           user_id: user,
-          vote_id: postObj[0].id
+          vote_id: postObj.id
         }),
       };
       fetch(`/update_vote/${id}/${score}`, requestOptions)
@@ -92,7 +92,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
           {author}
         </Link>
       </div>
-      <p>{content}</p>
+      <p>{content}{postId}</p>
       <div className="vote-buttons">
         <FaArrowCircleDown
           style={downIconStyle}
