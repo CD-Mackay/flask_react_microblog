@@ -142,6 +142,34 @@ def vote(post_id, action_vote):
     response = {"message": "Your opinion has been noted"}
     return response, 200
 
+@app.route('/update_vote/<post_id>/<action_vote>', methods=['POST'])
+@jwt_required()
+def update_vote(post_id, action_vote):
+    print(action_vote, action_vote == -1, action_vote == 1)
+    user_id = request.json.get('user_id', None)
+    voteId = request.json.get('vote_id', None)
+    current_user = User.query.filter_by(id=user_id).first()
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    if action_vote == "-1":
+        print("downvoting!", post.downvotes)
+        post.downvote()
+        db.session.commit()
+        print(post.downvotes)
+    elif action_vote == "1":
+        print("upvoting!!")
+        post.upvote()
+        db.session.commit()
+    upvote = None
+    if action_vote == "1":
+        upvote = True
+    elif action_vote == "-1":
+        upvote = False
+    vote = Vote.query.filter_by(id=voteId).first()
+    db.session.delete(vote)
+    db.session.commit()
+    response = {"message": "Your opinion has been noted"}
+    return response, 200
+
 
 @app.route('/votes')
 def get_votes():
