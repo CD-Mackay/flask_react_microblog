@@ -19,6 +19,7 @@ const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvo
   const postVote = votes.filter((element) => element.post_id === postId).sort((a, b) => b.id - a.id);
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
   const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
+  const [newVote, setNewVote] = useState(0);
 
 
   const handleVote = async (id, score) => {
@@ -43,8 +44,10 @@ const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvo
       .then((data) => {
         if (score === -1) {
           setVoteStatus({upvote: false})
+          setNewVote(-1)
         } else if (score === 1) {
           setVoteStatus({upvote: true})
+          setNewVote(1)
         }
         return data;
       });
@@ -69,8 +72,10 @@ const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvo
       .then((data) => {
         if (score === -1) {
           setVoteStatus({upvote: false})
+          setNewVote(-2)
         } else if (score === 1) {
           setVoteStatus({upvote: true})
+          setNewVote(2)
         }
         return data;
       });
@@ -97,7 +102,7 @@ const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvo
               : () => handleVote(postId, -1)
           }
         />
-        <span>{upvotes - downvotes}</span>
+        <span>{newVote + upvotes - downvotes}</span>
         <FaArrowCircleUp
           style={upIconStyle}
           onClick={
