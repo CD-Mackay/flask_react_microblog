@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import GetUser from "../GetUser";
 import { UserContext } from "../../Contexts/UserContext";
 
-const PostListItem = ({ user_id, content, title, author, postId, score }) => {
+const PostListItem = ({ user_id, content, title, author, postId, upvotes, downvotes }) => {
   const { token } = UseToken();
   const { user } = GetUser();
   const { votes } = useContext(UserContext);
@@ -19,11 +19,6 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const postVote = votes.filter((element) => element.post_id === postId).sort((a, b) => b.id - a.id);
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
   const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
-
-  if (postId === 13) {
-    console.log(postObj, voteStatus)
-  }
-
 
 
   const handleVote = async (id, score) => {
@@ -102,7 +97,7 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
               : () => handleVote(postId, -1)
           }
         />
-        <span>{score}</span>
+        <span>{upvotes - downvotes}</span>
         <FaArrowCircleUp
           style={upIconStyle}
           onClick={
