@@ -29,7 +29,8 @@ const PostList = ({ posts }) => {
           user_id={element.user_id}
           content={element.content}
           title={element.title}
-          score={element.upvotes - element.downvotes}
+          upvotes={element.upvotes}
+          downvotes={element.downvotes}
           key={index}
         />
       );
@@ -38,11 +39,11 @@ const PostList = ({ posts }) => {
 
   return (
     <div className="post-list">
-      <select id="orderBy" onChange={(e) => setOrderBy(e.target.value)}>
+      {posts && !posts.msg && <select id="orderBy" onChange={(e) => setOrderBy(e.target.value)}>
         <option value="new">new</option>
         <option value="hot">hot</option>
         <option value="controverial">controversial</option>
-      </select>
+      </select>}
       {posts && !posts.msg && <div>{showPosts()}</div>}
     </div>
   );
