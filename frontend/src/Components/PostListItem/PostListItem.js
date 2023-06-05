@@ -20,25 +20,27 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
   const postObj = postVote.length === 0 ? { upvote: null } : postVote[0];
   const [voteStatus, setVoteStatus] = useState(postVote.length === 0 ? { upvote: null } : postVote[0]);
 
-  if (postId === 12) {
+  if (postId === 11) {
     console.log(postVote)
   }
 
 
 
   const handleVote = async (id, score) => {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        user_id: user,
-      }),
-    };
-    fetch(`/vote/${id}/${score}`, requestOptions)
+    
+    if (voteStatus.upvote === null) {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          user_id: user,
+        }),
+      };
+      fetch(`/vote/${id}/${score}`, requestOptions)
       .then((response) => {
         if (!response.ok) throw new Error(response.status);
         return response.json();
@@ -51,6 +53,33 @@ const PostListItem = ({ user_id, content, title, author, postId, score }) => {
         }
         return data;
       });
+    } else if (voteStatus.upvote !== null) {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application.json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          user_id: user,
+          vote_id: postObj[0].id
+        }),
+      };
+      fetch(`/update_vote/${id}/${score}`, requestOptions)
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => {
+        if (score === -1) {
+          setVoteStatus({upvote: false})
+        } else if (score === 1) {
+          setVoteStatus({upvote: true})
+        }
+        return data;
+      });
+    }
   };
 
   const downIconStyle = { color: voteStatus.upvote === false ? "blue" : "gray" };
