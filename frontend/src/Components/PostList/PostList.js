@@ -13,6 +13,8 @@ const PostList = ({ posts }) => {
 
   const token = UseToken()
 
+  console.log(token)
+
   const showPosts = () => {
     orderBy === "new"
       ? posts.sort((a, b) => b.id - a.id)
@@ -52,12 +54,12 @@ const PostList = ({ posts }) => {
     <div className="post-list">
       {(posts && !posts.msg)&& (
         <>
-          <select id="orderBy" onChange={(e) => handleChangeSort(e)}>
+          {token.token && <select id="orderBy" onChange={(e) => handleChangeSort(e)}>
             <option value="0">Sort by</option>
             <option value="new">new</option>
             <option value="hot">hot</option>
             <option value="controverial">controversial</option>
-          </select>
+          </select>}
           <div>{showPosts()}</div>
         </>
       )}
