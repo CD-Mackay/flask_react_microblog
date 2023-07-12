@@ -1,11 +1,8 @@
 .App {
   text-align: center;
   align-items: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: 
-  "side feed empty"
-  ;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-wrapper {
@@ -16,7 +13,12 @@
   grid-area: feed;
 }
 
-
-
-
-
+@media only screen and (min-width: 992px) {
+  .App {
+    text-align: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "side feed empty";
+  }
+}
