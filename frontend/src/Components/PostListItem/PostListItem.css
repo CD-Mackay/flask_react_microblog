@@ -21,6 +21,7 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 5px;
+  font-size: 25px;
 }
 
 .post-title {
@@ -33,9 +34,13 @@
   color: lightblue;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 772px) {
   .post-item {
     width: 100%;
     min-height: 120px;
+  }
+
+  .vote-buttons {
+    font-size: 15px;
   }
 }
