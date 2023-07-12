@@ -6,9 +6,12 @@ import PostListItem from "../PostListItem/PostListItem";
 import "./PostList.css";
 
 // Component Imports
+import UseToken from "../UseToken";
 
 const PostList = ({ posts }) => {
   const [orderBy, setOrderBy] = useState("new");
+
+  const token = UseToken()
 
   const showPosts = () => {
     orderBy === "new"
@@ -37,16 +40,27 @@ const PostList = ({ posts }) => {
     });
   };
 
+  const handleChangeSort = (e) => {
+    if (e.target.value === "0") {
+      return;
+    } else {
+      setOrderBy(e.target.value);
+    }
+  };
+
   return (
     <div className="post-list">
-      {posts && !posts.msg && (
-        <select id="orderBy" onChange={(e) => setOrderBy(e.target.value)}>
-          <option value="new">new</option>
-          <option value="hot">hot</option>
-          <option value="controverial">controversial</option>
-        </select>
+      {(posts && !posts.msg)&& (
+        <>
+          <select id="orderBy" onChange={(e) => handleChangeSort(e)}>
+            <option value="0">Sort by</option>
+            <option value="new">new</option>
+            <option value="hot">hot</option>
+            <option value="controverial">controversial</option>
+          </select>
+          <div>{showPosts()}</div>
+        </>
       )}
-      {posts && !posts.msg && <div>{showPosts()}</div>}
     </div>
   );
 };
