@@ -13,8 +13,7 @@
   max-width: 900px;
   margin: 10px;
   grid-area: side;
-  align-self: start;
-  position: fixed;
+  align-self: center;
 }
 textarea {
   border-radius: 5px;
@@ -24,4 +23,11 @@ textarea {
 input {
   border-radius: 5px;
   padding: 5px;
+}
+
+@media only screen and (min-width: 992px) {
+  .new-post {
+    position: fixed;
+    align-self: start;
+  }
 }
