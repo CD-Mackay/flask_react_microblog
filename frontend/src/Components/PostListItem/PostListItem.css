@@ -1,9 +1,12 @@
 .post-item {
   border: 1px solid gray;
-  width: 100%;
+  width: 90vw;
   margin: 5px;
-  min-height: 120px;
   border-radius: 5px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .title-card {
@@ -28,4 +31,11 @@
 .post-link {
   text-decoration: none;
   color: lightblue;
+}
+
+@media only screen and (min-width: 992px) {
+  .post-item {
+    width: 100%;
+    min-height: 120px;
+  }
 }
