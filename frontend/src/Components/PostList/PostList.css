@@ -1,3 +1,7 @@
 .post-list {
   grid-area: feed;
 }
+
+select {
+  margin: 20px;
+}
